@@ -30,7 +30,7 @@ class SearchViewController: UIViewController {
         self.tableView.dataSource = self
         tableView.tableFooterView = UIView()
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -50,14 +50,14 @@ class SearchViewController: UIViewController {
                         let segmentName = item["segmentName"] as? String
                         let definition = item["definition"] as? String
                         let standardFormats = item["standardFormats"] as? [String]
-                        let lengths = item["length"] as? [String]
+                        let lengths = item["lengths"] as? [String]
                         let transactions = item["transactions"] as? [String]
-                        let version = item["version"] as? String
+                        let versions = item["versions"] as? [String]
                         
                         searchResults.append(Element(elementId: elementId, elementName: elementName,
                                                 definition: definition, segmentId: segmentId, segmentName: segmentName,
                                                 standardFormats : standardFormats!, lengths: lengths!, transactions : transactions!,
-                                                version : version))
+                                                versions : versions!))
                     }
                 }
                 
@@ -65,10 +65,7 @@ class SearchViewController: UIViewController {
                 print("JSON Error or nothing was found")
                let alertController = UIAlertController(title: "Alert", message: "Nothing was found", preferredStyle: UIAlertControllerStyle.alert)
                 alertController.addAction(UIAlertAction(title: "Dismiss:", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)
-                //self.presentViewController(alertController, animated: true, completion: nil)
-                    
-                
+                self.present(alertController, animated: true, completion: nil)                
             }
             
         } catch  {
@@ -114,7 +111,7 @@ extension SearchViewController: UISearchBarDelegate {
         
         let expectedCharSet = CharacterSet.urlQueryAllowed
         let searchTerm = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
-        let urlString = "https://dataasap.com/specview/webapi/v1/elements/ncpdp/" + searchTerm! + "?v=D0"
+        let urlString = "https://dataasap.com/specasap/webapi/v1/elements/ncpdp/" + searchTerm! + "?v=D0"
         print ("URL String is \(urlString)")
         let url = URL(string: urlString)
         
@@ -147,7 +144,7 @@ extension SearchViewController: UISearchBarDelegate {
                     if(httpResponse.statusCode == 404) {
                         alertString = "No records were found."
                     } else {
-                        alertString = "An error occured and Support as been notified.\n Pleas try again later."
+                        alertString = "An error occured and Support as been notified.\n Please try again later."
                     }
                     let alertController = UIAlertController(title: "", message: alertString, preferredStyle: UIAlertControllerStyle.alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))

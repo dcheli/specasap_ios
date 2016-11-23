@@ -16,11 +16,11 @@ class Element {
     var standardFormats : [String]
     var lengths : [String]
     var transactions : [String]
-    var version : String?
+    var versions : [String]
  
     init(elementId: String?, elementName: String?, definition : String?, segmentId: String?,
          segmentName: String?, standardFormats : [String], lengths : [String], transactions : [String],
-         version : String?) {
+         versions : [String]) {
         self.elementId = elementId
         self.elementName = elementName
         self.definition = definition
@@ -29,7 +29,7 @@ class Element {
         self.standardFormats = standardFormats
         self.lengths = lengths
         self.transactions = transactions
-        self.version = version
+        self.versions = versions
     }
 }
 import Foundation

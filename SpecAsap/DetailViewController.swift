@@ -29,6 +29,10 @@ class DetailViewController : UIViewController {
             displayString += "Length(s):"
             displayString += processArray(element.lengths)
         }
+        if element.versions.count > 0 {
+            displayString += "Version(s):"
+            displayString += processArray(element.versions)
+        }
         
         if element.standardFormats.count > 0 {
             displayString += "Standard Format(s):"

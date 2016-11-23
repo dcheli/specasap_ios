@@ -11,10 +11,16 @@ import UIKit
 
 class AboutViewController : UIViewController, UITableViewDataSource {
     
+    let defaultSession  = URLSessionConfiguration.default
+    var dataTask : URLSessionDataTask?
+
+    
     @IBOutlet weak var tableView: UITableView!
     let items = [
         ("Privacy Policy"),
-        ("Contact Us")
+        ("Terms Of Service"),
+        ("Contact Us"),
+        ("Rate Us")
     ]
     
     override func viewDidLoad() {
@@ -41,33 +47,32 @@ class AboutViewController : UIViewController, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ //       UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        var urlString = ""
         
         let indexPath = self.tableView.indexPathForSelectedRow
+        var responseData :  Data?
+        
         
         if(segue.identifier == "aboutUs") {
-            let destination = segue.destination as! AboutDetailsViewController
-            destination.pageTitle = items[indexPath!.row]
+            if items[indexPath!.row] == "Privacy Policy" {
+                urlString = "https://dataasap.com/specasap/webapi/privacypolicy"
+                print("Privay Policy was selected")
+            } else if items[indexPath!.row] == "Terms Of Service" {
+                urlString = "https://dataasap.com/specasap/webapi/termsofservice"
+                print ("Terms of Service was Selected")
+            } else if items[indexPath!.row] == "Contact Us" {
+                print("Contact Us was selected")
+            }
         }
-    
-    }
+         let destination = segue.destination as! AboutDetailsViewController
+        destination.pageTitle = items[indexPath!.row]
 
-    
+    }
 }
-/*
-extension AboutViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        print("is this called")
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
-    }
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
-        cell.textLabel?.text = "Bacon"
-        
-        return cell
-    }
-    
-}*/
+
+
+
+
+

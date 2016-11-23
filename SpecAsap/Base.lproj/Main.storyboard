@@ -225,12 +225,29 @@
                     <view key="view" contentMode="scaleToFill" id="Gpq-gt-Rsg">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IaH-Ih-0Dd">
+                                <rect key="frame" x="20" y="117" width="728" height="840"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="IaH-Ih-0Dd" firstAttribute="trailing" secondItem="Gpq-gt-Rsg" secondAttribute="trailingMargin" id="1xP-h0-PSC"/>
+                            <constraint firstItem="vIf-Dz-sQF" firstAttribute="top" secondItem="IaH-Ih-0Dd" secondAttribute="bottom" constant="67" id="7dE-C0-vPm"/>
+                            <constraint firstItem="IaH-Ih-0Dd" firstAttribute="leading" secondItem="Gpq-gt-Rsg" secondAttribute="leadingMargin" id="7rW-LJ-sAs"/>
+                            <constraint firstItem="IaH-Ih-0Dd" firstAttribute="top" secondItem="PJC-eT-arv" secondAttribute="bottom" constant="53" id="xVq-7R-ZSz"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="documentDisplay" destination="IaH-Ih-0Dd" id="rHJ-V4-sfk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3PH-sc-sR2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4933" y="479"/>
+            <point key="canvasLocation" x="4932.8125" y="478.71093749999994"/>
         </scene>
         <!--Initial View Controller-->
         <scene sceneID="y2k-Mp-YlS">

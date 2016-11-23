@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */; };
 		FD7822471DD9309700DD3E9C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7822461DD9309700DD3E9C /* AboutViewController.swift */; };
+		FD8D8A101DE51DEE00FC6254 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */; };
 		FDC80ADC1DD8F9B800548CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80ADB1DD8F9B800548CC0 /* AppDelegate.swift */; };
 		FDC80ADE1DD8F9B800548CC0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80ADD1DD8F9B800548CC0 /* SearchViewController.swift */; };
 		FDC80AE11DD8F9B800548CC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC80ADF1DD8F9B800548CC0 /* Main.storyboard */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutDetailsViewController.swift; sourceTree = "<group>"; };
 		FD7822461DD9309700DD3E9C /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		FDC80AD81DD8F9B800548CC0 /* SpecAsap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpecAsap.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,17 +41,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FD8D8A101DE51DEE00FC6254 /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD5FDCC11DE51CCE00C694AE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FDC80ACF1DD8F9B800548CC0 = {
 			isa = PBXGroup;
 			children = (
 				FDC80ADA1DD8F9B800548CC0 /* SpecAsap */,
 				FDC80AD91DD8F9B800548CC0 /* Products */,
+				FD5FDCC11DE51CCE00C694AE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
