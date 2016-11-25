@@ -17,109 +17,109 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
     
     override func viewDidLoad() {
         self.automaticallyAdjustsScrollViewInsets = false
-//        super.viewDidLoad()
         self.title = pageTitle
-        print(title!)
+
+        let username = "dcheli"
+        let password = "aside555"
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
+        let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
+
+
         if title! == "Privacy Policy" {
-            let document = LegalDocument()
-            document.urlString = "https://dataasap.com/specasap/webapi/privacypolicy"
+            let methodStart = Date()
+            let session = URLSession.shared
+            let url = URL(string: "https://dataasap.com/specasap/webapi/privacypolicy")
+            var request = URLRequest(url: url!)
+            request.httpMethod = "GET"
+            request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+            
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
-            document.getDocument { data in
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                }
-                
-                // so what this does is somehow returns the UI control back to the main thread. If you don't do this it will crach
-                // because this running in a different thread
-                DispatchQueue.main.sync(execute: {
-                    do {
-                        var document = ""
-                        let jsonDict  = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
-                     //       if let json = jsonDict as? AnyObject {
-                       if let json = jsonDict as? [String: String] {
-                        // the problem with this is that it displays in any order
-                        //        for(key, value) in json {
-                        //            let title = key + "\n\n"
-                        //            let content = value + "\n\n"
-                        //           document.append(title)
-                        //            document.append(content)
-                        //        }
-                        
-                        if let general = json["generalInformation"] {
-                            document.append("GENERAL INFORMATION\n")
-                            document.append(general + "\n\n")
-                        }
-                        
-                        if let usage = json["informationGatheringAndUsage"] {
-                            document.append("INFORMATION GATHERING AND USAGE\n")
-                            document.append(usage + "\n\n")
-                        }
+            let dataTask = session.dataTask(with: request) {(data, response, error) ->Void in
+                do {
+                    let jsonDict = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
 
-                        if let cookies  = json["cookies"] {
-                            document.append("COOKIES\n")
-                            document.append(cookies + "\n\n")
-                        }
-                        
-                        if let dataStorage  = json["dataStorage"] {
-                            document.append("DATA STORAGE\n")
-                            document.append(dataStorage + "\n\n")
-                        }
-                        
-                        if let disclosure  = json["disclosure"] {
-                            document.append("DISCLOSURE\n")
-                            document.append(disclosure + "\n\n")
-                        }
-                        
-                        if let safeHarbor  = json["euAndSwissSafeHarbor"] {
-                            document.append("EU AND SWISS SAFE HARBOR\n")
-                            document.append(safeHarbor + "\n\n")
-                        }
-
-
-                        if let changes  = json["changes"] {
-                            document.append("CHANGES\n")
-                            document.append(changes + "\n\n")
-                        }
-                        
-                        if let questions  = json["questions"] {
-                            document.append("QUESTIONS\n")
-                            document.append(questions + "\n\n")
-                        }
-
-                        if let lastUpdate  = json["lastReviewedOrUpdated"] {
-                            document.append("LAST REVIEWED OR UPDATED\n")
-                            document.append(lastUpdate + "\n\n")
-                        }
-                        
-
-                        self.documentDisplay.text = document
-                            }
-                    }catch  {
-                        print("Do better error handling here")
-                    }
-                    });
-            }
-            
-        } else if title! == "Terms Of Service" {
-            print ("terms of service was selected")
-            let document = LegalDocument()
-            document.urlString = "https://dataasap.com/specasap/webapi/termsofservice"
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-            
-            document.getDocument { data in
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                }
-                
-                DispatchQueue.main.sync(execute: {
-                    do {
-                        var document = ""
-                        
-                        let jsonDict  = try JSONSerialization.jsonObject(with: data as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
-                        //       if let json = jsonDict as? AnyObject {
+                    var document = ""
+                    DispatchQueue.main.async {
                         if let json = jsonDict as? [String: String] {
-                            print(json)
+                            
+                            if let general = json["generalInformation"] {
+                                document.append("GENERAL INFORMATION\n")
+                                document.append(general + "\n\n")
+                            }
+                            if let usage = json["informationGatheringAndUsage"] {
+                                document.append("INFORMATION GATHERING AND USAGE\n")
+                                document.append(usage + "\n\n")
+                            }
+                            
+                            if let cookies  = json["cookies"] {
+                                document.append("COOKIES\n")
+                                document.append(cookies + "\n\n")
+                            }
+                            
+                            if let dataStorage  = json["dataStorage"] {
+                                document.append("DATA STORAGE\n")
+                                document.append(dataStorage + "\n\n")
+                            }
+                            
+                            if let disclosure  = json["disclosure"] {
+                                document.append("DISCLOSURE\n")
+                                document.append(disclosure + "\n\n")
+                            }
+                            
+                            if let safeHarbor  = json["euAndSwissSafeHarbor"] {
+                                document.append("EU AND SWISS SAFE HARBOR\n")
+                                document.append(safeHarbor + "\n\n")
+                            }
+                            
+                            
+                            if let changes  = json["changes"] {
+                                document.append("CHANGES\n")
+                                document.append(changes + "\n\n")
+                            }
+                            
+                            if let questions  = json["questions"] {
+                                document.append("QUESTIONS\n")
+                                document.append(questions + "\n\n")
+                            }
+                            
+                            if let lastUpdate  = json["lastReviewedOrUpdated"] {
+                                document.append("LAST REVIEWED OR UPDATED\n")
+                                document.append(lastUpdate + "\n\n")
+                            }
+                        }
+                        self.documentDisplay.text = document
+ 
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    }
+                    let methodFinish = Date()
+                    let executionTime = methodFinish.timeIntervalSince(methodStart)
+                    print("Execution time for \(self.title!) was \(executionTime)ms")
+                } catch {
+                    print("Error: \(error)")
+                }
+                
+            }
+            dataTask.resume()
+ 
+        } else if title! == "Terms Of Service" {
+            let methodStart = Date()
+            let session = URLSession.shared
+            let url = URL(string: "https://dataasap.com/specasap/webapi/termsofservice")
+            var request = URLRequest(url: url!)
+            request.httpMethod = "GET"
+            request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            
+            let dataTask = session.dataTask(with: request) {( data, response, error) -> Void in
+                do {
+                    let jsonDict = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
+                    
+                    var document = ""
+                    DispatchQueue.main.async {
+                        if let json = jsonDict as? [String: String] {
                             if let introduction = json["introduction"] {
                                 document.append("INTRODUCTION\n")
                                 document.append(introduction + "\n\n")
@@ -160,16 +160,20 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
                                 document.append("LAST REVIEWED OR UPDATED\n")
                                 document.append(lastUpdate + "\n\n")
                             }
-                            
-                            self.documentDisplay.text = document
                         }
-                    }catch  {
-                        print("Do better error handling here")
+                        self.documentDisplay.text = document
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     }
-                });
-
+                    let methodFinish = Date()
+                    let executionTime = methodFinish.timeIntervalSince(methodStart)
+                    print("Execution time for \(self.title!) was \(executionTime)ms")
+                    
+                    
+                } catch {
+                    print("Error retrieving Terms of Service: \(error)")
+                }
             }
-            
+            dataTask.resume()
         } else if title! == "Contact Us" {
             print("Do something")
             let mailComposeController = MFMailComposeViewController()
@@ -220,46 +224,4 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
          let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail. Pelase check e-mailconfiguration and try again. You may also visit http://www.dataasap.com.", preferredStyle: .alert)
         self.present(sendMailErrorAlert, animated: true, completion: nil)
     }
-    
-    
 }
-
-class LegalDocument {
-    var urlString : String! = nil
-    
-    func getDocument(completion: @escaping (Data) -> ()) {
-        if let url = URL(string: urlString) {
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
-            let username = "dcheli"
-            let password = "aside555"
-            let loginString = NSString(format: "%@:%@", username, password)
-            let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
-            let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
-            request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
-            
-            let dataTask = URLSession.shared.dataTask(with: request) {
-                data, response, error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-                else if let httpResponse = response as? HTTPURLResponse {
-                    if httpResponse.statusCode == 200 {
-                        // do something here
-                        completion(data!)
-                    }
-                }
-//                if let data = data, let jsonString = String(data: data, encoding: String.Encoding.utf8), error == nil {
-//                    completion(jsonString)
-
-//                } else {
-//                    print("error=\(error!.localizedDescription)")
-//                }
-            }
-            dataTask.resume()
-        }
-    }
-}
-
-
-
