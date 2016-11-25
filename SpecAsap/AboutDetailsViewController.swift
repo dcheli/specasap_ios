@@ -175,14 +175,12 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
             }
             dataTask.resume()
         } else if title! == "Contact Us" {
-            print("Do something")
-            let mailComposeController = MFMailComposeViewController()
-            mailComposeController.mailComposeDelegate = self
-            mailComposeController.setToRecipients(["dcheli@live.com"])
-            mailComposeController.setSubject("Support Question")
-            mailComposeController.setMessageBody("This is a Test", isHTML: false)
+            // Note this is from Simon Archers youtube video; kind of
+
+            let mailComposeViewController = configuredMailViewController()
+            
             if MFMailComposeViewController.canSendMail() {
-                
+                self.present(mailComposeViewController, animated: true, completion: nil)
             } else {
                 self.showSendMailErrorAlert()
             }
@@ -203,6 +201,16 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
         }
     }
     
+    func configuredMailViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setToRecipients(["dcheli@live.com"])
+        mailComposerVC.setSubject("Feedback")
+        mailComposerVC.setMessageBody("This is a test", isHTML: false)
+        
+        return mailComposerVC
+    }
+
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true) { () -> Void in
             
@@ -220,8 +228,12 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
     }
     
     func showSendMailErrorAlert() {
-       // let sendMailErrorAlert = UIAlertView(title: "Could Not Send Email", message: "Your device could not send e-mail. Pelase check e-mailconfiguration and try again. You may also visit http://www.dataasap.com.", delegate: self, cancelButtonTitle: "OK")
-         let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail. Pelase check e-mailconfiguration and try again. You may also visit http://www.dataasap.com.", preferredStyle: .alert)
+         let sendMailErrorAlert = UIAlertController(title: "Could Not Send Email", message: "Your device could not send e-mail. Please check e-mail configuration and try again. You may also visit http://www.dataasap.com to contact us.", preferredStyle: .alert)
+        
+        sendMailErrorAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: {(action: UIAlertAction!) in
+            print("Email alert canceled")
+        }))
+        
         self.present(sendMailErrorAlert, animated: true, completion: nil)
     }
 }
