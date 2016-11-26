@@ -47,25 +47,20 @@ class AboutViewController : UIViewController, UITableViewDataSource {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- //       UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
-        var urlString = ""
+ //       var urlString = ""
         
         let indexPath = self.tableView.indexPathForSelectedRow
-        var responseData :  Data?
-        
-        
-        if(segue.identifier == "aboutUs") {
+  
+ /*       if(segue.identifier == "aboutUs") {
             if items[indexPath!.row] == "Privacy Policy" {
                 urlString = "https://dataasap.com/specasap/webapi/privacypolicy"
-                print("Privay Policy was selected")
             } else if items[indexPath!.row] == "Terms Of Service" {
                 urlString = "https://dataasap.com/specasap/webapi/termsofservice"
-                print ("Terms of Service was Selected")
             } else if items[indexPath!.row] == "Contact Us" {
-                print("Contact Us was selected")
+
             }
         }
+ */
          let destination = segue.destination as! AboutDetailsViewController
         destination.pageTitle = items[indexPath!.row]
 

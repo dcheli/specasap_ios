@@ -131,6 +131,7 @@
 				TargetAttributes = {
 					FDC80AD71DD8F9B800548CC0 = {
 						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = NF99H8R5Q8;
 						LastSwiftMigration = 0810;
 						ProvisioningStyle = Automatic;
 					};
@@ -301,6 +302,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NF99H8R5Q8;
 				INFOPLIST_FILE = SpecAsap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataasap.SpecAsap;
@@ -313,6 +315,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = NF99H8R5Q8;
 				INFOPLIST_FILE = SpecAsap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataasap.SpecAsap;

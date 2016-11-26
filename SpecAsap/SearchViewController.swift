@@ -44,20 +44,21 @@ class SearchViewController: UIViewController {
             if(jsonDict.count > 0) {
                 if let json = jsonDict as? [[String: AnyObject]] {
                     for item in json {
-                        let elementId = item["name"] as? String
-                        let elementName = item["elementName"] as? String
-                        let segmentId = item["segmentId"] as? String
-                        let segmentName = item["segmentName"] as? String
-                        let definition = item["definition"] as? String
-                        let standardFormats = item["standardFormats"] as? [String]
-                        let lengths = item["lengths"] as? [String]
-                        let transactions = item["transactions"] as? [String]
-                        let versions = item["versions"] as? [String]
+                        let elementId  = item["name"] as? String ?? ""
+                        let elementName = item["elementName"] as? String ?? ""
+                        let segmentId = item["segmentId"] as? String ?? ""
+                        let segmentName = item["segmentName"] as? String ?? ""
+                        let definition = item["definition"] as? String ?? ""
+                        
+                        let standardFormats = item["standardFormats"] as? [String] ?? []
+                        let lengths = item["lengths"] as? [String] ?? []
+                        let transactions = item["transactions"] as? [String] ?? []
+                        let versions = item["versions"] as? [String] ?? []
                         
                         searchResults.append(Element(elementId: elementId, elementName: elementName,
                                                 definition: definition, segmentId: segmentId, segmentName: segmentName,
-                                                standardFormats : standardFormats!, lengths: lengths!, transactions : transactions!,
-                                                versions : versions!))
+                                                standardFormats : standardFormats, lengths: lengths, transactions : transactions,
+                                                versions : versions))
                     }
                 }
                 
