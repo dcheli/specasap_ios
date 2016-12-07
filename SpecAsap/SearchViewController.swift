@@ -176,6 +176,7 @@ extension SearchViewController: UITableViewDataSource {
         cell.elementId.text = element.elementId
         cell.elementName.text = element.elementName
         
+        
         return cell
     }
 }
