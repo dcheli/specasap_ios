@@ -29,14 +29,14 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
         if title! == "Privacy Policy" {
             let methodStart = Date()
             let session = URLSession.shared
-            let url = URL(string: "https://dataasap.com/specasap/webapi/privacypolicy")
+            let url = URL(string: "https://dataasap.com/specasap/webapi/v1/legal/privacypolicy")
             var request = URLRequest(url: url!)
             request.httpMethod = "GET"
             request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             
-            let dataTask = session.dataTask(with: request) {(data, response, error) ->Void in
+            let dataTask = session.dataTask(with: request) {(data, response, error) -> Void in
                 do {
                     let jsonDict = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSDictionary
 
@@ -106,7 +106,7 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
         } else if title! == "Terms Of Service" {
             let methodStart = Date()
             let session = URLSession.shared
-            let url = URL(string: "https://dataasap.com/specasap/webapi/termsofservice")
+            let url = URL(string: "https://dataasap.com/specasap/webapi/v1/legal/termsofservice")
             var request = URLRequest(url: url!)
             request.httpMethod = "GET"
             request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
@@ -166,7 +166,7 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
                     }
                     let methodFinish = Date()
                     let executionTime = methodFinish.timeIntervalSince(methodStart)
-                    print("Execution time for \(self.title!) was \(executionTime)ms")
+                    print("Execution time for \(self.title!) was \(executionTime) ms")
                     
                     
                 } catch {

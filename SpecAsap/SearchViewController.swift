@@ -50,6 +50,8 @@ class SearchViewController: UIViewController {
                         let segmentName = item["segmentName"] as? String ?? ""
                         let definition = item["definition"] as? String ?? ""
                         
+                        let codes = item["codes"] as? [String] ?? []
+
                         let standardFormats = item["standardFormats"] as? [String] ?? []
                         let lengths = item["lengths"] as? [String] ?? []
                         let transactions = item["transactions"] as? [String] ?? []
@@ -58,7 +60,7 @@ class SearchViewController: UIViewController {
                         searchResults.append(Element(elementId: elementId, elementName: elementName,
                                                 definition: definition, segmentId: segmentId, segmentName: segmentName,
                                                 standardFormats : standardFormats, lengths: lengths, transactions : transactions,
-                                                versions : versions))
+                                                versions : versions, codes : codes))
                     }
                 }
                 
@@ -137,7 +139,7 @@ extension SearchViewController: UISearchBarDelegate {
             if let error = error {
                 print(error.localizedDescription)
             } else if let httpResponse = response as? HTTPURLResponse {
-                
+                print(data)
                 if(httpResponse.statusCode == 200) {
                     self.updateSearchResults(data as Data?)
                 } else {

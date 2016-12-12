@@ -76,7 +76,6 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView : UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let section = indexPath.section
         
-        //print ("Section: \(section) Row: \(indexPath.row)")
         switch section {
         case 0:
             self.performSegue(withIdentifier: "aboutus", sender: nil)
@@ -95,10 +94,8 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         switch section {
         case 1:
-            print("Section \(section)")
             return self.isNcpdpAsapActive()
         default:
-            print("Section \(section)")
             return ""
         }
     }

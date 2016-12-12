@@ -14,6 +14,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     
     var request:SKProductsRequest!
     var products:[SKProduct] = []
+    var id : [String] = []
     
     // SKProducts call back
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
@@ -24,19 +25,71 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         }
     }
     
-    func getProductIdentifiers() -> [String] {
+    func doit(identifiers : [String]) {
+        print("do it \(identifiers)")
+    }
+    
+    func getProductIdentifiers() {
+        
+        // So this is where u would make the call to URLSession to get the identfiers
+        let defaultSession  = URLSessionConfiguration.default
+
         var identifiers : [String] = []
         
-        if let fileUrl = Bundle.main.url(forResource: "products", withExtension: "plist") {
-            
-            let products = NSArray(contentsOf: fileUrl)
-            
-            for product in products as! [String] {
-                identifiers.append(product)
-            }
-        }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        return identifiers
+        let username = "dcheli"
+        let password = "aside555"
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
+        let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
+
+        let methodStart = Date()
+        let session = URLSession.shared
+        let url = URL(string: "https://dataasap.com/specasap/webapi/v1/products/productlist")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+
+        let dataTask = session.dataTask(with: request) {(data, response, error) -> Void in
+            do {
+                let jsonArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
+                DispatchQueue.main.async {
+                    if jsonArray.count > 0 {
+                        //print(jsonArray)
+                        for json in jsonArray as! [Dictionary<String, String>]{
+                            let productId = json["productId"]!
+                            identifiers.append(productId)
+
+                        }
+                    }
+                    self.performProductRequestForIdentifiers(identifiers: identifiers)
+        //            self.doit(identifiers: identifiers)
+                    print("Identifiers in async task are : \(identifiers)")
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+                let methodFinish = Date()
+                let executionTime = methodFinish.timeIntervalSince(methodStart)
+                print("Execution time for productlist request was \(executionTime) ms")
+            } catch {
+                print("Error: \(error)")
+            }
+
+        }
+        dataTask.resume()
+        
+        
+//// Here is the plist code
+//        if let fileUrl = Bundle.main.url(forResource: "products", withExtension: "plist") {
+//
+//            let products = NSArray(contentsOf: fileUrl)
+            
+//            for product in products as! [String] {
+//                identifiers.append(product)
+//            }
+//        }
+//        print("Id list is \(id)")
+ //       return identifiers
     }
     
     func performProductRequestForIdentifiers(identifiers : [String]) {
@@ -50,7 +103,8 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     }
     
     func requestProducts() {
-        performProductRequestForIdentifiers(identifiers: self.getProductIdentifiers())
+        self.getProductIdentifiers()
+       // performProductRequestForIdentifiers(identifiers: self.getProductIdentifiers())
     }
     
     func setupPurchases(_ handler: @escaping (Bool) ->Void) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
-    <device id="retina5_5" orientation="portrait">
-        <adaptation id="fullscreen"/>
+    <device id="ipad12_9" orientation="portrait">
+        <adaptation id="splitview1_3"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -18,34 +18,41 @@
                         <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="1366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="specASAP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTm-xS-WXh">
-                                <rect key="frame" x="140" y="87" width="134.33333333333331" height="32.666666666666671"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
-                                <color key="textColor" red="0.25735394438893022" green="0.28129814974791956" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2016 Dave Cheli. All rights reserved. " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="htv-vJ-9Oy">
-                                <rect key="frame" x="51" y="700" width="313.33333333333331" height="16"/>
+                                <rect key="frame" x="30.5" y="1330" width="314" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="specASAP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTm-xS-WXh">
+                                <rect key="frame" x="120" y="666.5" width="135" height="33"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                <color key="textColor" red="0.25735394438893022" green="0.28129814974791956" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="8IZ-fy-8nJ">
+                                <rect key="frame" x="40" y="213" width="240" height="27.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="htv-vJ-9Oy" secondAttribute="bottom" constant="20" id="ETQ-ml-odS"/>
-                            <constraint firstItem="htv-vJ-9Oy" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="IJD-C7-l6n"/>
-                            <constraint firstItem="KTm-xS-WXh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="VVV-FI-bLe"/>
-                            <constraint firstItem="KTm-xS-WXh" firstAttribute="top" secondItem="Llm-lL-Icb" secondAttribute="bottom" constant="67" id="o2p-c1-hxV"/>
+                            <constraint firstItem="htv-vJ-9Oy" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="F9v-yP-f5E"/>
+                            <constraint firstItem="KTm-xS-WXh" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="r8y-aQ-z8R"/>
+                            <constraint firstItem="KTm-xS-WXh" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="xea-V3-cUv"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="htv-vJ-9Oy" secondAttribute="bottom" constant="20" id="zCJ-Fc-KSR"/>
                         </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="52" y="374.66266866566718"/>
+            <point key="canvasLocation" x="49.275362318840585" y="373.36956521739131"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="40" height="40"/>
+    </resources>
 </document>

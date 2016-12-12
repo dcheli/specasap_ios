@@ -44,6 +44,11 @@ class DetailViewController : UIViewController {
             displayString += processArray(element.transactions)
         }
         
+        if element.codes.count > 0 {
+            displayString += "Codes: "
+            displayString += processArray(element.codes)
+        }
+        
         displayString += "Definition: " +  element.definition! + "\n"
         
         textView.text = displayString

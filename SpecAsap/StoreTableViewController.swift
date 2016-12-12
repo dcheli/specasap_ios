@@ -54,9 +54,7 @@ class StoreTableViewController: UITableViewController {
         
         cell.title?.text = product.localizedTitle + " - " + self.priceStringForProduct(product: product)
         cell.details?.text = product.localizedDescription
-//        cell.textLabel?.text = product.localizedTitle + " - " + self.priceStringForProduct(product: product)
-  //      cell.detailTextLabel?.text = product.localizedDescription
-        
+ 
         return cell
     }
     

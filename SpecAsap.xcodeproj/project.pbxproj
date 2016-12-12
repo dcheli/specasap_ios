@@ -69,6 +69,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FD0AFE4C1DFCB858009E798F /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Parsers;
+			sourceTree = "<group>";
+		};
 		FD5FDCC11DE51CCE00C694AE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +138,7 @@
 		FDC80ADA1DD8F9B800548CC0 /* SpecAsap */ = {
 			isa = PBXGroup;
 			children = (
+				FD0AFE4C1DFCB858009E798F /* Parsers */,
 				FDAFCB2D1DF778C200DFA032 /* Receipt Verification */,
 				FDF7E0CC1DF3368D00EDD451 /* TableCells */,
 				FD6DD51E1DECB88600ED511F /* Controllers */,
@@ -385,6 +393,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NF99H8R5Q8;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SpecAsap/openssl/include";
@@ -406,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NF99H8R5Q8;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SpecAsap/openssl/include";
