@@ -7,7 +7,7 @@
 //
 import Foundation
 
-class Element {
+class NCPDPElement {
     var elementId: String?
     var elementName: String?
     var definition: String?

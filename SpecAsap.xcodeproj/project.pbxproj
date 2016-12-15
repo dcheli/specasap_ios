@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */; };
 		FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */; };
+		FD75DC101DFF927000E45684 /* X12ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */; };
 		FD7822471DD9309700DD3E9C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7822461DD9309700DD3E9C /* AboutViewController.swift */; };
 		FD8D8A101DE51DEE00FC6254 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */; };
 		FDAFCB2B1DF7781E00DFA032 /* libssl_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */; };
@@ -20,7 +21,7 @@
 		FDC80AE11DD8F9B800548CC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC80ADF1DD8F9B800548CC0 /* Main.storyboard */; };
 		FDC80AE31DD8F9B800548CC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDC80AE21DD8F9B800548CC0 /* Assets.xcassets */; };
 		FDC80AE61DD8F9B800548CC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC80AE41DD8F9B800548CC0 /* LaunchScreen.storyboard */; };
-		FDC80AEF1DD8FAA200548CC0 /* Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AEE1DD8FAA200548CC0 /* Element.swift */; };
+		FDC80AEF1DD8FAA200548CC0 /* NCPDPElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AEE1DD8FAA200548CC0 /* NCPDPElement.swift */; };
 		FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AF01DD8FAE400548CC0 /* ElementCell.swift */; };
 		FDC80AF31DD8FB1E00548CC0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AF21DD8FB1E00548CC0 /* DetailViewController.swift */; };
 		FDE7A8FD1DEBD8A400080AA2 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE7A8FC1DEBD8A400080AA2 /* IAPManager.swift */; };
@@ -32,6 +33,7 @@
 		FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTableViewController.swift; sourceTree = "<group>"; };
 		FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutDetailsViewController.swift; sourceTree = "<group>"; };
+		FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = X12ElementParser.swift; sourceTree = "<group>"; };
 		FD7822461DD9309700DD3E9C /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl_iOS.a; path = SpecAsap/openssl/lib/libssl_iOS.a; sourceTree = "<group>"; };
 		FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto_iOS.a; path = SpecAsap/openssl/lib/libcrypto_iOS.a; sourceTree = "<group>"; };
@@ -47,7 +49,7 @@
 		FDC80AE21DD8F9B800548CC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDC80AE51DD8F9B800548CC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDC80AE71DD8F9B800548CC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FDC80AEE1DD8FAA200548CC0 /* Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Element.swift; sourceTree = "<group>"; };
+		FDC80AEE1DD8FAA200548CC0 /* NCPDPElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCPDPElement.swift; sourceTree = "<group>"; };
 		FDC80AF01DD8FAE400548CC0 /* ElementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementCell.swift; sourceTree = "<group>"; };
 		FDC80AF21DD8FB1E00548CC0 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FDE7A8FC1DEBD8A400080AA2 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 		FD0AFE4C1DFCB858009E798F /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -138,7 +141,6 @@
 		FDC80ADA1DD8F9B800548CC0 /* SpecAsap */ = {
 			isa = PBXGroup;
 			children = (
-				FD0AFE4C1DFCB858009E798F /* Parsers */,
 				FDAFCB2D1DF778C200DFA032 /* Receipt Verification */,
 				FDF7E0CC1DF3368D00EDD451 /* TableCells */,
 				FD6DD51E1DECB88600ED511F /* Controllers */,
@@ -150,6 +152,7 @@
 				FDC80AE41DD8F9B800548CC0 /* LaunchScreen.storyboard */,
 				FDC80AE71DD8F9B800548CC0 /* Info.plist */,
 				FDE7A9001DEBDCA300080AA2 /* products.plist */,
+				FD0AFE4C1DFCB858009E798F /* Parsers */,
 			);
 			path = SpecAsap;
 			sourceTree = "<group>";
@@ -157,7 +160,7 @@
 		FDC80AED1DD8FA9100548CC0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FDC80AEE1DD8FAA200548CC0 /* Element.swift */,
+				FDC80AEE1DD8FAA200548CC0 /* NCPDPElement.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 				FD7822471DD9309700DD3E9C /* AboutViewController.swift in Sources */,
 				FDC80ADE1DD8F9B800548CC0 /* SearchViewController.swift in Sources */,
 				FDC80ADC1DD8F9B800548CC0 /* AppDelegate.swift in Sources */,
+				FD75DC101DFF927000E45684 /* X12ElementParser.swift in Sources */,
 				FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */,
 				FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */,
 				FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */,
@@ -270,7 +274,7 @@
 				FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */,
 				FDF7E0CE1DF337C500EDD451 /* ProductCell.swift in Sources */,
 				FDC80AF31DD8FB1E00548CC0 /* DetailViewController.swift in Sources */,
-				FDC80AEF1DD8FAA200548CC0 /* Element.swift in Sources */,
+				FDC80AEF1DD8FAA200548CC0 /* NCPDPElement.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,7 +397,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NF99H8R5Q8;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SpecAsap/openssl/include";
@@ -415,7 +419,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "";
 				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = NF99H8R5Q8;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/SpecAsap/openssl/include";

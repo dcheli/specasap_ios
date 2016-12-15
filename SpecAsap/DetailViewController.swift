@@ -13,7 +13,7 @@ import UIKit
 class DetailViewController : UIViewController {
     
     @IBOutlet weak var textView: UITextView!
-    var element : Element! = nil
+    var element : NCPDPElement! = nil
     
     override func viewDidLoad() {
         self.automaticallyAdjustsScrollViewInsets = false

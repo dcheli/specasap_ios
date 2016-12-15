@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/SearchViewController.swift"
-            timestampString = "503101002.317324"
+            timestampString = "503362572.098914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "updateSearchResults(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/SearchViewController.swift"
-            timestampString = "503101002.317324"
+            timestampString = "503362572.098914"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "updateSearchResults(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/IAPManager.swift"
-            timestampString = "503182817.928956"
+            timestampString = "503290390.163568"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "validateReceipt(_:)"
             landmarkType = "7">
          </BreakpointContent>

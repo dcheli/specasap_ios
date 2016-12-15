@@ -25,14 +25,10 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         }
     }
     
-    func doit(identifiers : [String]) {
-        print("do it \(identifiers)")
-    }
-    
     func getProductIdentifiers() {
         
         // So this is where u would make the call to URLSession to get the identfiers
-        let defaultSession  = URLSessionConfiguration.default
+        //let defaultSession  = URLSessionConfiguration.default
 
         var identifiers : [String] = []
         
@@ -64,7 +60,6 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                         }
                     }
                     self.performProductRequestForIdentifiers(identifiers: identifiers)
-        //            self.doit(identifiers: identifiers)
                     print("Identifiers in async task are : \(identifiers)")
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }

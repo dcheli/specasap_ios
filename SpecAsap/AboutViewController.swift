@@ -72,8 +72,8 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
         //cell.textLabel?.text = firstSection[indexPath.row]
         return cell
     }
-    
-    func tableView(_ tableView : UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    //func tableView(_ tableView : UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let section = indexPath.section
         
         switch section {
@@ -119,7 +119,7 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
             let destination = segue.destination as! AboutDetailsViewController
             destination.pageTitle = menuItem
         } else {
-            let destination = segue.destination as! StoreTableViewController
+            segue.destination as! StoreTableViewController
         }
     }
     
