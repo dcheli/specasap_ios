@@ -12,6 +12,8 @@
 		FD75DC101DFF927000E45684 /* X12ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */; };
 		FD7822471DD9309700DD3E9C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7822461DD9309700DD3E9C /* AboutViewController.swift */; };
 		FD8D8A101DE51DEE00FC6254 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */; };
+		FD94AC701E038348008C50FC /* HL7Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC6F1E038348008C50FC /* HL7Element.swift */; };
+		FD94AC721E0383A5008C50FC /* HL7ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */; };
 		FDAFCB2B1DF7781E00DFA032 /* libssl_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */; };
 		FDAFCB2C1DF7781E00DFA032 /* libcrypto_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */; };
 		FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAFCB311DF7791900DFA032 /* RMAppReceipt.m */; };
@@ -24,6 +26,7 @@
 		FDC80AEF1DD8FAA200548CC0 /* NCPDPElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AEE1DD8FAA200548CC0 /* NCPDPElement.swift */; };
 		FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AF01DD8FAE400548CC0 /* ElementCell.swift */; };
 		FDC80AF31DD8FB1E00548CC0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AF21DD8FB1E00548CC0 /* DetailViewController.swift */; };
+		FDCE1F401E02364A000F7D36 /* X12Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCE1F3F1E02364A000F7D36 /* X12Element.swift */; };
 		FDE7A8FD1DEBD8A400080AA2 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE7A8FC1DEBD8A400080AA2 /* IAPManager.swift */; };
 		FDE7A9011DEBDCA300080AA2 /* products.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDE7A9001DEBDCA300080AA2 /* products.plist */; };
 		FDF7E0CE1DF337C500EDD451 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7E0CD1DF337C500EDD451 /* ProductCell.swift */; };
@@ -35,6 +38,8 @@
 		FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutDetailsViewController.swift; sourceTree = "<group>"; };
 		FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = X12ElementParser.swift; sourceTree = "<group>"; };
 		FD7822461DD9309700DD3E9C /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		FD94AC6F1E038348008C50FC /* HL7Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7Element.swift; sourceTree = "<group>"; };
+		FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7ElementParser.swift; sourceTree = "<group>"; };
 		FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl_iOS.a; path = SpecAsap/openssl/lib/libssl_iOS.a; sourceTree = "<group>"; };
 		FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto_iOS.a; path = SpecAsap/openssl/lib/libcrypto_iOS.a; sourceTree = "<group>"; };
 		FDAFCB2F1DF7791800DFA032 /* SpecAsap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpecAsap-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -52,6 +57,7 @@
 		FDC80AEE1DD8FAA200548CC0 /* NCPDPElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCPDPElement.swift; sourceTree = "<group>"; };
 		FDC80AF01DD8FAE400548CC0 /* ElementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementCell.swift; sourceTree = "<group>"; };
 		FDC80AF21DD8FB1E00548CC0 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		FDCE1F3F1E02364A000F7D36 /* X12Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = X12Element.swift; sourceTree = "<group>"; };
 		FDE7A8FC1DEBD8A400080AA2 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		FDE7A9001DEBDCA300080AA2 /* products.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = products.plist; sourceTree = "<group>"; };
 		FDF7E0CD1DF337C500EDD451 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
@@ -75,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */,
+				FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -161,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				FDC80AEE1DD8FAA200548CC0 /* NCPDPElement.swift */,
+				FDCE1F3F1E02364A000F7D36 /* X12Element.swift */,
+				FD94AC6F1E038348008C50FC /* HL7Element.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -262,12 +271,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDCE1F401E02364A000F7D36 /* X12Element.swift in Sources */,
 				FDE7A8FD1DEBD8A400080AA2 /* IAPManager.swift in Sources */,
 				FD7822471DD9309700DD3E9C /* AboutViewController.swift in Sources */,
+				FD94AC721E0383A5008C50FC /* HL7ElementParser.swift in Sources */,
 				FDC80ADE1DD8F9B800548CC0 /* SearchViewController.swift in Sources */,
 				FDC80ADC1DD8F9B800548CC0 /* AppDelegate.swift in Sources */,
 				FD75DC101DFF927000E45684 /* X12ElementParser.swift in Sources */,
 				FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */,
+				FD94AC701E038348008C50FC /* HL7Element.swift in Sources */,
 				FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */,
 				FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */,
 				FDAFCB351DF7796300DFA032 /* RMStoreAppReceiptVerifier.m in Sources */,

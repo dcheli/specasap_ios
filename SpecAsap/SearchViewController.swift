@@ -78,8 +78,6 @@ class SearchViewController: UIViewController {
         self.ncpdpButton.sendActions(for: .touchUpInside)
         self.x12Button.setTitleColor(UIColor.blue, for: .normal)
         self.hl7Button.setTitleColor(UIColor.blue, for: .normal)
-      //  groupingLabel.layer.borderColor = UIColor.gray.cgColor
-       // groupingLabel.layer.borderWidth = 1
     }
 
     override func didReceiveMemoryWarning() {
@@ -91,26 +89,28 @@ class SearchViewController: UIViewController {
 
         do {
             let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
+        
             if(jsonDict.count > 0) {
                 if let json = jsonDict as? [[String: AnyObject]] {
                     for item in json {
+                        print("Item is: \(item)")
                         let elementId  = item["name"] as? String ?? ""
-                        let elementName = item["elementName"] as? String ?? ""
                         let segmentId = item["segmentId"] as? String ?? ""
                         let segmentName = item["segmentName"] as? String ?? ""
+                        let elementName = item["elementName"] as? String ?? ""
                         let definition = item["definition"] as? String ?? ""
                         
                         let codes = item["codes"] as? [String] ?? []
-
+                        
                         let standardFormats = item["standardFormats"] as? [String] ?? []
                         let lengths = item["lengths"] as? [String] ?? []
                         let transactions = item["transactions"] as? [String] ?? []
                         let versions = item["versions"] as? [String] ?? []
                         
-                        searchResults.append(NCPDPElement(elementId: elementId, elementName: elementName,
-                                                definition: definition, segmentId: segmentId, segmentName: segmentName,
-                                                standardFormats : standardFormats, lengths: lengths, transactions : transactions,
-                                                versions : versions, codes : codes))
+                        searchResults.append(NCPDPElement(elementId : elementId, elementName: elementName,
+                                                        definition: definition, segmentId: segmentId, segmentName: segmentName,
+                                                        standardFormats : standardFormats, lengths: lengths, transactions : transactions,
+                                                        versions : versions, codes : codes))
                     }
                 }
                 
@@ -144,7 +144,14 @@ class SearchViewController: UIViewController {
         
         if(segue.identifier == "attributes") {
             let destination = segue.destination as! DetailViewController
-            destination.element = searchResults[indexPath!.row] as! NCPDPElement
+            if searchResults[indexPath!.row] is NCPDPElement {
+                destination.element = searchResults[indexPath!.row] as! NCPDPElement
+            } else if searchResults[indexPath!.row] is X12Element {
+                destination.element = searchResults[indexPath!.row] as! X12Element
+            } else if searchResults[indexPath!.row] is HL7Element {
+                destination.element = searchResults[indexPath!.row] as! HL7Element
+            }
+            
         }
     }
 }
@@ -159,12 +166,13 @@ extension SearchViewController: UISearchBarDelegate {
                 dataTask?.cancel()
             }
         }
-        print("something is pressed")
+
+        let expectedCharSet = CharacterSet.urlQueryAllowed
+        let searchTerm = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
+
         if self.ncpdpButton.isSelected {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-            let expectedCharSet = CharacterSet.urlQueryAllowed
-            let searchTerm = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
             let urlString =  urlElementsString + searchTerm! + "?v=D0"
             //let urlString = "https://dataasap.com/specasap/webapi/v1/elements/ncpdp/" + searchTerm! + "?v=D0"
             print ("URL String is \(urlString)")
@@ -210,9 +218,38 @@ extension SearchViewController: UISearchBarDelegate {
             }
             dataTask?.resume()
         } else if x12Button.isSelected {
-            print(urlElementsString)
+            searchResults.removeAll()
+
+            let urlString =  urlElementsString + searchTerm! + "?v=5010"
+            let x12ElementParser  = X12ElementParser(fromUrl : urlString)
+            x12ElementParser.getX12Spec(urlString: urlString) {
+                (result : [X12Element]) in
+                for item in result {
+                    self.searchResults.append(item)
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.tableView.setContentOffset(CGPoint.zero, animated: false)
+                }
+
+            }
+
         } else if hl7Button.isSelected {
-            print (urlElementsString)
+            searchResults.removeAll()
+            let urlString =  urlElementsString + searchTerm! + "?v=2"
+            let hl7ElementParser  = HL7ElementParser(fromUrl : urlString)
+            hl7ElementParser.getHL7Spec(urlString: urlString) {
+                (result : [HL7Element]) in
+                for item in result {
+                    self.searchResults.append(item)
+                }
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    self.tableView.setContentOffset(CGPoint.zero, animated: false)
+                }
+                
+            }
+            
         }
     }
     
@@ -229,12 +266,24 @@ extension SearchViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ElementCell", for: indexPath) as! ElementCell
-        let element = searchResults[indexPath.row] as? NCPDPElement
         
-        cell.elementId.text = element?.elementId
-        cell.elementName.text = element?.elementName
-        
-        
+        if searchResults[indexPath.row] is NCPDPElement {
+            let element = searchResults[indexPath.row] as? NCPDPElement
+            cell.elementId.text = element?.elementId
+            cell.elementName.text = element?.elementName
+
+        } else if searchResults[indexPath.row] is X12Element {
+            let element = searchResults[indexPath.row] as? X12Element
+            cell.elementId.text = element?.elementId
+            cell.elementName.text = element?.implementationName!
+
+        } else if searchResults[indexPath.row] is HL7Element {
+            let element = searchResults[indexPath.row] as? HL7Element
+            cell.elementId.text = element?.elementId
+            cell.elementName.text = element?.elementName!
+
+        }
+  
         return cell
     }
 }

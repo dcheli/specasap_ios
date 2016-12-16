@@ -1,14 +1,14 @@
 //
-//  X12ElementParser.swift
+//  HL7ElementParser.swift
 //  SpecAsap
 //
-//  Created by David Cheli on 12/12/16.
+//  Created by David Cheli on 12/15/16.
 //  Copyright © 2016 David Cheli. All rights reserved.
 //
 
 import Foundation
 
-class X12ElementParser {
+class HL7ElementParser {
     
     var urlString : String?
     
@@ -17,14 +17,14 @@ class X12ElementParser {
         print (self.urlString!)
     }
     
-    func getX12Spec(urlString: String, completion : @escaping (_ result : [X12Element]) -> Void) {
+    func getHL7Spec(urlString: String, completion : @escaping (_ result : [HL7Element]) -> Void) {
         
         let defaultSession  = URLSessionConfiguration.default
         var dataTask : URLSessionDataTask?
-        var searchResults = [X12Element]()
+        var searchResults = [HL7Element]()
         
         let url = URL(string: self.urlString!)
-
+        
         let request = NSMutableURLRequest(url:url! as URL)
         request.httpMethod = "GET"
         let username = "dcheli"
@@ -54,24 +54,24 @@ class X12ElementParser {
                             if let json = jsonDict as? [[String: AnyObject]] {
                                 for item in json {
                                     print("Item is: \(item)")
-                        
-                                    let elementId  = item["name"] as? String ?? ""
-                                    let elementName = item["elementName"] as? String ?? ""
-                                    let segmentId = item["segmentId"] as? String ?? ""
-                                    let segmentName = item["segmentName"] as? String ?? ""
-                                    let dataType = item["dataType"] as? String ?? ""
-                                    let usage = item["usage"] as? String ?? ""
-                                    let length = item["length"] as? String ?? ""
-                                    let implementationName = item["implementationName"] as? String ?? ""
-                                    let elementRepeat = item["elementRepeat"] as? Int ?? 0
-                                    let loop = item ["loop"] as? String ?? ""
-                                    let dataElement = item ["dataElement"] as? Int ?? 0
                                     
-                                    let codes = item["codes"] as? [String] ?? []
+                                    let elementId  = item["name"] as? String ?? ""
+                                     let segmentId = item["segmentId"] as? String ?? ""
+                                    let segmentName = item["segmentName"] as? String ?? ""
+                                    let elementName = item["elementName"] as? String ?? ""
+                                    let sequence = item["sequence"] as? Int ?? 0
+                                    let length = item["length"] as? String ?? ""
+                                    let conformanceLength = item["conformanceLength"] as? String ?? ""
+                                    let dataType = item["dataType"] as? String ?? ""
+                                    let optionality = item["optionality"] as? String ?? ""
+                                    let repetition = item["repetition"] as? String ?? ""
+                                    let tableNumber = item["elementRepeat"] as? String ?? ""
+                                    let itemNumber = item ["itemNumber"] as? String ?? ""
+                                    
                                     let transactions = item["transactions"] as? [String] ?? []
                                     let versions = item["versions"] as? [String] ?? []
                                     
-                                    searchResults.append(X12Element(elementId: elementId, segmentId: segmentId, segmentName: segmentName, elementName: elementName, dataType : dataType, usage : usage, length : length, implementationName : implementationName, elementRepeat : elementRepeat, loop : loop, dataElement : dataElement, codes : codes, transactions : transactions, versions : versions))
+                                    searchResults.append(HL7Element(elementId: elementId, segmentId: segmentId, segmentName: segmentName, elementName: elementName, sequence: sequence, length : length, conformanceLength : conformanceLength,dataType : dataType, optionality : optionality, repetition : repetition, tableNumber : tableNumber, itemNumber : itemNumber, transactions : transactions, versions : versions))
                                 }
                             }
                             
@@ -79,7 +79,7 @@ class X12ElementParser {
                             print("JSON Error or nothing was found")
                             let alertController = UIAlertController(title: "Alert", message: "Nothing was found", preferredStyle: UIAlertControllerStyle.alert)
                             alertController.addAction(UIAlertAction(title: "Dismiss:", style: UIAlertActionStyle.default, handler: nil))
-                      //      self.present(alertController, animated: true, completion: nil)
+                            //      self.present(alertController, animated: true, completion: nil)
                         }
                         
                     } catch  {
@@ -87,10 +87,10 @@ class X12ElementParser {
                     }
                     // I think what is going to happen is that a call will be made here to return the array
                     //and I think I want to do something like the below, but hand over the parsed array
-                    // maybe the getX12 should provide a completion handler?
+                    // maybe the getHL should provide a completion handler?
                     completion(searchResults)
-
-                   // self.updateSearchResults(data as Data?)
+                    
+                    // self.updateSearchResults(data as Data?)
                 } else {
                     var alertString = ""
                     if(httpResponse.statusCode == 404) {
@@ -101,13 +101,15 @@ class X12ElementParser {
                     }
                     let alertController = UIAlertController(title: "", message: alertString, preferredStyle: UIAlertControllerStyle.alert)
                     alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                 //   self.present(alertController, animated: true, completion: nil)
+                    //   self.present(alertController, animated: true, completion: nil)
                     
                     print("HttpResponse is \(httpResponse.statusCode)")
                 }
             }
         }
         dataTask?.resume()
-
+        
     }
+
+    
 }

@@ -119,6 +119,7 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
             let destination = segue.destination as! AboutDetailsViewController
             destination.pageTitle = menuItem
         } else {
+            
             segue.destination as! StoreTableViewController
         }
     }
