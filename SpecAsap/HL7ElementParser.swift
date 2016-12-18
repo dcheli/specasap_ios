@@ -55,8 +55,8 @@ class HL7ElementParser {
                                 for item in json {
                                     print("Item is: \(item)")
                                     
-                                    let elementId  = item["name"] as? String ?? ""
-                                     let segmentId = item["segmentId"] as? String ?? ""
+                                    let elementId  = item["elementId"] as? String ?? ""
+                                    let segmentId = item["segmentId"] as? String ?? ""
                                     let segmentName = item["segmentName"] as? String ?? ""
                                     let elementName = item["elementName"] as? String ?? ""
                                     let sequence = item["sequence"] as? Int ?? 0
@@ -67,11 +67,12 @@ class HL7ElementParser {
                                     let repetition = item["repetition"] as? String ?? ""
                                     let tableNumber = item["elementRepeat"] as? String ?? ""
                                     let itemNumber = item ["itemNumber"] as? String ?? ""
+                                    let definition = item["definition"] as? String ?? ""
                                     
                                     let transactions = item["transactions"] as? [String] ?? []
                                     let versions = item["versions"] as? [String] ?? []
                                     
-                                    searchResults.append(HL7Element(elementId: elementId, segmentId: segmentId, segmentName: segmentName, elementName: elementName, sequence: sequence, length : length, conformanceLength : conformanceLength,dataType : dataType, optionality : optionality, repetition : repetition, tableNumber : tableNumber, itemNumber : itemNumber, transactions : transactions, versions : versions))
+                                    searchResults.append(HL7Element(elementId: elementId, segmentId: segmentId, segmentName: segmentName, elementName: elementName, sequence: sequence, length : length, conformanceLength : conformanceLength,dataType : dataType, optionality : optionality, repetition : repetition, tableNumber : tableNumber, itemNumber : itemNumber, transactions : transactions, versions : versions, definition : definition))
                                 }
                             }
                             

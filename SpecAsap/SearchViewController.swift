@@ -94,7 +94,7 @@ class SearchViewController: UIViewController {
                 if let json = jsonDict as? [[String: AnyObject]] {
                     for item in json {
                         print("Item is: \(item)")
-                        let elementId  = item["name"] as? String ?? ""
+                        let elementId  = item["elementId"] as? String ?? ""
                         let segmentId = item["segmentId"] as? String ?? ""
                         let segmentName = item["segmentName"] as? String ?? ""
                         let elementName = item["elementName"] as? String ?? ""
@@ -236,7 +236,7 @@ extension SearchViewController: UISearchBarDelegate {
 
         } else if hl7Button.isSelected {
             searchResults.removeAll()
-            let urlString =  urlElementsString + searchTerm! + "?v=2"
+            let urlString =  urlElementsString + searchTerm! + "?v=282"
             let hl7ElementParser  = HL7ElementParser(fromUrl : urlString)
             hl7ElementParser.getHL7Spec(urlString: urlString) {
                 (result : [HL7Element]) in

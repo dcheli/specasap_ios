@@ -55,7 +55,7 @@ class X12ElementParser {
                                 for item in json {
                                     print("Item is: \(item)")
                         
-                                    let elementId  = item["name"] as? String ?? ""
+                                    let elementId  = item["elementId"] as? String ?? ""
                                     let elementName = item["elementName"] as? String ?? ""
                                     let segmentId = item["segmentId"] as? String ?? ""
                                     let segmentName = item["segmentName"] as? String ?? ""

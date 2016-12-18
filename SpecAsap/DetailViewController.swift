@@ -102,7 +102,6 @@ class DetailViewController : UIViewController {
             displayString += "Table Number: " + String(e.tableNumber!) + "\n"
             displayString += "Item Number: " + String(e.itemNumber!) + "\n"
             
-            
             if e.versions.count > 0 {
                 displayString += "Version(s):"
                 displayString += processArray(e.versions)
@@ -112,6 +111,8 @@ class DetailViewController : UIViewController {
                 displayString += "Transaction(s):"
                 displayString += processArray(e.transactions)
             }
+            displayString += "Definition: " + e.definition! + "\n"
+
         }
         
         textView.text = displayString

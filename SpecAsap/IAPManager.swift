@@ -16,13 +16,30 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     var products:[SKProduct] = []
     var id : [String] = []
     
-    // SKProducts call back
+    // SKProducts call back. Apple will process the request and call this method
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         self.products = response.products
 
         for product in self.products {
             print("Found \(product.localizedTitle)")
         }
+    }
+    
+    func performProductRequestForIdentifiers(identifiers : [String]) {
+        
+        // this is making a call to iTunes Connect
+        //force unwrap as Set<String>
+        let products = NSSet(array: identifiers) as! Set<String>
+        self.request = SKProductsRequest(productIdentifiers: products)
+        self.request.delegate = self
+        self.request.start()
+    }
+    
+
+    
+    // this is called to get the productlist
+    func requestProducts() {
+        self.getProductIdentifiers()
     }
     
     func getProductIdentifiers() {
@@ -52,7 +69,6 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                 let jsonArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
                 DispatchQueue.main.async {
                     if jsonArray.count > 0 {
-                        //print(jsonArray)
                         for json in jsonArray as! [Dictionary<String, String>]{
                             let productId = json["productId"]!
                             identifiers.append(productId)
@@ -60,7 +76,6 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                         }
                     }
                     self.performProductRequestForIdentifiers(identifiers: identifiers)
-                    print("Identifiers in async task are : \(identifiers)")
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }
                 let methodFinish = Date()
@@ -72,35 +87,9 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
 
         }
         dataTask.resume()
-        
-        
-//// Here is the plist code
-//        if let fileUrl = Bundle.main.url(forResource: "products", withExtension: "plist") {
-//
-//            let products = NSArray(contentsOf: fileUrl)
-            
-//            for product in products as! [String] {
-//                identifiers.append(product)
-//            }
-//        }
-//        print("Id list is \(id)")
- //       return identifiers
     }
     
-    func performProductRequestForIdentifiers(identifiers : [String]) {
-        
-        // this I believe is making a call to iTunes Connect
-        //force unwrap as Set<String>
-        let products = NSSet(array: identifiers) as! Set<String>
-        self.request = SKProductsRequest(productIdentifiers: products)
-        self.request.delegate = self
-        self.request.start()
-    }
-    
-    func requestProducts() {
-        self.getProductIdentifiers()
-       // performProductRequestForIdentifiers(identifiers: self.getProductIdentifiers())
-    }
+
     
     func setupPurchases(_ handler: @escaping (Bool) ->Void) {
         if SKPaymentQueue.canMakePayments() {
@@ -111,6 +100,9 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         handler(false)
     }
     
+    // Make the Payment
+    
+    // This function makes the payment request
     func createPaymentRequestForProduct(product : SKProduct) {
         let payment = SKMutablePayment(product : product)
         payment.quantity = 1
@@ -118,7 +110,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         SKPaymentQueue.default().add(payment)
     }
     
-    // Transaction Observer
+    // Transaction Observer. This observer will let us know when Apple processes the request
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
             switch transaction.transactionState {
