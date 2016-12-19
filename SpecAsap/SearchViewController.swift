@@ -12,58 +12,39 @@ import UIKit
 class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
-    @IBOutlet weak var ncpdpButton: UIButton!
-    @IBOutlet weak var x12Button: UIButton!
-    @IBOutlet weak var hl7Button: UIButton!
+    @IBOutlet weak var criteriaLabel: UILabel!
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
 
     let urlElements = "https://dataasap.com/specasap/webapi/v1/elements/"
     var urlElementsString = ""
+    var version = ""
     
     var searchResults = [AnyObject]() // this was cast as NCPDPElement
     let defaultSession  = URLSessionConfiguration.default
     
     var dataTask : URLSessionDataTask?
     
-    @IBAction func ncpdpButtonPressed(_ sender: UIButton) {
-        ncpdpButton.isSelected = true
-        x12Button.isSelected = false
-        hl7Button.isSelected = false
-        
-        ncpdpButton.setTitle("NCPDP", for: .selected)
-        //ncpdpButton.setTitle("✔︎NCPDP", for: .normal)
-        x12Button.setTitle("X12", for: .normal)
-        hl7Button.setTitle("HL7", for: .normal)
-        self.urlElementsString = urlElements + "ncpdp/"
-
-    }
     
-    @IBAction func x12ButtonPressed(_ sender: UIButton) {
-        ncpdpButton.isSelected = false
-        x12Button.isSelected = true
-        hl7Button.isSelected = false
-        
-        ncpdpButton.setTitle("NCPDP", for: .normal)
-        x12Button.setTitle("X12", for: .selected)
-        hl7Button.setTitle("HL7", for: .normal)
-
-        self.urlElementsString = urlElements + "x12/"
-        
+    @IBAction func standardSegmentedControl(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0: // NCPDP D.0
+            self.urlElementsString = urlElements + "ncpdp/"
+            self.version = "D0"
+            break
+        case 1: // HL7 2.8.2
+            self.urlElementsString = urlElements + "hl7/"
+            self.version = "282"
+            break
+        case 2: // X12 v5010
+            self.urlElementsString = urlElements + "x12/"
+            self.version = "5010"
+            break
+        default:
+            break
+        }
     }
-    
-    @IBAction func hl7ButtonPressed(_ sender: UIButton) {
-        ncpdpButton.isSelected = false
-        x12Button.isSelected = false
-        hl7Button.isSelected = true
-        
-        ncpdpButton.setTitle("NCPDP", for: .normal)
-        x12Button.setTitle("X12", for: .normal)
-        hl7Button.setTitle("HL7", for: .selected)
-        
-        self.urlElementsString = urlElements + "hl7/"
-    }
-    
     lazy var tapRecognizer: UITapGestureRecognizer = {
         var recognizer = UITapGestureRecognizer(target:self, action: #selector(SearchViewController.dismissKeyboard))
         return recognizer
@@ -74,11 +55,11 @@ class SearchViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.tableFooterView = UIView()
-        self.ncpdpButton.setTitleColor(UIColor.blue, for: .normal)
-        self.ncpdpButton.sendActions(for: .touchUpInside)
-        self.x12Button.setTitleColor(UIColor.blue, for: .normal)
-        self.hl7Button.setTitleColor(UIColor.blue, for: .normal)
-    }
+        // set as a default for the moment
+        self.urlElementsString = urlElements + "ncpdp/"
+        self.version = "D0"
+    
+     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -93,7 +74,7 @@ class SearchViewController: UIViewController {
             if(jsonDict.count > 0) {
                 if let json = jsonDict as? [[String: AnyObject]] {
                     for item in json {
-                        print("Item is: \(item)")
+
                         let elementId  = item["elementId"] as? String ?? ""
                         let segmentId = item["segmentId"] as? String ?? ""
                         let segmentName = item["segmentName"] as? String ?? ""
@@ -170,10 +151,10 @@ extension SearchViewController: UISearchBarDelegate {
         let expectedCharSet = CharacterSet.urlQueryAllowed
         let searchTerm = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
 
-        if self.ncpdpButton.isSelected {
+        if self.segmentedControl.selectedSegmentIndex == 0 {
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-            let urlString =  urlElementsString + searchTerm! + "?v=D0"
+            let urlString =  urlElementsString + searchTerm! + "?v=" + version
             //let urlString = "https://dataasap.com/specasap/webapi/v1/elements/ncpdp/" + searchTerm! + "?v=D0"
             print ("URL String is \(urlString)")
             let url = URL(string: urlString)
@@ -217,13 +198,13 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
             dataTask?.resume()
-        } else if x12Button.isSelected {
+        } else if self.segmentedControl.selectedSegmentIndex == 1 {
             searchResults.removeAll()
 
-            let urlString =  urlElementsString + searchTerm! + "?v=5010"
-            let x12ElementParser  = X12ElementParser(fromUrl : urlString)
-            x12ElementParser.getX12Spec(urlString: urlString) {
-                (result : [X12Element]) in
+            let urlString =  urlElementsString + searchTerm! + "?v=" + version
+            let hL7ElementParser  = HL7ElementParser(fromUrl : urlString)
+            hL7ElementParser.getHL7Spec(urlString: urlString) {
+                (result : [HL7Element]) in
                 for item in result {
                     self.searchResults.append(item)
                 }
@@ -234,12 +215,12 @@ extension SearchViewController: UISearchBarDelegate {
 
             }
 
-        } else if hl7Button.isSelected {
+        } else if self.segmentedControl.selectedSegmentIndex == 2 {
             searchResults.removeAll()
-            let urlString =  urlElementsString + searchTerm! + "?v=282"
-            let hl7ElementParser  = HL7ElementParser(fromUrl : urlString)
-            hl7ElementParser.getHL7Spec(urlString: urlString) {
-                (result : [HL7Element]) in
+            let urlString =  urlElementsString + searchTerm! + "?v=" + version
+            let x12ElementParser  = X12ElementParser(fromUrl : urlString)
+            x12ElementParser.getX12Spec(urlString: urlString) {
+                (result : [X12Element]) in
                 for item in result {
                     self.searchResults.append(item)
                 }
@@ -273,12 +254,15 @@ extension SearchViewController: UITableViewDataSource {
             cell.elementName.text = element?.elementName
 
         } else if searchResults[indexPath.row] is X12Element {
+            print("Really????")
             let element = searchResults[indexPath.row] as? X12Element
             cell.elementId.text = element?.elementId
             cell.elementName.text = element?.implementationName!
 
         } else if searchResults[indexPath.row] is HL7Element {
             let element = searchResults[indexPath.row] as? HL7Element
+            print("Really?")
+            print("ElementID is \(element?.elementId)")
             cell.elementId.text = element?.elementId
             cell.elementName.text = element?.elementName!
 

@@ -148,8 +148,9 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         }
     }
     
-    // some of this stuff is for non-auto renewing subscriptions
-    //Receipt Verification completion handler
+    // Some of this stuff is for non-auto renewing subscriptions
+    // Receipt Verification completion handler
+    
     func validateReceipt(_ handler: @escaping (Bool, [RMAppReceiptIAP]?) -> Void) {
         let verifier = RMStoreAppReceiptVerifier()
         if verifier.verifyAppReceipt() {

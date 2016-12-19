@@ -53,8 +53,7 @@ class X12ElementParser {
                         if(jsonDict.count > 0) {
                             if let json = jsonDict as? [[String: AnyObject]] {
                                 for item in json {
-                                    print("Item is: \(item)")
-                        
+                    
                                     let elementId  = item["elementId"] as? String ?? ""
                                     let elementName = item["elementName"] as? String ?? ""
                                     let segmentId = item["segmentId"] as? String ?? ""
