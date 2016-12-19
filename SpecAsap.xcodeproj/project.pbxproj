@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD17E8561E07616400648631 /* NCPDPParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17E8551E07616400648631 /* NCPDPParser.swift */; };
 		FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */; };
 		FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */; };
 		FD75DC101DFF927000E45684 /* X12ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD17E8551E07616400648631 /* NCPDPParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCPDPParser.swift; sourceTree = "<group>"; };
 		FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTableViewController.swift; sourceTree = "<group>"; };
 		FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutDetailsViewController.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			children = (
 				FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */,
 				FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */,
+				FD17E8551E07616400648631 /* NCPDPParser.swift */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -272,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDCE1F401E02364A000F7D36 /* X12Element.swift in Sources */,
+				FD17E8561E07616400648631 /* NCPDPParser.swift in Sources */,
 				FDE7A8FD1DEBD8A400080AA2 /* IAPManager.swift in Sources */,
 				FD7822471DD9309700DD3E9C /* AboutViewController.swift in Sources */,
 				FD94AC721E0383A5008C50FC /* HL7ElementParser.swift in Sources */,

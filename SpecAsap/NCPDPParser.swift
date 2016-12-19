@@ -1,14 +1,14 @@
 //
-//  HL7ElementParser.swift
+//  NCPDPParser.swift
 //  SpecAsap
 //
-//  Created by David Cheli on 12/15/16.
+//  Created by David Cheli on 12/18/16.
 //  Copyright © 2016 David Cheli. All rights reserved.
 //
 
 import Foundation
 
-class HL7ElementParser {
+class NCPDPElementParser {
     
     var urlString : String?
     
@@ -17,11 +17,10 @@ class HL7ElementParser {
         print (self.urlString!)
     }
     
-    func getHL7Spec(urlString: String, completion : @escaping (_ result : [HL7Element]) -> Void) {
-        
+    func getNCPDPSpec(urlString: String, completion : @escaping (_ result : [NCPDPElement]) -> Void) {
         let defaultSession  = URLSessionConfiguration.default
         var dataTask : URLSessionDataTask?
-        var searchResults = [HL7Element]()
+        var searchResults = [NCPDPElement]()
         
         let url = URL(string: self.urlString!)
         
@@ -52,26 +51,26 @@ class HL7ElementParser {
                         let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
                         if(jsonDict.count > 0) {
                             if let json = jsonDict as? [[String: AnyObject]] {
-                                for item in json {                                    
+                                for item in json {
+                                    
                                     let elementId  = item["elementId"] as? String ?? ""
                                     let segmentId = item["segmentId"] as? String ?? ""
                                     let segmentName = item["segmentName"] as? String ?? ""
                                     let elementName = item["elementName"] as? String ?? ""
-                                    let sequence = item["sequence"] as? Int ?? 0
-                                    let length = item["length"] as? String ?? ""
-                                    let conformanceLength = item["conformanceLength"] as? String ?? ""
-                                    let dataType = item["dataType"] as? String ?? ""
-                                    let optionality = item["optionality"] as? String ?? ""
-                                    let repetition = item["repetition"] as? String ?? ""
-                                    let tableNumber = item["elementRepeat"] as? String ?? ""
-                                    let itemNumber = item ["itemNumber"] as? String ?? ""
                                     let definition = item["definition"] as? String ?? ""
                                     
+                                    let codes = item["codes"] as? [String] ?? []
+                                    
+                                    let standardFormats = item["standardFormats"] as? [String] ?? []
+                                    let lengths = item["lengths"] as? [String] ?? []
                                     let transactions = item["transactions"] as? [String] ?? []
                                     let versions = item["versions"] as? [String] ?? []
                                     
-                                    searchResults.append(HL7Element(elementId: elementId, segmentId: segmentId, segmentName: segmentName, elementName: elementName, sequence: sequence, length : length, conformanceLength : conformanceLength,dataType : dataType, optionality : optionality, repetition : repetition, tableNumber : tableNumber, itemNumber : itemNumber, transactions : transactions, versions : versions, definition : definition))
-                                }
+                                    searchResults.append(NCPDPElement(elementId : elementId, elementName: elementName,
+                                                                      definition: definition, segmentId: segmentId, segmentName: segmentName,
+                                                                      standardFormats : standardFormats, lengths: lengths, transactions : transactions,
+                                                                      versions : versions, codes : codes))
+                               }
                             }
                             
                         } else {
@@ -82,27 +81,24 @@ class HL7ElementParser {
                         }
                         
                     } catch  {
-                        print("Do better error handling here")
+                        print("Some error occured in NCPDPParser")
                     }
-                    //completion(searchResults)
+                  //  completion(searchResults)
                     
-                    // self.updateSearchResults(data as Data?)
                 } else {
                     var alertString = ""
                     if(httpResponse.statusCode == 404) {
-                        print("Just not found")
+                
                         alertString = "No records were found."
                     } else {
                         alertString = "An error occured and Support as been notified.\n Please try again later."
-                    }                    
+                    }
                     print("HttpResponse is \(httpResponse.statusCode)")
                 }
+                completion(searchResults)
             }
-            completion(searchResults)
         }
         dataTask?.resume()
-        
-    }
 
-    
+    } 
 }

@@ -84,13 +84,8 @@ class X12ElementParser {
                     } catch  {
                         print("Do better error handling here")
                     }
-                    // I think what is going to happen is that a call will be made here to return the array
-                    //and I think I want to do something like the below, but hand over the parsed array
-                    // maybe the getX12 should provide a completion handler?
-                    completion(searchResults)
-
-                   // self.updateSearchResults(data as Data?)
-                } else {
+                    //completion(searchResults)
+               } else {
                     var alertString = ""
                     if(httpResponse.statusCode == 404) {
                         print("Just not found")
@@ -98,13 +93,10 @@ class X12ElementParser {
                     } else {
                         alertString = "An error occured and Support as been notified.\n Please try again later."
                     }
-                    let alertController = UIAlertController(title: "", message: alertString, preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                 //   self.present(alertController, animated: true, completion: nil)
-                    
                     print("HttpResponse is \(httpResponse.statusCode)")
                 }
             }
+            completion(searchResults)
         }
         dataTask?.resume()
 

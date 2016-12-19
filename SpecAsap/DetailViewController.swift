@@ -116,6 +116,17 @@ class DetailViewController : UIViewController {
         }
         
         textView.text = displayString
+        
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // this forces the textView to go to the top row rather then the bottom row.
+        super.viewDidLayoutSubviews()
+        self.textView.setContentOffset(CGPoint.zero, animated: false)
+        // the below code is to deal with a bug in ios
+        textView.isScrollEnabled = false
+        textView.isScrollEnabled = true
+        
     }
     
     override func didReceiveMemoryWarning() {

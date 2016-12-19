@@ -64,57 +64,57 @@ class SearchViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    func updateSearchResults(_ data: Data?) {
-        searchResults.removeAll()
 
-        do {
-            let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
+//    func updateSearchResults(_ data: Data?) {
+  //      searchResults.removeAll()
+
+    //    do {
+      //      let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
         
-            if(jsonDict.count > 0) {
-                if let json = jsonDict as? [[String: AnyObject]] {
-                    for item in json {
+ //           if(jsonDict.count > 0) {
+   //             if let json = jsonDict as? [[String: AnyObject]] {
+     //               for item in json {
 
-                        let elementId  = item["elementId"] as? String ?? ""
-                        let segmentId = item["segmentId"] as? String ?? ""
-                        let segmentName = item["segmentName"] as? String ?? ""
-                        let elementName = item["elementName"] as? String ?? ""
-                        let definition = item["definition"] as? String ?? ""
+       //                 let elementId  = item["elementId"] as? String ?? ""
+         //               let segmentId = item["segmentId"] as? String ?? ""
+           //             let segmentName = item["segmentName"] as? String ?? ""
+             //           let elementName = item["elementName"] as? String ?? ""
+               //         let definition = item["definition"] as? String ?? ""
                         
-                        let codes = item["codes"] as? [String] ?? []
+                 //       let codes = item["codes"] as? [String] ?? []
                         
-                        let standardFormats = item["standardFormats"] as? [String] ?? []
-                        let lengths = item["lengths"] as? [String] ?? []
-                        let transactions = item["transactions"] as? [String] ?? []
-                        let versions = item["versions"] as? [String] ?? []
-                        
-                        searchResults.append(NCPDPElement(elementId : elementId, elementName: elementName,
-                                                        definition: definition, segmentId: segmentId, segmentName: segmentName,
-                                                        standardFormats : standardFormats, lengths: lengths, transactions : transactions,
-                                                        versions : versions, codes : codes))
-                    }
-                }
+                   //     let standardFormats = item["standardFormats"] as? [String] ?? []
+                     //   let lengths = item["lengths"] as? [String] ?? []
+                       // let transactions = item["transactions"] as? [String] ?? []
+//                        let versions = item["versions"] as? [String] ?? []
+  //
+    //                    searchResults.append(NCPDPElement(elementId : elementId, elementName: elementName,
+      //                                                  definition: definition, segmentId: segmentId, segmentName: segmentName,
+        //                                                standardFormats : standardFormats, lengths: lengths, transactions : transactions,
+          //                                              versions : versions, codes : codes))
+            //        }
+              //  }
                 
-            } else {
-                print("JSON Error or nothing was found")
-               let alertController = UIAlertController(title: "Alert", message: "Nothing was found", preferredStyle: UIAlertControllerStyle.alert)
-                alertController.addAction(UIAlertAction(title: "Dismiss:", style: UIAlertActionStyle.default, handler: nil))
-                self.present(alertController, animated: true, completion: nil)                
-            }
+//            } else {
+  //              print("JSON Error or nothing was found")
+    //           let alertController = UIAlertController(title: "Alert", message: "Nothing was found", preferredStyle: UIAlertControllerStyle.alert)
+//                alertController.addAction(UIAlertAction(title: "Dismiss:", style: UIAlertActionStyle.default, handler: nil))
+  //              self.present(alertController, animated: true, completion: nil)
+    //        }
             
-        } catch  {
-            print("Do better error handling here")
-        }
+  //      } catch  {
+    //        print("Do better error handling here")
+      //  }
         
         
-         DispatchQueue.main.async {
-         self.tableView.reloadData()
-         self.tableView.setContentOffset(CGPoint.zero, animated: false)
-         }
+//         DispatchQueue.main.async {
+  //       self.tableView.reloadData()
+    //     self.tableView.setContentOffset(CGPoint.zero, animated: false)
+      //   }
          
  
-    }
-    
+ //   }
+ 
     func dismissKeyboard() {
         searchBar.resignFirstResponder()
     }
@@ -150,54 +150,30 @@ extension SearchViewController: UISearchBarDelegate {
 
         let expectedCharSet = CharacterSet.urlQueryAllowed
         let searchTerm = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
-
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         if self.segmentedControl.selectedSegmentIndex == 0 {
-            UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
+            searchResults.removeAll()
             let urlString =  urlElementsString + searchTerm! + "?v=" + version
-            //let urlString = "https://dataasap.com/specasap/webapi/v1/elements/ncpdp/" + searchTerm! + "?v=D0"
-            print ("URL String is \(urlString)")
-            let url = URL(string: urlString)
-        
-            print ("URL is \(url)")
-        
-            let request = NSMutableURLRequest(url:url! as URL)
-            request.httpMethod = "GET"
-            let username = "dcheli"
-            let password = "aside555"
-            let loginString = NSString(format: "%@:%@", username, password)
-            let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
-            let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
-            request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
-        
-            let session = URLSession(configuration: defaultSession)
-            dataTask = session.dataTask(with: request as URLRequest){
-                data, response, error in
-                DispatchQueue.main.async {
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                }
+            let ncpdpElementParser  = NCPDPElementParser(fromUrl : urlString)
+            ncpdpElementParser.getNCPDPSpec(urlString: urlString) {
+                (result : [NCPDPElement]) in
+                if result.isEmpty{
+                    let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    for item in result {
+                        self.searchResults.append(item)
+                    }
             
-                if let error = error {
-                    print(error.localizedDescription)
-                } else if let httpResponse = response as? HTTPURLResponse {
-                    if(httpResponse.statusCode == 200) {
-                        self.updateSearchResults(data as Data?)
-                    } else {
-                        var alertString = ""
-                        if(httpResponse.statusCode == 404) {
-                            alertString = "No records were found."
-                        } else {
-                            alertString = "An error occured and Support as been notified.\n Please try again later."
-                        }
-                        let alertController = UIAlertController(title: "", message: alertString, preferredStyle: UIAlertControllerStyle.alert)
-                        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                        self.present(alertController, animated: true, completion: nil)
-
-                        print("HttpResponse is \(httpResponse.statusCode)")
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.tableView.setContentOffset(CGPoint.zero, animated: false)
                     }
                 }
             }
-            dataTask?.resume()
+      
         } else if self.segmentedControl.selectedSegmentIndex == 1 {
             searchResults.removeAll()
 
@@ -205,14 +181,19 @@ extension SearchViewController: UISearchBarDelegate {
             let hL7ElementParser  = HL7ElementParser(fromUrl : urlString)
             hL7ElementParser.getHL7Spec(urlString: urlString) {
                 (result : [HL7Element]) in
-                for item in result {
-                    self.searchResults.append(item)
+                if result.isEmpty{
+                    let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    for item in result {
+                        self.searchResults.append(item)
+                    }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.tableView.setContentOffset(CGPoint.zero, animated: false)
+                    }
                 }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.tableView.setContentOffset(CGPoint.zero, animated: false)
-                }
-
             }
 
         } else if self.segmentedControl.selectedSegmentIndex == 2 {
@@ -221,12 +202,18 @@ extension SearchViewController: UISearchBarDelegate {
             let x12ElementParser  = X12ElementParser(fromUrl : urlString)
             x12ElementParser.getX12Spec(urlString: urlString) {
                 (result : [X12Element]) in
-                for item in result {
-                    self.searchResults.append(item)
-                }
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                    self.tableView.setContentOffset(CGPoint.zero, animated: false)
+                if result.isEmpty{
+                    let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
+                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                } else {
+                    for item in result {
+                        self.searchResults.append(item)
+                    }
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.tableView.setContentOffset(CGPoint.zero, animated: false)
+                    }
                 }
                 
             }
@@ -254,14 +241,12 @@ extension SearchViewController: UITableViewDataSource {
             cell.elementName.text = element?.elementName
 
         } else if searchResults[indexPath.row] is X12Element {
-            print("Really????")
             let element = searchResults[indexPath.row] as? X12Element
             cell.elementId.text = element?.elementId
             cell.elementName.text = element?.implementationName!
 
         } else if searchResults[indexPath.row] is HL7Element {
             let element = searchResults[indexPath.row] as? HL7Element
-            print("Really?")
             print("ElementID is \(element?.elementId)")
             cell.elementId.text = element?.elementId
             cell.elementName.text = element?.elementName!
