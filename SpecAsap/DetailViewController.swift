@@ -19,32 +19,37 @@ class DetailViewController : UIViewController {
     override func viewDidLoad() {
         self.automaticallyAdjustsScrollViewInsets = false
         var displayString = ""
+        var ddd : NSMutableAttributedString = NSMutableAttributedString()
+        
         if element is NCPDPElement {
             
             let e : NCPDPElement = self.element as! NCPDPElement
 
-            displayString += "Element Name: " +  e.elementName! + "\n"
             displayString += "Element ID: " +  e.elementId! + "\n"
-            displayString += "Segment Name: " +  e.segmentName! + "\n"
+            displayString += "Element Name: " +  e.elementName! + "\n"
             displayString += "Segment ID: " +  e.segmentId! + "\n"
-        
-        
+            displayString += "Segment Name: " +  e.segmentName! + "\n"
+
+            if e.fieldFormats.count > 0 {
+                displayString += "Field Format(s): "
+                displayString += processArray(e.fieldFormats)
+            }
             if e.lengths.count > 0{
-                displayString += "Length(s):"
+                displayString += "Length(s): "
                 displayString += processArray(e.lengths)
             }
             if e.versions.count > 0 {
-                displayString += "Version(s):"
+                displayString += "Version(s): "
                 displayString += processArray(e.versions)
             }
         
             if e.standardFormats.count > 0 {
-                displayString += "Standard Format(s):"
+                displayString += "Standard Format(s): "
                 displayString += processArray(e.standardFormats)
             }
         
             if e.transactions.count > 0 {
-                displayString += "Transaction(s):"
+                displayString += "Transaction(s): "
                 displayString += processArray(e.transactions)
             }
         
@@ -52,8 +57,48 @@ class DetailViewController : UIViewController {
                 displayString += "Codes: "
                 displayString += processArray(e.codes)
             }
+            
+            
         
             displayString += "Definition: " +  e.definition! + "\n"
+            
+            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
+            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
+            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+            
+            let dd : NSString = displayString as NSString
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment ID:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment Name:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length(s):"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Standard Format(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Standard Format(s):"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Codes:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Codes:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Format(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Format(s):"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Version(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Version(s):"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Transaction(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Transaction(s):"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Definition:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
+            
+            
+            ddd = attributedString
+
+            
         } else if element is X12Element {
 
             let e : X12Element = self.element as! X12Element
@@ -84,6 +129,50 @@ class DetailViewController : UIViewController {
                 displayString += processArray(e.codes)
             }
             
+            
+            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
+            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
+            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+            
+            let dd : NSString = displayString as NSString
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Implementation Name:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Implementation Name:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment ID:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment Name:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Repeat:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Repeat:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Loop:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Loop:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Element:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Element:"))
+
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Codes:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Codes:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Version(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Version(s):"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Transaction(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Transaction(s):"))
+            
+            ddd = attributedString
+
+            
         } else if element is HL7Element {
             
             let e : HL7Element = self.element as! HL7Element
@@ -112,10 +201,54 @@ class DetailViewController : UIViewController {
                 displayString += processArray(e.transactions)
             }
             displayString += "Definition: " + e.definition! + "\n"
+            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
+            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
+            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+            
+            let dd : NSString = displayString as NSString
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment ID:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment ID:"))
 
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment Name:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Sequence:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Sequence:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Conformance Length:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Conformance Length:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Optionality:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Optionality:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Repetition:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Repetition:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Table Number:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Table Number:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Item Number:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Item Number:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Version(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Version(s):"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Transaction(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Transaction(s):"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Definition:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
+            
+            
+            ddd = attributedString
         }
         
-        textView.text = displayString
+        textView.attributedText = ddd
         
     }
     
@@ -139,4 +272,5 @@ class DetailViewController : UIViewController {
         }
         return String(output.characters.dropLast()) + "\n"
     }
+    
 }

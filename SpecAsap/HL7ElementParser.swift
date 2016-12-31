@@ -52,7 +52,7 @@ class HL7ElementParser {
                         let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
                         if(jsonDict.count > 0) {
                             if let json = jsonDict as? [[String: AnyObject]] {
-                                for item in json {                                    
+                                for item in json {
                                     let elementId  = item["elementId"] as? String ?? ""
                                     let segmentId = item["segmentId"] as? String ?? ""
                                     let segmentName = item["segmentName"] as? String ?? ""

@@ -65,56 +65,6 @@ class SearchViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
-//    func updateSearchResults(_ data: Data?) {
-  //      searchResults.removeAll()
-
-    //    do {
-      //      let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
-        
- //           if(jsonDict.count > 0) {
-   //             if let json = jsonDict as? [[String: AnyObject]] {
-     //               for item in json {
-
-       //                 let elementId  = item["elementId"] as? String ?? ""
-         //               let segmentId = item["segmentId"] as? String ?? ""
-           //             let segmentName = item["segmentName"] as? String ?? ""
-             //           let elementName = item["elementName"] as? String ?? ""
-               //         let definition = item["definition"] as? String ?? ""
-                        
-                 //       let codes = item["codes"] as? [String] ?? []
-                        
-                   //     let standardFormats = item["standardFormats"] as? [String] ?? []
-                     //   let lengths = item["lengths"] as? [String] ?? []
-                       // let transactions = item["transactions"] as? [String] ?? []
-//                        let versions = item["versions"] as? [String] ?? []
-  //
-    //                    searchResults.append(NCPDPElement(elementId : elementId, elementName: elementName,
-      //                                                  definition: definition, segmentId: segmentId, segmentName: segmentName,
-        //                                                standardFormats : standardFormats, lengths: lengths, transactions : transactions,
-          //                                              versions : versions, codes : codes))
-            //        }
-              //  }
-                
-//            } else {
-  //              print("JSON Error or nothing was found")
-    //           let alertController = UIAlertController(title: "Alert", message: "Nothing was found", preferredStyle: UIAlertControllerStyle.alert)
-//                alertController.addAction(UIAlertAction(title: "Dismiss:", style: UIAlertActionStyle.default, handler: nil))
-  //              self.present(alertController, animated: true, completion: nil)
-    //        }
-            
-  //      } catch  {
-    //        print("Do better error handling here")
-      //  }
-        
-        
-//         DispatchQueue.main.async {
-  //       self.tableView.reloadData()
-    //     self.tableView.setContentOffset(CGPoint.zero, animated: false)
-      //   }
-         
- 
- //   }
- 
     func dismissKeyboard() {
         searchBar.resignFirstResponder()
     }
@@ -247,7 +197,6 @@ extension SearchViewController: UITableViewDataSource {
 
         } else if searchResults[indexPath.row] is HL7Element {
             let element = searchResults[indexPath.row] as? HL7Element
-            print("ElementID is \(element?.elementId)")
             cell.elementId.text = element?.elementId
             cell.elementName.text = element?.elementName!
 

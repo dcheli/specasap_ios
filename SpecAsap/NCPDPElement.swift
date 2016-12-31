@@ -18,10 +18,12 @@ class NCPDPElement {
     var transactions : [String]
     var versions : [String]
     var codes : [String]
- 
+    var dataType : String?
+    var fieldFormats : [String]
+    
     init(elementId: String?, elementName: String?, definition : String?, segmentId: String?,
          segmentName: String?, standardFormats : [String], lengths : [String], transactions : [String],
-         versions : [String], codes : [String]) {
+         versions : [String], codes : [String], dataType : String?, fieldFormats : [String]) {
         self.elementId = elementId
         self.elementName = elementName
         self.definition = definition
@@ -32,5 +34,7 @@ class NCPDPElement {
         self.transactions = transactions
         self.versions = versions
         self.codes = codes
+        self.dataType = dataType
+        self.fieldFormats = fieldFormats
     }
 }

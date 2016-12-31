@@ -52,7 +52,6 @@ class NCPDPElementParser {
                         if(jsonDict.count > 0) {
                             if let json = jsonDict as? [[String: AnyObject]] {
                                 for item in json {
-                                    
                                     let elementId  = item["elementId"] as? String ?? ""
                                     let segmentId = item["segmentId"] as? String ?? ""
                                     let segmentName = item["segmentName"] as? String ?? ""
@@ -66,10 +65,13 @@ class NCPDPElementParser {
                                     let transactions = item["transactions"] as? [String] ?? []
                                     let versions = item["versions"] as? [String] ?? []
                                     
+                                    let dataType = item["dataType"] as? String ?? ""
+                                    let fieldFormats = item["fieldFormats"] as? [String] ?? []
+                                    
                                     searchResults.append(NCPDPElement(elementId : elementId, elementName: elementName,
                                                                       definition: definition, segmentId: segmentId, segmentName: segmentName,
                                                                       standardFormats : standardFormats, lengths: lengths, transactions : transactions,
-                                                                      versions : versions, codes : codes))
+                                                                      versions : versions, codes : codes, dataType : dataType, fieldFormats : fieldFormats))
                                }
                             }
                             
