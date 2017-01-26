@@ -91,22 +91,30 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
  
     }
     
-    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        switch section {
-        case 1:
-            return self.isNcpdpAsapActive()
-        default:
-            return ""
-        }
-    }
+    //func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    //    switch section {
+      //  case 1:
+  //          return self.isNcpdpAsapActive()
+   //     default:
+     //       return ""
+       // }
     
-    func isNcpdpAsapActive()  -> String {
-        if UserDefaults.standard.bool(forKey: "com.dataasap.ncpdpasap") {
-            return "NCPDP ASAP is enabled"
-        } else {
-            return "NCPDP ASAP is not enabled"
-        }
-    }
+    //}
+    
+  //  func isNcpdpAsapActive()  -> String {
+  //      var enabledProducts = ""
+  //      for product in AppDelegate.products {
+  //          print("Product in about controller is \(product.productId!) and enablement is \(product.enabled!)")
+  //         if product.enabled! == "true" {
+  //              enabledProducts += "\(product.productId!) is \(product.enabled!)\n"
+  //          }
+  //         else {
+  //              enabledProducts += "\(product.productId!) is \(product.enabled!)\n"
+  //          }
+  //      }
+
+   //     return enabledProducts
+   // }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 

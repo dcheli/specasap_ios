@@ -25,6 +25,13 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         }
     }
     
+    //Dave, you need to look into this.
+    
+    func request(_ request: SKRequest, didFailWithError error: Error) {
+        print("Error: \(error.localizedDescription)")
+    
+    }
+    
     func performProductRequestForIdentifiers(identifiers : [String]) {
         
         // this is making a call to iTunes Connect
@@ -102,12 +109,12 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     
     // Make the Payment
     
-    // This function makes the payment request
+    // This function makes the payment request; allows you to buy the product
     func createPaymentRequestForProduct(product : SKProduct) {
         let payment = SKMutablePayment(product : product)
         payment.quantity = 1
         
-        SKPaymentQueue.default().add(payment)
+        SKPaymentQueue.default().add(payment) // Storekit will handle it from here
     }
     
     // Transaction Observer. This observer will let us know when Apple processes the request
@@ -119,6 +126,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                 break
             case .purchased:
                 print("purchased")
+                
                 //verifiy the receipt; RMStore stuff
                 self.validateReceipt({ (success, purchases) in
                     if success {
@@ -136,17 +144,27 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                 print("deferred")
                 break
             case .failed:
-                print("failed")
+                if let transactionError = transaction.error as? NSError {
+                    if transactionError.code != SKError.paymentCancelled.rawValue {
+                        print("Transaction error: \(transaction.error?.localizedDescription)")
+                    } else {
+                        print ("User cancelled transaction")
+                    }
+                }
                 queue.finishTransaction(transaction)
                 break
             case .restored:
                 print("restored")
+                if SKPaymentQueue.canMakePayments() {
+                    queue.restoreCompletedTransactions()
+                }
                 
                 queue.finishTransaction(transaction)
                 break
             }
         }
     }
+    
     
     // Some of this stuff is for non-auto renewing subscriptions
     // Receipt Verification completion handler

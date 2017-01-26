@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD0973421E36C2BE004C15F4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0973411E36C2BE004C15F4 /* Product.swift */; };
 		FD17E8561E07616400648631 /* NCPDPParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17E8551E07616400648631 /* NCPDPParser.swift */; };
 		FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */; };
 		FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */; };
@@ -15,6 +16,7 @@
 		FD8D8A101DE51DEE00FC6254 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */; };
 		FD94AC701E038348008C50FC /* HL7Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC6F1E038348008C50FC /* HL7Element.swift */; };
 		FD94AC721E0383A5008C50FC /* HL7ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */; };
+		FD9A1BB01E1AC36E00C954E7 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */; };
 		FDAFCB2B1DF7781E00DFA032 /* libssl_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */; };
 		FDAFCB2C1DF7781E00DFA032 /* libcrypto_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */; };
 		FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAFCB311DF7791900DFA032 /* RMAppReceipt.m */; };
@@ -34,6 +36,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD0973411E36C2BE004C15F4 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FD17E8551E07616400648631 /* NCPDPParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCPDPParser.swift; sourceTree = "<group>"; };
 		FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTableViewController.swift; sourceTree = "<group>"; };
@@ -42,6 +45,7 @@
 		FD7822461DD9309700DD3E9C /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		FD94AC6F1E038348008C50FC /* HL7Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7Element.swift; sourceTree = "<group>"; };
 		FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7ElementParser.swift; sourceTree = "<group>"; };
+		FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
 		FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl_iOS.a; path = SpecAsap/openssl/lib/libssl_iOS.a; sourceTree = "<group>"; };
 		FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto_iOS.a; path = SpecAsap/openssl/lib/libcrypto_iOS.a; sourceTree = "<group>"; };
 		FDAFCB2F1DF7791800DFA032 /* SpecAsap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpecAsap-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -123,6 +127,7 @@
 		FDAFCB2E1DF778D600DFA032 /* RMStore */ = {
 			isa = PBXGroup;
 			children = (
+				FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */,
 				FDAFCB331DF7796300DFA032 /* RMStoreAppReceiptVerifier.h */,
 				FDAFCB341DF7796300DFA032 /* RMStoreAppReceiptVerifier.m */,
 				FDAFCB301DF7791900DFA032 /* RMAppReceipt.h */,
@@ -173,6 +178,7 @@
 				FDC80AEE1DD8FAA200548CC0 /* NCPDPElement.swift */,
 				FDCE1F3F1E02364A000F7D36 /* X12Element.swift */,
 				FD94AC6F1E038348008C50FC /* HL7Element.swift */,
+				FD0973411E36C2BE004C15F4 /* Product.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -263,6 +269,7 @@
 				FDE7A9011DEBDCA300080AA2 /* products.plist in Resources */,
 				FDC80AE61DD8F9B800548CC0 /* LaunchScreen.storyboard in Resources */,
 				FDC80AE31DD8F9B800548CC0 /* Assets.xcassets in Resources */,
+				FD9A1BB01E1AC36E00C954E7 /* AppleIncRootCertificate.cer in Resources */,
 				FDC80AE11DD8F9B800548CC0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +292,7 @@
 				FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */,
 				FD94AC701E038348008C50FC /* HL7Element.swift in Sources */,
 				FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */,
+				FD0973421E36C2BE004C15F4 /* Product.swift in Sources */,
 				FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */,
 				FDAFCB351DF7796300DFA032 /* RMStoreAppReceiptVerifier.m in Sources */,
 				FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */,

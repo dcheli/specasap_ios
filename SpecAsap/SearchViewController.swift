@@ -27,7 +27,21 @@ class SearchViewController: UIViewController {
     var dataTask : URLSessionDataTask?
     
     
+
     @IBAction func standardSegmentedControl(_ sender: Any) {
+        for product in AppDelegate.products {
+            if product.productId == "com.dataasap.ncpdpasap" {
+                segmentedControl.setEnabled(product.active, forSegmentAt: 0)
+            }
+            else if product.productId == "com.dataasap.hl7asap" {
+                segmentedControl.setEnabled(product.active, forSegmentAt: 1)
+            }
+            else if product.productId == "com.dataasap.x12asap" {
+                segmentedControl.setEnabled(true, forSegmentAt: 2)
+               // segmentedControl.setEnabled(product.active, forSegmentAt: 2)
+            }
+        }
+        
         switch segmentedControl.selectedSegmentIndex {
         case 0: // NCPDP D.0
             self.urlElementsString = urlElements + "ncpdp/"
