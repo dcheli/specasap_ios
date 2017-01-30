@@ -20,9 +20,9 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         self.products = response.products
 
-        for product in self.products {
-            print("Found \(product.localizedTitle)")
-        }
+ //       for product in self.products {
+ //           print("Found \(product.localizedTitle)")
+ //       }
     }
     
     //Dave, you need to look into this.
@@ -126,11 +126,12 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                 break
             case .purchased:
                 print("purchased")
-                
+                print("AppDelegate.validateReceipt is being called from IAPManager after purchase is made")
+                AppDelegate.validateReceipt()
                 //verifiy the receipt; RMStore stuff
-                self.validateReceipt({ (success, purchases) in
+               self.validateReceipt({ (success, purchases) in
                     if success {
-                        print("receipt validated")
+                        print("receipt locally validated..I think")
                         self.persistPurchase(purchases: purchases!)
                         queue.finishTransaction(transaction)
                     } else {

@@ -90,31 +90,31 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
  
     }
+    // this is temporary in that it only provides product feedback to me in the AboutViewController
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        switch section {
+        case 1:
+            return self.isProductActive()
+        default:
+            return ""
+        }
     
-    //func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-    //    switch section {
-      //  case 1:
-  //          return self.isNcpdpAsapActive()
-   //     default:
-     //       return ""
-       // }
+    }
     
-    //}
-    
-  //  func isNcpdpAsapActive()  -> String {
-  //      var enabledProducts = ""
-  //      for product in AppDelegate.products {
-  //          print("Product in about controller is \(product.productId!) and enablement is \(product.enabled!)")
-  //         if product.enabled! == "true" {
-  //              enabledProducts += "\(product.productId!) is \(product.enabled!)\n"
-  //          }
-  //         else {
-  //              enabledProducts += "\(product.productId!) is \(product.enabled!)\n"
-  //          }
-  //      }
+    func isProductActive()  -> String {
+        var enabledProducts = ""
+        for product in AppDelegate.products {
+           if product.active == true {
+                enabledProducts += "\(product.productId!) is \(product.active)\n"
+            }
+           else {
+                enabledProducts += "\(product.productId!) is \(product.active)\n"
+            }
+        }
 
-   //     return enabledProducts
-   // }
+        return enabledProducts
+    }
+
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
@@ -127,7 +127,6 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
             let destination = segue.destination as! AboutDetailsViewController
             destination.pageTitle = menuItem
         } else {
-            
             segue.destination as! StoreTableViewController
         }
     }

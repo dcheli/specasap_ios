@@ -15,8 +15,7 @@ class Product {
     
     init(productId : String?, enabled : String?) {
         self.productId = productId!
-   //     self.enabled = enabled!
-        if enabled == "true" {
+        if enabled! == "true" {
             self.active = true
         } else {
             self.active = false

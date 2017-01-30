@@ -27,11 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IAPManager.sharedInstance.setupPurchases{ (success) in
             // Test against success
             if success {
-                // This call is necessary to retrieve the product list if IAP's
+                // This call retrives the list of products, validates them against iTunes, and adds them to the Add On Store IAP section
                 IAPManager.sharedInstance.requestProducts()
                 UserDefaults.standard.set(true, forKey: "IAPCapable")
                 UserDefaults.standard.synchronize()
-                self.validateReceipt()
+                AppDelegate.validateReceipt()
             }
         }
         return true
@@ -72,7 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName:UIColor.white]
     }
     
-    func validateReceipt() {
+    static func validateReceipt() {
         var response: URLResponse?
         var error: NSError?
         
@@ -110,11 +110,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 do{
                 let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
             //    print("HttpResponse is \(httpResponse.statusCode)")
-                print("Response returned is: \(jsonDict)")
+                //print("Response returned is: \(jsonDict)")
                 if(jsonDict.count > 0) {
+                    AppDelegate.products.removeAll()
                     if let json = jsonDict as? [[String: AnyObject]] {
                             for item in json {
-                                print("Item is \(item)")
+                              //  print("Item is \(item)")
                                 
                                 let productId = item["productId"] as? String ?? ""
                                 let enabled =  item["enabled"] as? String ?? ""
