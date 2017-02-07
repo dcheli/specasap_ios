@@ -42,6 +42,7 @@ class AboutViewController : UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        
     }
     
     @IBAction func homeButtonTapped(_ sender: Any) {

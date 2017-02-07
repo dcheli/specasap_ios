@@ -17,10 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let tintColor =  UIColor(red: 242/255, green: 71/255, blue: 63/255, alpha: 1)
     static var products = [Product]()
     
-    // fucking around
-    let errorCode:Int32 = 173
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        print("didFinishLaunchingWithOptions is launced")
         // Override point for customization after application launch.
         customizeAppearance()
         
@@ -31,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 IAPManager.sharedInstance.requestProducts()
                 UserDefaults.standard.set(true, forKey: "IAPCapable")
                 UserDefaults.standard.synchronize()
+                print("didFinishLaunchingWithOptions - AppDelegrate.validateReceipt is being called")
                 AppDelegate.validateReceipt()
             }
         }
@@ -73,68 +73,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     static func validateReceipt() {
-        var response: URLResponse?
-        var error: NSError?
+        print("Inside of validateReceipt")
         
         let receiptUrl = Bundle.main.appStoreReceiptURL
-        let receipt: NSData = try! NSData(contentsOf: receiptUrl!, options: [])
         
-        let receiptData = receipt.base64EncodedString(options:[])
-        //print("ReceiptData \(receiptData)")
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
-        let request = NSMutableURLRequest(url: URL(string: "https://dataasap.com/specasap/webapi/v1/IAPReceipt/verifyapplereceipt")!)
-        
-        let session = URLSession.shared
-        request.httpMethod = "POST"
-        
-        let username = "dcheli"
-        let password = "aside555"
-        let loginString = NSString(format: "%@:%@", username, password)
-        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
-        let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
-        request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+        if let receipt = try? NSData(contentsOf: receiptUrl!, options: []) {
+            let receiptData = receipt.base64EncodedString(options:[])
+    
+            let username = "dcheli"
+            let password = "aside555"
+            let loginString = NSString(format: "%@:%@", username, password)
+            let loginData = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
+            let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
 
-        var err: NSError?
-        request.addValue("text/plain", forHTTPHeaderField: "Content-Type")
-        request.httpBody = receiptData.data(using: String.Encoding.ascii)
-        
-   
-        let dataTask = session.dataTask(with: request as URLRequest){
-            data, response, error in
-            DispatchQueue.main.async {
-                UIApplication.shared.isNetworkActivityIndicatorVisible = false
-            }
-            if let error = error {
-                print(error.localizedDescription)
-            } else if let httpResponse = response as? HTTPURLResponse {
-                do{
-                let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
-            //    print("HttpResponse is \(httpResponse.statusCode)")
-                //print("Response returned is: \(jsonDict)")
-                if(jsonDict.count > 0) {
-                    AppDelegate.products.removeAll()
-                    if let json = jsonDict as? [[String: AnyObject]] {
-                            for item in json {
-                              //  print("Item is \(item)")
-                                
-                                let productId = item["productId"] as? String ?? ""
-                                let enabled =  item["enabled"] as? String ?? ""
-                                
-                               // print("Product  is \(productId)")
-                                //print("Enabled is \(enabled)")
-                                AppDelegate.products.append(Product(productId: productId, enabled: enabled ))
+            let request = NSMutableURLRequest(url: URL(string: "https://dataasap.com/specasap/webapi/v1/IAPReceipt/verifyapplereceipt")!)
+            request.httpMethod = "POST"
+            request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+            request.addValue("text/plain", forHTTPHeaderField: "Content-Type")
+            request.httpBody = receiptData.data(using: String.Encoding.ascii)
+            
+            let session = URLSession.shared
+            let dataTask = session.dataTask(with: request as URLRequest){
+                data, response, error in
+                // this is the callback that is being pass data, response, error
+                // This invokes the UI update in the main thread.
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+                
+                if let error = error {
+                    print(error.localizedDescription)
+                } else if (response as? HTTPURLResponse) != nil {
+                    do {
+                        let jsonDict  = try JSONSerialization.jsonObject(with: data! as Data, options: JSONSerialization.ReadingOptions.mutableContainers)as AnyObject
+                        if(jsonDict.count > 0) {
+                            AppDelegate.products.removeAll()
+                            if let json = jsonDict as? [[String: AnyObject]] {
+                                for item in json {
+                                    let productId = item["productId"] as? String ?? ""
+                                    let enabled =  item["enabled"] as? String ?? ""
+                                    AppDelegate.products.append(Product(productId: productId, enabled: enabled ))
+                                }
+                            }
                         }
+                    } catch {
+                        print("Something is messed")
                     }
                 }
-
-                
-                } catch {
-                    print("Something is messed")
-                }
             }
-        
-        }
-        dataTask.resume()
-        
+            dataTask.resume()
+            } else {
+                print("AppDelegate.validateReceipt() did not find local receipt.")
+            }
     }
 }

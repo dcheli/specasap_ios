@@ -12,7 +12,6 @@ import UIKit
 class SearchViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
     @IBOutlet weak var criteriaLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -21,14 +20,10 @@ class SearchViewController: UIViewController {
     var urlElementsString = ""
     var version = ""
     
-    var searchResults = [AnyObject]() // this was cast as NCPDPElement
-    let defaultSession  = URLSessionConfiguration.default
+    var searchResults = [AnyObject]()
     
-    var dataTask : URLSessionDataTask?
-    
-    
-
     @IBAction func standardSegmentedControl(_ sender: Any) {
+        //Not sure this is relevant
 /*
         for product in AppDelegate.products {
             
@@ -63,6 +58,7 @@ class SearchViewController: UIViewController {
             break
         }
     }
+    
     lazy var tapRecognizer: UITapGestureRecognizer = {
         var recognizer = UITapGestureRecognizer(target:self, action: #selector(SearchViewController.dismissKeyboard))
         return recognizer
@@ -80,15 +76,22 @@ class SearchViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         print("SeachViewController, viewDidAppear")
         var segmentSelected : Bool = false
+  
         //here is where you need to somehow call the function that enables the segmented controls
         if AppDelegate.products.count == 0 {
-            sleep(3)
+            // I put the sleep in to give the verifyReceipt REST call a chance to finish
+            sleep(2)
         }
+        
         print("SearchViewController product is \(AppDelegate.products)")
         for product in AppDelegate.products {
             
             if product.productId == "com.dataasap.ncpdpasap" {
-                segmentedControl.setEnabled(product.active, forSegmentAt: 0)
+                // the below is for testing\developmen
+                
+                segmentedControl.setEnabled(true, forSegmentAt: 0)
+                //unremark the line below for production
+               // segmentedControl.setEnabled(product.active, forSegmentAt: 0)
                 if product.active && !segmentSelected {
                     segmentedControl.selectedSegmentIndex = 0
                     self.urlElementsString = urlElements + "ncpdp/"
@@ -99,7 +102,11 @@ class SearchViewController: UIViewController {
    
             }
             else if product.productId == "com.dataasap.hl7asap" {
-                segmentedControl.setEnabled(product.active, forSegmentAt: 1)
+                // the below is for testing\developmen
+                segmentedControl.setEnabled(true, forSegmentAt: 1)
+
+                //unremark the line below for production
+                //segmentedControl.setEnabled(product.active, forSegmentAt: 1)
                 if product.active && !segmentSelected {
                     segmentedControl.selectedSegmentIndex = 1
                     self.urlElementsString = urlElements + "hl7/"
@@ -109,7 +116,11 @@ class SearchViewController: UIViewController {
 
             }
             else if product.productId == "com.dataasap.x12asap" {
-                segmentedControl.setEnabled(product.active, forSegmentAt: 2)
+                // the below is for testing\developmen
+                segmentedControl.setEnabled(true, forSegmentAt: 2)
+                
+                //unremark the line below for production
+                //segmentedControl.setEnabled(product.active, forSegmentAt: 2)
                 if product.active && !segmentSelected {
                     segmentedControl.selectedSegmentIndex = 2
                     self.urlElementsString = urlElements + "x12/"
@@ -152,20 +163,14 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         dismissKeyboard()
-        
-        if(!searchBar.text!.isEmpty) {
-            if(dataTask != nil) {
-                dataTask?.cancel()
-            }
-        }
 
         let expectedCharSet = CharacterSet.urlQueryAllowed
         let searchTerm = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        searchResults.removeAll()
+        let urlString =  urlElementsString + searchTerm! + "?v=" + version
         
         if self.segmentedControl.selectedSegmentIndex == 0 {
-            searchResults.removeAll()
-            let urlString =  urlElementsString + searchTerm! + "?v=" + version
             let ncpdpElementParser  = NCPDPElementParser(fromUrl : urlString)
             ncpdpElementParser.getNCPDPSpec(urlString: urlString) {
                 (result : [NCPDPElement]) in
@@ -186,9 +191,6 @@ extension SearchViewController: UISearchBarDelegate {
             }
       
         } else if self.segmentedControl.selectedSegmentIndex == 1 {
-            searchResults.removeAll()
-
-            let urlString =  urlElementsString + searchTerm! + "?v=" + version
             let hL7ElementParser  = HL7ElementParser(fromUrl : urlString)
             hL7ElementParser.getHL7Spec(urlString: urlString) {
                 (result : [HL7Element]) in
@@ -208,8 +210,6 @@ extension SearchViewController: UISearchBarDelegate {
             }
 
         } else if self.segmentedControl.selectedSegmentIndex == 2 {
-            searchResults.removeAll()
-            let urlString =  urlElementsString + searchTerm! + "?v=" + version
             let x12ElementParser  = X12ElementParser(fromUrl : urlString)
             x12ElementParser.getX12Spec(urlString: urlString) {
                 (result : [X12Element]) in

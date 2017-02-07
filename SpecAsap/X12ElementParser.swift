@@ -35,7 +35,6 @@ class X12ElementParser {
         request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
         
         let session = URLSession(configuration: defaultSession)
-        
         dataTask = session.dataTask(with: request as URLRequest){
             data, response, error in
             DispatchQueue.main.async {
