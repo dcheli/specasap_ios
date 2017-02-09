@@ -27,9 +27,18 @@ class DetailViewController : UIViewController {
 
             displayString += "Element ID: " +  e.elementId! + "\n"
             displayString += "Element Name: " +  e.elementName! + "\n"
-            displayString += "Segment ID: " +  e.segmentId! + "\n"
-            displayString += "Segment Name: " +  e.segmentName! + "\n"
 
+            if e.segmentIds .count > 0 {
+                displayString += "Segment ID(s): "
+                displayString += processArray(e.segmentIds)
+            }
+            
+            if e.segmentNames .count > 0 {
+                displayString += "Segment Name(s): "
+                displayString += processArray(e.segmentNames)
+            }
+
+            
             if e.fieldFormats.count > 0 {
                 displayString += "Field Format(s): "
                 displayString += processArray(e.fieldFormats)
@@ -48,9 +57,13 @@ class DetailViewController : UIViewController {
                 displayString += processArray(e.standardFormats)
             }
         
-            if e.transactions.count > 0 {
-                displayString += "Transaction(s): "
-                displayString += processArray(e.transactions)
+            if e.requestTransactions.count > 0 {
+                displayString += "Request Transaction(s): "
+                displayString += processArray(e.requestTransactions)
+            }
+            if e.responseTransactions.count > 0 {
+                displayString += "Response Transaction(s): "
+                displayString += processArray(e.responseTransactions)
             }
         
             if e.codes.count > 0 {
@@ -72,10 +85,10 @@ class DetailViewController : UIViewController {
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element ID:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Name:"))
             attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment ID:"))
-            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment ID:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment Name:"))
-            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment Name:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment ID(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment ID(s):"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment Name(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment Name(s):"))
             attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length(s):"))
             
@@ -90,8 +103,11 @@ class DetailViewController : UIViewController {
             attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Version(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Version(s):"))
             
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Transaction(s):"))
-            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Transaction(s):"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Request Transaction(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Request Transaction(s):"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Response Transaction(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Response Transaction(s):"))
+
             attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Definition:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
             

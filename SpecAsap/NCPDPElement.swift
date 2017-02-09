@@ -11,30 +11,34 @@ class NCPDPElement {
     var elementId: String?
     var elementName: String?
     var definition: String?
-    var segmentId: String?
-    var segmentName: String?
+    var segmentIds: [String]
+    var segmentNames: [String]
     var standardFormats : [String]
     var lengths : [String]
-    var transactions : [String]
+    var requestTransactions : [String]
+    var responseTransactions : [String]
     var versions : [String]
     var codes : [String]
     var dataType : String?
     var fieldFormats : [String]
     
-    init(elementId: String?, elementName: String?, definition : String?, segmentId: String?,
-         segmentName: String?, standardFormats : [String], lengths : [String], transactions : [String],
-         versions : [String], codes : [String], dataType : String?, fieldFormats : [String]) {
+    init(elementId: String?, elementName: String?, definition : String?, segmentIds: [String],
+         segmentNames: [String], standardFormats : [String], lengths : [String],
+         versions : [String], codes : [String], dataType : String?, fieldFormats : [String],
+         requestTransactions : [String], responseTransactions : [String]) {
         self.elementId = elementId
         self.elementName = elementName
         self.definition = definition
-        self.segmentId = segmentId
-        self.segmentName = segmentName
+        self.segmentIds = segmentIds
+        self.segmentNames = segmentNames
         self.standardFormats = standardFormats
         self.lengths = lengths
-        self.transactions = transactions
         self.versions = versions
         self.codes = codes
         self.dataType = dataType
         self.fieldFormats = fieldFormats
+        self.requestTransactions = requestTransactions
+        self.responseTransactions = responseTransactions
+        
     }
 }

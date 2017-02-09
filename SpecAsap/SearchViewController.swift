@@ -23,24 +23,7 @@ class SearchViewController: UIViewController {
     var searchResults = [AnyObject]()
     
     @IBAction func standardSegmentedControl(_ sender: Any) {
-        //Not sure this is relevant
-/*
-        for product in AppDelegate.products {
-            
-            if product.productId == "com.dataasap.ncpdpasap" {
-                print("Product id is \(product.productId!) and active is \(product.active)")
-                segmentedControl.setEnabled(product.active, forSegmentAt: 0)
-            }
-            else if product.productId == "com.dataasap.hl7asap" {
-                print("Product id is \(product.productId!) and active is \(product.active)")
-                segmentedControl.setEnabled(product.active, forSegmentAt: 1)
-            }
-            else if product.productId == "com.dataasap.x12asap" {
-                print("Product id is \(product.productId!) and active is \(product.active)")
-                segmentedControl.setEnabled(product.active, forSegmentAt: 2)
-            }
-        }
-  */
+
         switch segmentedControl.selectedSegmentIndex {
         case 0: // NCPDP D.0
             self.urlElementsString = urlElements + "ncpdp/"
@@ -75,12 +58,11 @@ class SearchViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         print("SeachViewController, viewDidAppear")
-        var segmentSelected : Bool = false
   
         //here is where you need to somehow call the function that enables the segmented controls
         if AppDelegate.products.count == 0 {
             // I put the sleep in to give the verifyReceipt REST call a chance to finish
-            sleep(2)
+            sleep(3)
         }
         
         print("SearchViewController product is \(AppDelegate.products)")
@@ -88,15 +70,13 @@ class SearchViewController: UIViewController {
             
             if product.productId == "com.dataasap.ncpdpasap" {
                 // the below is for testing\developmen
-                
                 segmentedControl.setEnabled(true, forSegmentAt: 0)
+                
                 //unremark the line below for production
                // segmentedControl.setEnabled(product.active, forSegmentAt: 0)
-                if product.active && !segmentSelected {
-                    segmentedControl.selectedSegmentIndex = 0
+                if product.active{
                     self.urlElementsString = urlElements + "ncpdp/"
                     self.version = "D0"
-                    segmentSelected = true
                 }
 
    
@@ -107,11 +87,10 @@ class SearchViewController: UIViewController {
 
                 //unremark the line below for production
                 //segmentedControl.setEnabled(product.active, forSegmentAt: 1)
-                if product.active && !segmentSelected {
-                    segmentedControl.selectedSegmentIndex = 1
+                if product.active {
+    //                segmentedControl.selectedSegmentIndex = 1
                     self.urlElementsString = urlElements + "hl7/"
                     self.version = "282"
-                    segmentSelected = true
                 }
 
             }
@@ -121,11 +100,10 @@ class SearchViewController: UIViewController {
                 
                 //unremark the line below for production
                 //segmentedControl.setEnabled(product.active, forSegmentAt: 2)
-                if product.active && !segmentSelected {
-                    segmentedControl.selectedSegmentIndex = 2
+                if product.active {
+      //              segmentedControl.selectedSegmentIndex = 2
                     self.urlElementsString = urlElements + "x12/"
                     self.version = "5010"
-                    segmentSelected = true
                 }
 
             }

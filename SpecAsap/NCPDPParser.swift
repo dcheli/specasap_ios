@@ -52,9 +52,10 @@ class NCPDPElementParser {
                         if(jsonDict.count > 0) {
                             if let json = jsonDict as? [[String: AnyObject]] {
                                 for item in json {
+                                    print(item)
                                     let elementId  = item["elementId"] as? String ?? ""
-                                    let segmentId = item["segmentId"] as? String ?? ""
-                                    let segmentName = item["segmentName"] as? String ?? ""
+                                    let segmentIds = item["segmentIds"] as? [String] ?? []
+                                    let segmentNames = item["segmentNames"] as? [String] ?? []
                                     let elementName = item["elementName"] as? String ?? ""
                                     let definition = item["definition"] as? String ?? ""
                                     
@@ -62,16 +63,17 @@ class NCPDPElementParser {
                                     
                                     let standardFormats = item["standardFormats"] as? [String] ?? []
                                     let lengths = item["lengths"] as? [String] ?? []
-                                    let transactions = item["transactions"] as? [String] ?? []
+                                    let requestTransactions = item["requestTransactions"] as? [String] ?? []
+                                    let responseTransactions = item["responseTransactions"] as? [String] ?? []
                                     let versions = item["versions"] as? [String] ?? []
                                     
                                     let dataType = item["dataType"] as? String ?? ""
                                     let fieldFormats = item["fieldFormats"] as? [String] ?? []
                                     
                                     searchResults.append(NCPDPElement(elementId : elementId, elementName: elementName,
-                                                                      definition: definition, segmentId: segmentId, segmentName: segmentName,
-                                                                      standardFormats : standardFormats, lengths: lengths, transactions : transactions,
-                                                                      versions : versions, codes : codes, dataType : dataType, fieldFormats : fieldFormats))
+                                                                      definition: definition, segmentIds: segmentIds, segmentNames: segmentNames,
+                                                                      standardFormats : standardFormats, lengths: lengths,
+                                                                      versions : versions, codes : codes, dataType : dataType, fieldFormats : fieldFormats, requestTransactions : requestTransactions, responseTransactions : responseTransactions))
                                }
                             }
                             
