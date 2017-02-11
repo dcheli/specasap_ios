@@ -32,6 +32,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaults.standard.synchronize()
                 print("didFinishLaunchingWithOptions - AppDelegrate.validateReceipt is being called")
                 AppDelegate.validateReceipt()
+                // I put this sleep in, because I think it's needed for some of the inital REST services to complete, particularly
+                // the productlist and verifyreceipt
+                sleep(3)
             }
         }
         return true
@@ -95,11 +98,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             request.httpBody = receiptData.data(using: String.Encoding.ascii)
             
             let session = URLSession.shared
+            print("AppDelegate setting isNetworkActivityIndicatorVisible to true")
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             let dataTask = session.dataTask(with: request as URLRequest){
                 data, response, error in
                 // this is the callback that is being pass data, response, error
                 // This invokes the UI update in the main thread.
                 DispatchQueue.main.async {
+                    print("AppDelegate completion handling is setting isNetworkActivityIndicator to false")
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }
                 

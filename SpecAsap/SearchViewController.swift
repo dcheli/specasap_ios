@@ -58,54 +58,46 @@ class SearchViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         print("SeachViewController, viewDidAppear")
-  
-        //here is where you need to somehow call the function that enables the segmented controls
-        if AppDelegate.products.count == 0 {
-            // I put the sleep in to give the verifyReceipt REST call a chance to finish
-            sleep(3)
-        }
+        /* The below code is only needed for when you are NOT offering this as a subscription application */
         
+        segmentedControl.setEnabled(true, forSegmentAt: 0)
+        segmentedControl.setEnabled(true, forSegmentAt: 1)
+        segmentedControl.setEnabled(true, forSegmentAt: 2)
+        self.urlElementsString = urlElements + "ncpdp/"
+        self.version = "D0"
+        segmentedControl.selectedSegmentIndex = 0
+
+        /* This section needs to be reworked when you are ready to make this a production\subscription based application */
+ 
         print("SearchViewController product is \(AppDelegate.products)")
         for product in AppDelegate.products {
             
             if product.productId == "com.dataasap.ncpdpasap" {
-                // the below is for testing\developmen
-                segmentedControl.setEnabled(true, forSegmentAt: 0)
-                
                 //unremark the line below for production
-               // segmentedControl.setEnabled(product.active, forSegmentAt: 0)
+                /* segmentedControl.setEnabled(product.active, forSegmentAt: 0)
                 if product.active{
                     self.urlElementsString = urlElements + "ncpdp/"
                     self.version = "D0"
-                }
-
+                } */
    
             }
             else if product.productId == "com.dataasap.hl7asap" {
-                // the below is for testing\developmen
-                segmentedControl.setEnabled(true, forSegmentAt: 1)
-
                 //unremark the line below for production
-                //segmentedControl.setEnabled(product.active, forSegmentAt: 1)
+                /*segmentedControl.setEnabled(product.active, forSegmentAt: 1)
                 if product.active {
-    //                segmentedControl.selectedSegmentIndex = 1
+                    segmentedControl.selectedSegmentIndex = 1
                     self.urlElementsString = urlElements + "hl7/"
                     self.version = "282"
-                }
-
+                }*/
             }
             else if product.productId == "com.dataasap.x12asap" {
-                // the below is for testing\developmen
-                segmentedControl.setEnabled(true, forSegmentAt: 2)
-                
                 //unremark the line below for production
-                //segmentedControl.setEnabled(product.active, forSegmentAt: 2)
+                /*segmentedControl.setEnabled(product.active, forSegmentAt: 2)
                 if product.active {
-      //              segmentedControl.selectedSegmentIndex = 2
+                    segmentedControl.selectedSegmentIndex = 2
                     self.urlElementsString = urlElements + "x12/"
                     self.version = "5010"
-                }
-
+                }*/
             }
         }
 

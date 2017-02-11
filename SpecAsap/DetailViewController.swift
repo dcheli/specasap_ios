@@ -58,12 +58,12 @@ class DetailViewController : UIViewController {
             }
         
             if e.requestTransactions.count > 0 {
-                displayString += "Request Transaction(s): "
-                displayString += processArray(e.requestTransactions)
+                displayString += "Request Transaction(s): \n"
+                displayString += processArray(e.requestTransactions, addNewLine: true)
             }
             if e.responseTransactions.count > 0 {
-                displayString += "Response Transaction(s): "
-                displayString += processArray(e.responseTransactions)
+                displayString += "Response Transaction(s): \n"
+                displayString += processArray(e.responseTransactions, addNewLine: true)
             }
         
             if e.codes.count > 0 {
@@ -281,12 +281,27 @@ class DetailViewController : UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    func processArray(_ array : [String]) -> String {
+    
+    func processArray(_ array : [String], addNewLine: Bool = false) -> String {
         var output = ""
-        for item in array {
-            output += " " + item + ","
+        
+        let stringSeparator : String
+        if addNewLine {
+            stringSeparator = ",\n"
+        } else {
+            stringSeparator = ","
         }
-        return String(output.characters.dropLast()) + "\n"
+        
+        for item in array {
+            output += " " + item + stringSeparator
+        }
+        
+        // This drops the addtional \n character
+        if addNewLine {
+            return String(output.characters.dropLast(2)) + "\n"
+        } else {
+            return String(output.characters.dropLast()) + "\n"
+        }
     }
     
 }

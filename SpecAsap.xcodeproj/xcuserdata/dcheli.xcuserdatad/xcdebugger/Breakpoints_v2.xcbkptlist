@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/AppDelegate.swift"
-            timestampString = "508124206.043728"
+            timestampString = "508530451.389503"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
+            startingLineNumber = "103"
+            endingLineNumber = "103"
             landmarkName = "validateReceipt()"
             landmarkType = "7">
             <Locations>

@@ -52,7 +52,6 @@ class NCPDPElementParser {
                         if(jsonDict.count > 0) {
                             if let json = jsonDict as? [[String: AnyObject]] {
                                 for item in json {
-                                    print(item)
                                     let elementId  = item["elementId"] as? String ?? ""
                                     let segmentIds = item["segmentIds"] as? [String] ?? []
                                     let segmentNames = item["segmentNames"] as? [String] ?? []
