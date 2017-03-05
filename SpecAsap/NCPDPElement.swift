@@ -21,11 +21,12 @@ class NCPDPElement {
     var codes : [String]
     var dataType : String?
     var fieldFormats : [String]
+    var comments: String?
     
     init(elementId: String?, elementName: String?, definition : String?, segmentIds: [String],
          segmentNames: [String], standardFormats : [String], lengths : [String],
          versions : [String], codes : [String], dataType : String?, fieldFormats : [String],
-         requestTransactions : [String], responseTransactions : [String]) {
+         requestTransactions : [String], responseTransactions : [String], comments : String?) {
         self.elementId = elementId
         self.elementName = elementName
         self.definition = definition
@@ -39,6 +40,6 @@ class NCPDPElement {
         self.fieldFormats = fieldFormats
         self.requestTransactions = requestTransactions
         self.responseTransactions = responseTransactions
-        
+        self.comments = comments
     }
 }

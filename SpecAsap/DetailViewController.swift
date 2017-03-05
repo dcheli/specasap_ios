@@ -38,7 +38,19 @@ class DetailViewController : UIViewController {
                 displayString += processArray(e.segmentNames)
             }
 
+            if e.versions.count > 0 {
+                displayString += "Version(s): "
+                displayString += processArray(e.versions)
+            }
+            if e.definition != nil  || !(e.definition?.isEmpty)!{
+                displayString += "Definition: " +  e.definition! + "\n"
+            }
             
+            if e.comments != nil  || !(e.comments?.isEmpty)!{
+                displayString += "Comments: " +  e.comments! + "\n"
+            }
+            
+
             if e.fieldFormats.count > 0 {
                 displayString += "Field Format(s): "
                 displayString += processArray(e.fieldFormats)
@@ -47,17 +59,14 @@ class DetailViewController : UIViewController {
                 displayString += "Length(s): "
                 displayString += processArray(e.lengths)
             }
-            if e.versions.count > 0 {
-                displayString += "Version(s): "
-                displayString += processArray(e.versions)
-            }
         
             if e.standardFormats.count > 0 {
                 displayString += "Standard Format(s): "
                 displayString += processArray(e.standardFormats)
             }
         
-            if e.requestTransactions.count > 0 {
+            if e.requestTransactions.count > 0  || !e.requestTransactions.isEmpty {
+                print("Request is \(e.requestTransactions)")
                 displayString += "Request Transaction(s): \n"
                 displayString += processArray(e.requestTransactions, addNewLine: true)
             }
@@ -71,10 +80,7 @@ class DetailViewController : UIViewController {
                 displayString += processArray(e.codes)
             }
             
-            
-        
-            displayString += "Definition: " +  e.definition! + "\n"
-            
+    
             
             let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
             let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
@@ -111,6 +117,8 @@ class DetailViewController : UIViewController {
             attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Definition:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
             
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Comments:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Comments:"))
             
             ddd = attributedString
 

@@ -37,9 +37,13 @@ class X12ElementParser {
         let session = URLSession(configuration: defaultSession)
         dataTask = session.dataTask(with: request as URLRequest){
             data, response, error in
-            DispatchQueue.main.async {
+            OperationQueue.main.addOperation {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
+
             }
+ //           DispatchQueue.main.async {
+ //               UIApplication.shared.isNetworkActivityIndicatorVisible = false
+ //           }
             
             if let error = error {
                 print(error.localizedDescription)

@@ -57,6 +57,7 @@ class NCPDPElementParser {
                                     let segmentNames = item["segmentNames"] as? [String] ?? []
                                     let elementName = item["elementName"] as? String ?? ""
                                     let definition = item["definition"] as? String ?? ""
+                                    let comments = item["comments"] as? String ?? ""
                                     
                                     let codes = item["codes"] as? [String] ?? []
                                     
@@ -72,7 +73,7 @@ class NCPDPElementParser {
                                     searchResults.append(NCPDPElement(elementId : elementId, elementName: elementName,
                                                                       definition: definition, segmentIds: segmentIds, segmentNames: segmentNames,
                                                                       standardFormats : standardFormats, lengths: lengths,
-                                                                      versions : versions, codes : codes, dataType : dataType, fieldFormats : fieldFormats, requestTransactions : requestTransactions, responseTransactions : responseTransactions))
+                                                                      versions : versions, codes : codes, dataType : dataType, fieldFormats : fieldFormats, requestTransactions : requestTransactions, responseTransactions : responseTransactions, comments: comments))
                                }
                             }
                             
