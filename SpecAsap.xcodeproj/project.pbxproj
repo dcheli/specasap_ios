@@ -12,7 +12,6 @@
 		FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */; };
 		FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */; };
 		FD75DC101DFF927000E45684 /* X12ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */; };
-		FD7822471DD9309700DD3E9C /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD7822461DD9309700DD3E9C /* AboutViewController.swift */; };
 		FD8D8A101DE51DEE00FC6254 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */; };
 		FD94AC701E038348008C50FC /* HL7Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC6F1E038348008C50FC /* HL7Element.swift */; };
 		FD94AC721E0383A5008C50FC /* HL7ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */; };
@@ -30,9 +29,11 @@
 		FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AF01DD8FAE400548CC0 /* ElementCell.swift */; };
 		FDC80AF31DD8FB1E00548CC0 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80AF21DD8FB1E00548CC0 /* DetailViewController.swift */; };
 		FDCE1F401E02364A000F7D36 /* X12Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDCE1F3F1E02364A000F7D36 /* X12Element.swift */; };
+		FDD1ED471E7A171D008B311E /* AboutTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD1ED461E7A171D008B311E /* AboutTableViewController.swift */; };
 		FDE7A8FD1DEBD8A400080AA2 /* IAPManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDE7A8FC1DEBD8A400080AA2 /* IAPManager.swift */; };
 		FDE7A9011DEBDCA300080AA2 /* products.plist in Resources */ = {isa = PBXBuildFile; fileRef = FDE7A9001DEBDCA300080AA2 /* products.plist */; };
 		FDF7E0CE1DF337C500EDD451 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDF7E0CD1DF337C500EDD451 /* ProductCell.swift */; };
+		FDFADBCE1E6CD201003476B4 /* StandardsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDFADBCD1E6CD201003476B4 /* StandardsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,7 +43,6 @@
 		FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTableViewController.swift; sourceTree = "<group>"; };
 		FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutDetailsViewController.swift; sourceTree = "<group>"; };
 		FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = X12ElementParser.swift; sourceTree = "<group>"; };
-		FD7822461DD9309700DD3E9C /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		FD94AC6F1E038348008C50FC /* HL7Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7Element.swift; sourceTree = "<group>"; };
 		FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7ElementParser.swift; sourceTree = "<group>"; };
 		FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
@@ -64,9 +64,11 @@
 		FDC80AF01DD8FAE400548CC0 /* ElementCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ElementCell.swift; sourceTree = "<group>"; };
 		FDC80AF21DD8FB1E00548CC0 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		FDCE1F3F1E02364A000F7D36 /* X12Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = X12Element.swift; sourceTree = "<group>"; };
+		FDD1ED461E7A171D008B311E /* AboutTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutTableViewController.swift; sourceTree = "<group>"; };
 		FDE7A8FC1DEBD8A400080AA2 /* IAPManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPManager.swift; sourceTree = "<group>"; };
 		FDE7A9001DEBDCA300080AA2 /* products.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = products.plist; sourceTree = "<group>"; };
 		FDF7E0CD1DF337C500EDD451 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		FDFADBCD1E6CD201003476B4 /* StandardsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StandardsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,11 +108,13 @@
 		FD6DD51E1DECB88600ED511F /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				FDC80ADB1DD8F9B800548CC0 /* AppDelegate.swift */,
 				FDC80ADD1DD8F9B800548CC0 /* SearchViewController.swift */,
 				FDC80AF21DD8FB1E00548CC0 /* DetailViewController.swift */,
 				FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */,
-				FD7822461DD9309700DD3E9C /* AboutViewController.swift */,
 				FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */,
+				FDFADBCD1E6CD201003476B4 /* StandardsTableViewController.swift */,
+				FDD1ED461E7A171D008B311E /* AboutTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -161,7 +165,6 @@
 				FD6DD51E1DECB88600ED511F /* Controllers */,
 				FDE7A8FB1DEBD88200080AA2 /* Managers */,
 				FDC80AED1DD8FA9100548CC0 /* Model */,
-				FDC80ADB1DD8F9B800548CC0 /* AppDelegate.swift */,
 				FDC80ADF1DD8F9B800548CC0 /* Main.storyboard */,
 				FDC80AE21DD8F9B800548CC0 /* Assets.xcassets */,
 				FDC80AE41DD8F9B800548CC0 /* LaunchScreen.storyboard */,
@@ -281,16 +284,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FDFADBCE1E6CD201003476B4 /* StandardsTableViewController.swift in Sources */,
 				FDCE1F401E02364A000F7D36 /* X12Element.swift in Sources */,
 				FD17E8561E07616400648631 /* NCPDPParser.swift in Sources */,
 				FDE7A8FD1DEBD8A400080AA2 /* IAPManager.swift in Sources */,
-				FD7822471DD9309700DD3E9C /* AboutViewController.swift in Sources */,
 				FD94AC721E0383A5008C50FC /* HL7ElementParser.swift in Sources */,
 				FDC80ADE1DD8F9B800548CC0 /* SearchViewController.swift in Sources */,
 				FDC80ADC1DD8F9B800548CC0 /* AppDelegate.swift in Sources */,
 				FD75DC101DFF927000E45684 /* X12ElementParser.swift in Sources */,
 				FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */,
 				FD94AC701E038348008C50FC /* HL7Element.swift in Sources */,
+				FDD1ED471E7A171D008B311E /* AboutTableViewController.swift in Sources */,
 				FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */,
 				FD0973421E36C2BE004C15F4 /* Product.swift in Sources */,
 				FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */,

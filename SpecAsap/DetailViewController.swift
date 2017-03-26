@@ -50,6 +50,10 @@ class DetailViewController : UIViewController {
                 displayString += "Comments: " +  e.comments! + "\n"
             }
             
+            if e.codes.count > 0 {
+                displayString += "Codes: "
+                displayString += processArray(e.codes)
+            }
 
             if e.fieldFormats.count > 0 {
                 displayString += "Field Format(s): "
@@ -75,10 +79,6 @@ class DetailViewController : UIViewController {
                 displayString += processArray(e.responseTransactions, addNewLine: true)
             }
         
-            if e.codes.count > 0 {
-                displayString += "Codes: "
-                displayString += processArray(e.codes)
-            }
             
     
             

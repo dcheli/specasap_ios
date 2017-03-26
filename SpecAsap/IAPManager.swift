@@ -16,6 +16,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     var products:[SKProduct] = []
     var id : [String] = []
     
+    
     // SKProducts call back. Apple will process the request and call this method
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         self.products = response.products
@@ -30,16 +31,6 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     func request(_ request: SKRequest, didFailWithError error: Error) {
         print("Error: \(error.localizedDescription)")
     
-    }
-    
-    func performProductRequestForIdentifiers(identifiers : [String]) {
-        
-        // this is making a call to iTunes Connect
-        //force unwrap as Set<String>
-        let products = NSSet(array: identifiers) as! Set<String>
-        self.request = SKProductsRequest(productIdentifiers: products)
-        self.request.delegate = self
-        self.request.start()
     }
     
 
@@ -79,11 +70,12 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                         for json in jsonArray as! [Dictionary<String, String>]{
                             let productId = json["productId"]!
                             identifiers.append(productId)
-
                         }
                     }
-                    self.performProductRequestForIdentifiers(identifiers: identifiers)
+            
+                    self.performProductRequestForIdentifiersFromiTunes(identifiers: identifiers)
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                 
                 }
                 let methodFinish = Date()
                 let executionTime = methodFinish.timeIntervalSince(methodStart)
@@ -96,6 +88,17 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         dataTask.resume()
     }
     
+    func performProductRequestForIdentifiersFromiTunes(identifiers : [String]) {
+        
+        // this is making a call to iTunes Connect
+        //below is read - force unwrap as Set<String>
+        let products = NSSet(array: identifiers) as! Set<String>
+        self.request = SKProductsRequest(productIdentifiers: products)
+        self.request.delegate = self
+        self.request.start()
+    }
+    
+
 
     
     func setupPurchases(_ handler: @escaping (Bool) ->Void) {

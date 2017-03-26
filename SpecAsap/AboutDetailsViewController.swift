@@ -13,7 +13,7 @@ import MessageUI
 class AboutDetailsViewController : UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var documentDisplay: UITextView!
-    var pageTitle: String! = nil
+    var pageTitle: String! = ""
     
     override func viewDidLoad() {
         self.automaticallyAdjustsScrollViewInsets = false

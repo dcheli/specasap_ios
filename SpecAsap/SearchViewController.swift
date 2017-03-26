@@ -14,92 +14,83 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var criteriaLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-
-    let urlElements = "https://dataasap.com/specasap/webapi/v1/elements/"
-    var urlElementsString = ""
+    @IBOutlet weak var selector: UISegmentedControl!
+    let baseURL = "https://dataasap.com/specasap/webapi/v1/"
+    var elementsURL = ""
+    var codesURL  = ""
+    var urlString = ""
     var version = ""
+    var selectedStandard  = ""
+    var searchDomain  = ""
+    var standardsDomain = ""
+    var queryURL = ""
     
     var searchResults = [AnyObject]()
     
-    @IBAction func standardSegmentedControl(_ sender: Any) {
-
-        switch segmentedControl.selectedSegmentIndex {
-        case 0: // NCPDP D.0
-            self.urlElementsString = urlElements + "ncpdp/"
-            self.version = "D0"
-            break
-        case 1: // HL7 2.8.2
-            self.urlElementsString = urlElements + "hl7/"
-            self.version = "282"
-            break
-        case 2: // X12 v5010
-            self.urlElementsString = urlElements + "x12/"
-            self.version = "5010"
-            break
+    
+    
+    @IBAction func selectorChanged(_ sender: Any) {
+        // All this should do is select the URL that will be used in the query
+        switch selector.selectedSegmentIndex {
+        case 0: // Data Elements
+            self.queryURL = elementsURL
+            self.searchDomain = "elements"
+        case 1: // Codes
+            self.queryURL = codesURL
+            self.searchDomain = "codes"
         default:
-            break
+            self.searchDomain = ""
         }
+        print("queryURL is \(self.queryURL)")
     }
     
+
     lazy var tapRecognizer: UITapGestureRecognizer = {
         var recognizer = UITapGestureRecognizer(target:self, action: #selector(SearchViewController.dismissKeyboard))
         return recognizer
     }()
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        self.title = selectedStandard
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.tableFooterView = UIView()
+   
+        
+        // this is the default when entering this screen
+        urlString = elementsURL
+        
+        
+        switch selectedStandard {
+            case "NCPDP D.0":
+                self.standardsDomain = "ncpdpvD0"
+                self.elementsURL = baseURL + "elements/ncpdp/"
+                self.codesURL = baseURL + "codes/ncpdp/"
+                self.version = "D0"
+            case "X12 5010" :
+                self.standardsDomain = "x12v5010"
+                self.elementsURL = baseURL + "elements/x12/"
+                self.codesURL = baseURL + "codes/x12/"
+                self.version = "5010"
+            case "HL7 v2":
+                self.standardsDomain = "hl7v2"
+                self.elementsURL = baseURL + "elements/hl7/"
+                self.codesURL = baseURL + "codes/hl7/"
+                self.version = "282"
+            default:
+                self.urlString +=  ""
+                self.version = ""
+        }
+        // This is the default url
+        self.queryURL = self.elementsURL
      }
     
     // this is activated when you move to this screen, via the Home Screen; fyi after viewDidAppear is called, didMove toParentViewControlelr is called
 
     override func viewDidAppear(_ animated: Bool) {
-        print("SeachViewController, viewDidAppear")
-        /* The below code is only needed for when you are NOT offering this as a subscription application */
-        
-        segmentedControl.setEnabled(true, forSegmentAt: 0)
-        segmentedControl.setEnabled(true, forSegmentAt: 1)
-        segmentedControl.setEnabled(true, forSegmentAt: 2)
-        self.urlElementsString = urlElements + "ncpdp/"
-        self.version = "D0"
-        segmentedControl.selectedSegmentIndex = 0
-
-        /* This section needs to be reworked when you are ready to make this a production\subscription based application */
- 
-        print("SearchViewController product is \(AppDelegate.products)")
-        for product in AppDelegate.products {
-            
-            if product.productId == "com.dataasap.ncpdpasap" {
-                //unremark the line below for production
-                /* segmentedControl.setEnabled(product.active, forSegmentAt: 0)
-                if product.active{
-                    self.urlElementsString = urlElements + "ncpdp/"
-                    self.version = "D0"
-                } */
-   
-            }
-            else if product.productId == "com.dataasap.hl7asap" {
-                //unremark the line below for production
-                /*segmentedControl.setEnabled(product.active, forSegmentAt: 1)
-                if product.active {
-                    segmentedControl.selectedSegmentIndex = 1
-                    self.urlElementsString = urlElements + "hl7/"
-                    self.version = "282"
-                }*/
-            }
-            else if product.productId == "com.dataasap.x12asap" {
-                //unremark the line below for production
-                /*segmentedControl.setEnabled(product.active, forSegmentAt: 2)
-                if product.active {
-                    segmentedControl.selectedSegmentIndex = 2
-                    self.urlElementsString = urlElements + "x12/"
-                    self.version = "5010"
-                }*/
-            }
-        }
+       
 
     }
     
@@ -138,11 +129,13 @@ extension SearchViewController: UISearchBarDelegate {
         let searchTerm = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         searchResults.removeAll()
-        let urlString =  urlElementsString + searchTerm! + "?v=" + version
+        self.queryURL = elementsURL +  searchTerm! + "?v=" + version
+        print("from something \(self.queryURL)\n")
+        print("with standards domain \(self.standardsDomain)")
         
-        if self.segmentedControl.selectedSegmentIndex == 0 {
-            let ncpdpElementParser  = NCPDPElementParser(fromUrl : urlString)
-            ncpdpElementParser.getNCPDPSpec(urlString: urlString) {
+        if self.standardsDomain == "ncpdpvD0" {
+            let ncpdpElementParser  = NCPDPElementParser(fromUrl : self.queryURL)
+            ncpdpElementParser.getNCPDPSpec(urlString: self.queryURL) {
                 (result : [NCPDPElement]) in
                 if result.isEmpty{
                     let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
@@ -160,9 +153,10 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
       
-        } else if self.segmentedControl.selectedSegmentIndex == 1 {
-            let hL7ElementParser  = HL7ElementParser(fromUrl : urlString)
-            hL7ElementParser.getHL7Spec(urlString: urlString) {
+        } else if self.standardsDomain == "hl7v2" {
+
+            let hL7ElementParser  = HL7ElementParser(fromUrl : self.queryURL)
+            hL7ElementParser.getHL7Spec(urlString: self.queryURL) {
                 (result : [HL7Element]) in
                 if result.isEmpty{
                     let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
@@ -179,9 +173,10 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
 
-        } else if self.segmentedControl.selectedSegmentIndex == 2 {
-            let x12ElementParser  = X12ElementParser(fromUrl : urlString)
-            x12ElementParser.getX12Spec(urlString: urlString) {
+        } else if self.standardsDomain == "x12v5010" {
+    //else if self.selector.selectedSegmentIndex == 2 {
+            let x12ElementParser  = X12ElementParser(fromUrl : self.queryURL)
+            x12ElementParser.getX12Spec(urlString: self.queryURL) {
                 (result : [X12Element]) in
                 if result.isEmpty{
                     let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
@@ -216,6 +211,7 @@ extension SearchViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ElementCell", for: indexPath) as! ElementCell
         
+        
         if searchResults[indexPath.row] is NCPDPElement {
             let element = searchResults[indexPath.row] as? NCPDPElement
             cell.elementId.text = element?.elementId
@@ -232,7 +228,9 @@ extension SearchViewController: UITableViewDataSource {
             cell.elementName.text = element?.elementName!
 
         }
-  
+        
+        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        
         return cell
     }
 }

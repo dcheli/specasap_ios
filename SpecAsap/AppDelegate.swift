@@ -17,21 +17,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let tintColor =  UIColor(red: 242/255, green: 71/255, blue: 63/255, alpha: 1)
     static var products = [Product]()
     
+    static var standardNames = [String]()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        print("didFinishLaunchingWithOptions is launced")
-        // Override point for customization after application launch.
+        print("Woke up and finished launching")
+         // Override point for customization after application launch.
         customizeAppearance()
+        
         
         IAPManager.sharedInstance.setupPurchases{ (success) in
             // Test against success
+            
             if success {
                 // This call retrives the list of products, validates them against iTunes, and adds them to the Add On Store IAP section
                 IAPManager.sharedInstance.requestProducts()
+                
                 UserDefaults.standard.set(true, forKey: "IAPCapable")
                 UserDefaults.standard.synchronize()
-                print("didFinishLaunchingWithOptions - AppDelegrate.validateReceipt is being called")
-                AppDelegate.validateReceipt()
+   
+                // The below is NEEDEDif you are going to be using auto-renew subscription. I have temporarlity commented it out
+                // in order to test on the simulator.
+                //  AppDelegate.validateReceipt()
+                
+                // The below is just temporary at the moment
+                self.getProductIds() {
+                    (identifiers: [String]) in
+                    AppDelegate.standardNames = identifiers
+                }
+                
                 // I put this sleep in, because I think it's needed for some of the inital REST services to complete, particularly
                 // the productlist and verifyreceipt
                 sleep(3)
@@ -120,7 +133,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                 for item in json {
                                     let productId = item["productId"] as? String ?? ""
                                     let enabled =  item["enabled"] as? String ?? ""
-                                    AppDelegate.products.append(Product(productId: productId, enabled: enabled ))
+                                    let displayName = item["displayName"] as? String ?? ""
+                                    AppDelegate.products.append(Product(productId: productId, enabled: enabled , displayName : displayName))
                                 }
                             }
                         }
@@ -134,4 +148,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("AppDelegate.validateReceipt() did not find local receipt.")
             }
     }
+    
+    
+    
+    
+    //myshit
+
+      func getProductIds(completion : @escaping (_ completion : [String]) -> Void) {
+        // So this is where u would make the call to URLSession to get the identfiers
+        //let defaultSession  = URLSessionConfiguration.default
+        
+        var identifiers : [String] = []
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        let username = "dcheli"
+        let password = "aside555"
+        let loginString = NSString(format: "%@:%@", username, password)
+        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
+        let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
+        
+        let methodStart = Date()
+        let session = URLSession.shared
+        let url = URL(string: "https://dataasap.com/specasap/webapi/v1/products/productlist")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "GET"
+        request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+        
+        let dataTask = session.dataTask(with: request, completionHandler: {(data, response, error) -> Void in
+            do {
+                let jsonArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
+                    if jsonArray.count > 0 {
+                        for json in jsonArray as! [Dictionary<String, String>]{
+                            let productId = json["displayName"]!
+                            identifiers.append(productId)
+                        }
+                    }
+                DispatchQueue.main.async {
+                    
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    
+                }
+                
+                let methodFinish = Date()
+                let executionTime = methodFinish.timeIntervalSince(methodStart)
+                print("Execution time for productlist request was \(executionTime) ms")
+            } catch {
+                print("Error: \(error)")
+            }
+            // I suppose it(?) returned??? so this is called now?
+            completion(identifiers)
+            
+        })
+        dataTask.resume()
+    }
+    
+    
 }

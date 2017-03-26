@@ -10,16 +10,17 @@ import Foundation
 
 class Product {
     var productId : String?
- //   var enabled : String?
     var active : Bool
+    var displayName : String?
     
-    init(productId : String?, enabled : String?) {
+    init(productId : String?, enabled : String?, displayName : String?) {
         self.productId = productId!
         if enabled! == "true" {
             self.active = true
         } else {
             self.active = false
         }
+        self.displayName = displayName
         
     }
 }
