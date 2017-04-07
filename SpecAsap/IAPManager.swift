@@ -21,9 +21,6 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         self.products = response.products
 
- //       for product in self.products {
- //           print("Found \(product.localizedTitle)")
- //       }
     }
     
     //Dave, you need to look into this.
@@ -42,36 +39,64 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     
     func getProductIdentifiers() {
         
-        // So this is where u would make the call to URLSession to get the identfiers
-        //let defaultSession  = URLSessionConfiguration.default
-
         var identifiers : [String] = []
-        
+    
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
-        let username = "dcheli"
-        let password = "aside555"
-        let loginString = NSString(format: "%@:%@", username, password)
-        let loginData: Data = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
-        let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
 
-        let methodStart = Date()
-        let session = URLSession.shared
-        let url = URL(string: "https://dataasap.com/specasap/webapi/v1/products/productlist")
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
-
-        let dataTask = session.dataTask(with: request) {(data, response, error) -> Void in
-            do {
-                let jsonArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
-                DispatchQueue.main.async {
-                    if jsonArray.count > 0 {
-                        for json in jsonArray as! [Dictionary<String, String>]{
-                            let productId = json["productId"]!
-                            identifiers.append(productId)
+        NetworkManager.sharedInstance.getProductSet(os: "ios") { (responseCode, data) -> Void in
+            
+             print("Completion Handler called")
+            
+            if responseCode == 200 {
+                
+                let productSetParser = ProductSetParser()
+                let productSet = productSetParser.parseProductSet(fromUrl: data!)
+                
+                if productSet.count > 0 {
+                    for item in productSet {
+                        if let iProducts = item.products{
+                            for id in iProducts {
+                                identifiers.append(id.productId!)
+                            }
                         }
                     }
+        
+                    AppDelegate.productSet = productSet
+                }
+                AppDelegate.standardNames = identifiers
+                self.performProductRequestForIdentifiersFromiTunes(identifiers: identifiers)
+                
+            } else {
+                print("result is \(String(describing : responseCode))")
+            }
+        }
+
+/*
+        let dataTask = session.dataTask(with: request) {(data, response, error) -> Void in
+            do {
+       //    DispatchQueue.main.async {
+                let productSetParser  = ProductSetParser()
+                productSetParser.parseProductSet(fromUrl: data!)
+                
+                if AppDelegate.productSet.count > 0 {
+                    for productSet in AppDelegate.productSet {
+                        for product in productSet.products! {
+                            identifiers.append(product.productId!)
+                        }
+                    }
+                }
+                
+                
+                // I need to get the product ids & domains for the sections
+                
+             //   let jsonArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
+                DispatchQueue.main.async {
+             //       if jsonArray.count > 0 {
+               //         for json in jsonArray as! [Dictionary<String, String>]{
+                 //           let productId = json["productId"]!
+                   //         identifiers.append(productId)
+                     //   }
+           // }
             
                     self.performProductRequestForIdentifiersFromiTunes(identifiers: identifiers)
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -85,7 +110,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
             }
 
         }
-        dataTask.resume()
+        dataTask.resume()*/
     }
     
     func performProductRequestForIdentifiersFromiTunes(identifiers : [String]) {

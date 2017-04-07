@@ -12,8 +12,9 @@ class Product {
     var productId : String?
     var active : Bool
     var displayName : String?
+    var version : String?
     
-    init(productId : String?, enabled : String?, displayName : String?) {
+    init(productId : String?, enabled : String?, displayName : String?, version: String?) {
         self.productId = productId!
         if enabled! == "true" {
             self.active = true
@@ -21,6 +22,7 @@ class Product {
             self.active = false
         }
         self.displayName = displayName
+        self.version = version
         
     }
 }

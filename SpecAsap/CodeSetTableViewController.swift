@@ -1,72 +1,76 @@
 //
-//  StandardsTableViewController.swift
+//  CodeSetTableViewController.swift
 //  SpecAsap
 //
-//  Created by David Cheli on 3/5/17.
+//  Created by David Cheli on 4/4/17.
 //  Copyright © 2017 David Cheli. All rights reserved.
 //
 
 import UIKit
 
-class StandardsTableViewController: UITableViewController {
-    let sectionImages : [UIImage] = [#imageLiteral(resourceName: "healthcare"), #imageLiteral(resourceName: "finance")]
+class CodeSetTableViewController: UITableViewController {
+    
+    var elementId : String?
+    var codeSet : CodeSet = CodeSet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+        guard let e = elementId else {
+            print("Bam.. prob dismiss the screen")
+            return
+        }
+        
+        NetworkManager.sharedInstance.getCodeSet(elementId: e) { (responseCode, data) -> Void in
+            if responseCode == 200 {
+             
+                let codeSetParser = CodeSetParser()
+                self.codeSet = codeSetParser.parseCodeSet(fromUrl: data!)!
+                
+                self.tableView.reloadData()
+            } else {
+                print("result is \(String(describing : responseCode))")
+            }
+        }
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return AppDelegate.productSet.count
+        
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-            case 0:
-                return (AppDelegate.productSet[0].products?.count)!
-            default:
-                return (AppDelegate.productSet[1].products?.count)!
+        guard let count = self.codeSet.codes?.count else {
+            return 0
         }
-    }
-
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-
-        let view = UIView()
-
-        view.backgroundColor = UIColor(red: 0.8784, green: 0.8863, blue: 0.898, alpha: 1.0)
-        let image = UIImageView(image: sectionImages[section])
-        image.frame = CGRect(x: 5, y: 5, width: 35, height: 35)
-        view.addSubview(image)
         
-        let label = UILabel()
-        label.text = AppDelegate.productSet[section].domain
-        //label.text = sectionTitles[section]
-        
-        label.frame = CGRect(x: 45, y: 5, width: 100, height: 35)
-        view.addSubview(label)
-     
-        return view
+        print("returning \(count)")
+        return count
     }
-    
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
-    }
+
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "StandardsCellIdentifier", for: indexPath)
-       // let product = AppDelegate.products[indexPath.row]
-        switch indexPath.section {
-            case 0:
-                cell.textLabel?.text = AppDelegate.productSet[0].products?[indexPath.row].displayName
-            default:
-                cell.textLabel?.text = AppDelegate.productSet[1].products?[indexPath.row].displayName
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CodeSetCell", for: indexPath)
+        
+        if let code = codeSet.codes?[indexPath.row] {
+            cell.textLabel?.text = code.code
+             print("desc is \(code.description!)")
+            cell.detailTextLabel?.text = code.description
         }
-        cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
+        
         return cell
     }
     
@@ -106,18 +110,14 @@ class StandardsTableViewController: UITableViewController {
     }
     */
 
- 
+    /*
+    // MARK: - Navigation
+
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
-        if segue.identifier == "elements" {
-            let indexPath = self.tableView.indexPathForSelectedRow
-            let section = self.tableView.indexPathForSelectedRow?.section
-            let destination = segue.destination as! SearchViewController
-            destination.selectedStandard = (AppDelegate.productSet[section!].products?[indexPath!.row].displayName)!
-        }
-        
     }
+    */
+
 }

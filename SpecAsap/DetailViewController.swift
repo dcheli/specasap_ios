@@ -15,15 +15,22 @@ class DetailViewController : UIViewController {
     @IBOutlet weak var textView: UITextView!
     //var element : NCPDPElement! = nil
     var element : AnyObject! = nil
+    var elementId : String?
+    
+    @IBOutlet weak var getCodeSetButton: UIButton!
     
     override func viewDidLoad() {
         self.automaticallyAdjustsScrollViewInsets = false
+        self.getCodeSetButton.isEnabled = false
+        self.getCodeSetButton.isHidden = true
+        
         var displayString = ""
         var ddd : NSMutableAttributedString = NSMutableAttributedString()
         
         if element is NCPDPElement {
             
             let e : NCPDPElement = self.element as! NCPDPElement
+            self.elementId = e.elementId
 
             displayString += "Element ID: " +  e.elementId! + "\n"
             displayString += "Element Name: " +  e.elementName! + "\n"
@@ -51,8 +58,12 @@ class DetailViewController : UIViewController {
             }
             
             if e.codes.count > 0 {
-                displayString += "Codes: "
+              //  displayString += "Codes: "
+              //
                 displayString += processArray(e.codes)
+                self.getCodeSetButton.isHidden = false
+                self.getCodeSetButton.isEnabled = true
+                
             }
 
             if e.fieldFormats.count > 0 {
@@ -70,7 +81,6 @@ class DetailViewController : UIViewController {
             }
         
             if e.requestTransactions.count > 0  || !e.requestTransactions.isEmpty {
-                print("Request is \(e.requestTransactions)")
                 displayString += "Request Transaction(s): \n"
                 displayString += processArray(e.requestTransactions, addNewLine: true)
             }
@@ -124,8 +134,9 @@ class DetailViewController : UIViewController {
 
             
         } else if element is X12Element {
-
+            
             let e : X12Element = self.element as! X12Element
+            self.elementId = e.elementId
             
             displayString += "Implementation Name: " +  e.implementationName! + "\n"
             displayString += "Element ID: " +  e.elementId! + "\n"
@@ -151,6 +162,8 @@ class DetailViewController : UIViewController {
             if e.codes.count > 0 {
                 displayString += "Codes: "
                 displayString += processArray(e.codes)
+                self.getCodeSetButton.isHidden = false
+                self.getCodeSetButton.isEnabled = true
             }
             
             
@@ -200,6 +213,7 @@ class DetailViewController : UIViewController {
         } else if element is HL7Element {
             
             let e : HL7Element = self.element as! HL7Element
+            self.elementId = e.elementId
             
             displayString += "Element ID: " +  e.elementId! + "\n"
             displayString += "Element Name: " +  e.elementName! + "\n"
@@ -211,7 +225,13 @@ class DetailViewController : UIViewController {
             displayString += "Conformance Length: " + e.conformanceLength! + "\n"
             displayString += "Data Type: " + e.dataType! + "\n"
             displayString += "Optionality: "  + String(e.optionality!) + "\n"
-            displayString += "Repetition: " + e.repetition! + "\n"
+           
+            if let repetition = e.repetition {
+                if !repetition.isEmpty{
+                    displayString += "Repetition: " + e.repetition! + "\n"
+                }
+            }
+            
             displayString += "Table Number: " + String(e.tableNumber!) + "\n"
             displayString += "Item Number: " + String(e.itemNumber!) + "\n"
             
@@ -290,6 +310,7 @@ class DetailViewController : UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    
     func processArray(_ array : [String], addNewLine: Bool = false) -> String {
         var output = ""
         
@@ -312,4 +333,15 @@ class DetailViewController : UIViewController {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let destination = segue.destination as! CodeSetTableViewController
+        
+        if let e = elementId {
+            destination.elementId = e
+        } else {
+            destination.elementId = nil
+        }
+        
+    }
 }

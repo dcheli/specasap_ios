@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD01F18E1E94371F00881637 /* CodeSetTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F18D1E94371E00881637 /* CodeSetTableViewController.swift */; };
+		FD01F1901E94412800881637 /* CodeSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F18F1E94412800881637 /* CodeSet.swift */; };
+		FD01F1921E94415600881637 /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F1911E94415600881637 /* Code.swift */; };
+		FD01F1941E94440200881637 /* CodeSetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F1931E94440200881637 /* CodeSetParser.swift */; };
 		FD0973421E36C2BE004C15F4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0973411E36C2BE004C15F4 /* Product.swift */; };
 		FD17E8561E07616400648631 /* NCPDPParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17E8551E07616400648631 /* NCPDPParser.swift */; };
 		FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */; };
@@ -16,10 +20,13 @@
 		FD94AC701E038348008C50FC /* HL7Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC6F1E038348008C50FC /* HL7Element.swift */; };
 		FD94AC721E0383A5008C50FC /* HL7ElementParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */; };
 		FD9A1BB01E1AC36E00C954E7 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */; };
+		FD9D98371E96D80E00CC01D9 /* ProductSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D98361E96D80D00CC01D9 /* ProductSet.swift */; };
+		FD9D98391E96D92E00CC01D9 /* ProductSetParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D98381E96D92E00CC01D9 /* ProductSetParser.swift */; };
 		FDAFCB2B1DF7781E00DFA032 /* libssl_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */; };
 		FDAFCB2C1DF7781E00DFA032 /* libcrypto_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */; };
 		FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAFCB311DF7791900DFA032 /* RMAppReceipt.m */; };
 		FDAFCB351DF7796300DFA032 /* RMStoreAppReceiptVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAFCB341DF7796300DFA032 /* RMStoreAppReceiptVerifier.m */; };
+		FDC72B371E92FF88001909C0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC72B361E92FF88001909C0 /* NetworkManager.swift */; };
 		FDC80ADC1DD8F9B800548CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80ADB1DD8F9B800548CC0 /* AppDelegate.swift */; };
 		FDC80ADE1DD8F9B800548CC0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80ADD1DD8F9B800548CC0 /* SearchViewController.swift */; };
 		FDC80AE11DD8F9B800548CC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDC80ADF1DD8F9B800548CC0 /* Main.storyboard */; };
@@ -37,6 +44,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD01F18D1E94371E00881637 /* CodeSetTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSetTableViewController.swift; sourceTree = "<group>"; };
+		FD01F18F1E94412800881637 /* CodeSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSet.swift; sourceTree = "<group>"; };
+		FD01F1911E94415600881637 /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
+		FD01F1931E94440200881637 /* CodeSetParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSetParser.swift; sourceTree = "<group>"; };
 		FD0973411E36C2BE004C15F4 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FD17E8551E07616400648631 /* NCPDPParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCPDPParser.swift; sourceTree = "<group>"; };
 		FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -46,6 +57,8 @@
 		FD94AC6F1E038348008C50FC /* HL7Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7Element.swift; sourceTree = "<group>"; };
 		FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7ElementParser.swift; sourceTree = "<group>"; };
 		FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
+		FD9D98361E96D80D00CC01D9 /* ProductSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSet.swift; sourceTree = "<group>"; };
+		FD9D98381E96D92E00CC01D9 /* ProductSetParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSetParser.swift; sourceTree = "<group>"; };
 		FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl_iOS.a; path = SpecAsap/openssl/lib/libssl_iOS.a; sourceTree = "<group>"; };
 		FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto_iOS.a; path = SpecAsap/openssl/lib/libcrypto_iOS.a; sourceTree = "<group>"; };
 		FDAFCB2F1DF7791800DFA032 /* SpecAsap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpecAsap-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -53,6 +66,7 @@
 		FDAFCB311DF7791900DFA032 /* RMAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMAppReceipt.m; path = "../../../../Downloads/Ex_Files_In_App_Purchases_Swift3/Exercise Files/04_06_NoteTaker End/NoteTaker/RMAppReceipt.m"; sourceTree = "<group>"; };
 		FDAFCB331DF7796300DFA032 /* RMStoreAppReceiptVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMStoreAppReceiptVerifier.h; path = "../../../../Downloads/Ex_Files_In_App_Purchases_Swift3/Exercise Files/04_06_NoteTaker End/NoteTaker/RMStoreAppReceiptVerifier.h"; sourceTree = "<group>"; };
 		FDAFCB341DF7796300DFA032 /* RMStoreAppReceiptVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMStoreAppReceiptVerifier.m; path = "../../../../Downloads/Ex_Files_In_App_Purchases_Swift3/Exercise Files/04_06_NoteTaker End/NoteTaker/RMStoreAppReceiptVerifier.m"; sourceTree = "<group>"; };
+		FDC72B361E92FF88001909C0 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FDC80AD81DD8F9B800548CC0 /* SpecAsap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpecAsap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC80ADB1DD8F9B800548CC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FDC80ADD1DD8F9B800548CC0 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -91,6 +105,8 @@
 				FD75DC0F1DFF927000E45684 /* X12ElementParser.swift */,
 				FD94AC711E0383A5008C50FC /* HL7ElementParser.swift */,
 				FD17E8551E07616400648631 /* NCPDPParser.swift */,
+				FD01F1931E94440200881637 /* CodeSetParser.swift */,
+				FD9D98381E96D92E00CC01D9 /* ProductSetParser.swift */,
 			);
 			name = Parsers;
 			sourceTree = "<group>";
@@ -115,6 +131,7 @@
 				FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */,
 				FDFADBCD1E6CD201003476B4 /* StandardsTableViewController.swift */,
 				FDD1ED461E7A171D008B311E /* AboutTableViewController.swift */,
+				FD01F18D1E94371E00881637 /* CodeSetTableViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -182,6 +199,9 @@
 				FDCE1F3F1E02364A000F7D36 /* X12Element.swift */,
 				FD94AC6F1E038348008C50FC /* HL7Element.swift */,
 				FD0973411E36C2BE004C15F4 /* Product.swift */,
+				FD01F18F1E94412800881637 /* CodeSet.swift */,
+				FD01F1911E94415600881637 /* Code.swift */,
+				FD9D98361E96D80D00CC01D9 /* ProductSet.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -190,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				FDE7A8FC1DEBD8A400080AA2 /* IAPManager.swift */,
+				FDC72B361E92FF88001909C0 /* NetworkManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -285,18 +306,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDFADBCE1E6CD201003476B4 /* StandardsTableViewController.swift in Sources */,
+				FD9D98371E96D80E00CC01D9 /* ProductSet.swift in Sources */,
 				FDCE1F401E02364A000F7D36 /* X12Element.swift in Sources */,
+				FD01F1941E94440200881637 /* CodeSetParser.swift in Sources */,
 				FD17E8561E07616400648631 /* NCPDPParser.swift in Sources */,
 				FDE7A8FD1DEBD8A400080AA2 /* IAPManager.swift in Sources */,
+				FD01F1921E94415600881637 /* Code.swift in Sources */,
 				FD94AC721E0383A5008C50FC /* HL7ElementParser.swift in Sources */,
 				FDC80ADE1DD8F9B800548CC0 /* SearchViewController.swift in Sources */,
+				FD01F18E1E94371F00881637 /* CodeSetTableViewController.swift in Sources */,
 				FDC80ADC1DD8F9B800548CC0 /* AppDelegate.swift in Sources */,
 				FD75DC101DFF927000E45684 /* X12ElementParser.swift in Sources */,
 				FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */,
 				FD94AC701E038348008C50FC /* HL7Element.swift in Sources */,
 				FDD1ED471E7A171D008B311E /* AboutTableViewController.swift in Sources */,
 				FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */,
+				FDC72B371E92FF88001909C0 /* NetworkManager.swift in Sources */,
 				FD0973421E36C2BE004C15F4 /* Product.swift in Sources */,
+				FD01F1901E94412800881637 /* CodeSet.swift in Sources */,
+				FD9D98391E96D92E00CC01D9 /* ProductSetParser.swift in Sources */,
 				FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */,
 				FDAFCB351DF7796300DFA032 /* RMStoreAppReceiptVerifier.m in Sources */,
 				FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */,

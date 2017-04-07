@@ -16,15 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundSessionCompletionHandler: (() -> Void)?
     let tintColor =  UIColor(red: 242/255, green: 71/255, blue: 63/255, alpha: 1)
     static var products = [Product]()
-    
+    static var productSet = [ProductSet]()
     static var standardNames = [String]()
     
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        print("Woke up and finished launching")
          // Override point for customization after application launch.
         customizeAppearance()
         
-        
+  
         IAPManager.sharedInstance.setupPurchases{ (success) in
             // Test against success
             
@@ -34,17 +34,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
                 UserDefaults.standard.set(true, forKey: "IAPCapable")
                 UserDefaults.standard.synchronize()
+                
    
                 // The below is NEEDEDif you are going to be using auto-renew subscription. I have temporarlity commented it out
                 // in order to test on the simulator.
                 //  AppDelegate.validateReceipt()
                 
                 // The below is just temporary at the moment
-                self.getProductIds() {
+      /*          self.getProductIds() {
                     (identifiers: [String]) in
                     AppDelegate.standardNames = identifiers
                 }
-                
+      */          
                 // I put this sleep in, because I think it's needed for some of the inital REST services to complete, particularly
                 // the productlist and verifyreceipt
                 sleep(3)
@@ -134,7 +135,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     let productId = item["productId"] as? String ?? ""
                                     let enabled =  item["enabled"] as? String ?? ""
                                     let displayName = item["displayName"] as? String ?? ""
-                                    AppDelegate.products.append(Product(productId: productId, enabled: enabled , displayName : displayName))
+                                    let version = item["version"] as? String ?? ""
+                                    AppDelegate.products.append(Product(productId: productId, enabled: enabled , displayName : displayName, version: version))
                                 }
                             }
                         }
@@ -153,7 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     //myshit
-
+/*
       func getProductIds(completion : @escaping (_ completion : [String]) -> Void) {
         // So this is where u would make the call to URLSession to get the identfiers
         //let defaultSession  = URLSessionConfiguration.default
@@ -202,6 +204,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         dataTask.resume()
     }
-    
+ */   
     
 }

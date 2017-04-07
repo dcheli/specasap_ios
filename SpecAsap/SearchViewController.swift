@@ -14,7 +14,6 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var criteriaLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var selector: UISegmentedControl!
     let baseURL = "https://dataasap.com/specasap/webapi/v1/"
     var elementsURL = ""
     var codesURL  = ""
@@ -27,24 +26,7 @@ class SearchViewController: UIViewController {
     
     var searchResults = [AnyObject]()
     
-    
-    
-    @IBAction func selectorChanged(_ sender: Any) {
-        // All this should do is select the URL that will be used in the query
-        switch selector.selectedSegmentIndex {
-        case 0: // Data Elements
-            self.queryURL = elementsURL
-            self.searchDomain = "elements"
-        case 1: // Codes
-            self.queryURL = codesURL
-            self.searchDomain = "codes"
-        default:
-            self.searchDomain = ""
-        }
-        print("queryURL is \(self.queryURL)")
-    }
-    
-
+  
     lazy var tapRecognizer: UITapGestureRecognizer = {
         var recognizer = UITapGestureRecognizer(target:self, action: #selector(SearchViewController.dismissKeyboard))
         return recognizer
@@ -130,8 +112,6 @@ extension SearchViewController: UISearchBarDelegate {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         searchResults.removeAll()
         self.queryURL = elementsURL +  searchTerm! + "?v=" + version
-        print("from something \(self.queryURL)\n")
-        print("with standards domain \(self.standardsDomain)")
         
         if self.standardsDomain == "ncpdpvD0" {
             let ncpdpElementParser  = NCPDPElementParser(fromUrl : self.queryURL)
