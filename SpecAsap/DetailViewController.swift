@@ -16,6 +16,7 @@ class DetailViewController : UIViewController {
     //var element : NCPDPElement! = nil
     var element : AnyObject! = nil
     var elementId : String?
+    var codeSetDomain : String?
     
     @IBOutlet weak var getCodeSetButton: UIButton!
     
@@ -29,9 +30,12 @@ class DetailViewController : UIViewController {
         
         if element is NCPDPElement {
             
+            self.codeSetDomain = "ncpdpD0"
+            
             let e : NCPDPElement = self.element as! NCPDPElement
             self.elementId = e.elementId
 
+            
             displayString += "Element ID: " +  e.elementId! + "\n"
             displayString += "Element Name: " +  e.elementName! + "\n"
 
@@ -58,9 +62,6 @@ class DetailViewController : UIViewController {
             }
             
             if e.codes.count > 0 {
-              //  displayString += "Codes: "
-              //
-                displayString += processArray(e.codes)
                 self.getCodeSetButton.isHidden = false
                 self.getCodeSetButton.isEnabled = true
                 
@@ -135,6 +136,8 @@ class DetailViewController : UIViewController {
             
         } else if element is X12Element {
             
+            self.codeSetDomain = "x125010"
+            
             let e : X12Element = self.element as! X12Element
             self.elementId = e.elementId
             
@@ -146,7 +149,11 @@ class DetailViewController : UIViewController {
             displayString += "Data Type: " + e.dataType! + "\n"
             displayString += "Length: " + e.length! + "\n"
             displayString += "Element Repeat: "  + String(e.elementRepeat!) + "\n"
-            displayString += "Loop: " + e.loop! + "\n"
+            
+            if !(e.loop?.isEmpty)!{
+                displayString += "Loop: " + e.loop! + "\n"
+            }
+            
             displayString += "Data Element: " + String(e.dataElement!) + "\n"
             
             if e.versions.count > 0 {
@@ -160,8 +167,6 @@ class DetailViewController : UIViewController {
             }
             
             if e.codes.count > 0 {
-                displayString += "Codes: "
-                displayString += processArray(e.codes)
                 self.getCodeSetButton.isHidden = false
                 self.getCodeSetButton.isEnabled = true
             }
@@ -211,6 +216,8 @@ class DetailViewController : UIViewController {
 
             
         } else if element is HL7Element {
+            
+            self.codeSetDomain = "hl7v2"
             
             let e : HL7Element = self.element as! HL7Element
             self.elementId = e.elementId
@@ -339,6 +346,7 @@ class DetailViewController : UIViewController {
         
         if let e = elementId {
             destination.elementId = e
+            destination.codeSetDomain = self.codeSetDomain
         } else {
             destination.elementId = nil
         }

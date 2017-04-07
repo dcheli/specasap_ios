@@ -29,13 +29,14 @@ class NetworkManager {
         
     }
     
-    func getCodeSet(elementId: String, completion : @escaping ((_ responseCode: Int?, _ data : Data?) -> Void)){
+    func getCodeSet(elementId: String, codeSetDomain : String, completion : @escaping ((_ responseCode: Int?, _ data : Data?) -> Void)){
         
-        let relativeUrl = URL(string: "specasap/webapi/v1/codesets/ncpdp/\(elementId)", relativeTo: baseUrl)
+        let relativeUrl = URL(string: "specasap/webapi/v1/codesets/\(codeSetDomain)/\(elementId)", relativeTo: baseUrl)
         let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
 
         
         let request = NSMutableURLRequest(url: components!.url!)
+        print("CodeSet URL is \(request.url)")
         
         request.httpMethod = "GET"
         request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")

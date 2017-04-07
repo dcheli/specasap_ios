@@ -11,17 +11,15 @@ import UIKit
 class CodeSetTableViewController: UITableViewController {
     
     var elementId : String?
+    var codeSetDomain: String?
+    
     var codeSet : CodeSet = CodeSet()
     
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        guard let e = elementId else {
-            print("Bam.. prob dismiss the screen")
-            return
-        }
         
-        NetworkManager.sharedInstance.getCodeSet(elementId: e) { (responseCode, data) -> Void in
+        NetworkManager.sharedInstance.getCodeSet(elementId: elementId!, codeSetDomain : codeSetDomain!) { (responseCode, data) -> Void in
             if responseCode == 200 {
              
                 let codeSetParser = CodeSetParser()
@@ -66,9 +64,9 @@ class CodeSetTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CodeSetCell", for: indexPath)
         
         if let code = codeSet.codes?[indexPath.row] {
-            cell.textLabel?.text = code.code
-             print("desc is \(code.description!)")
-            cell.detailTextLabel?.text = code.description
+            cell.textLabel?.text = code.code! + " - " + code.description!
+         
+           // cell.detailTextLabel?.text = code.description
         }
         
         return cell
