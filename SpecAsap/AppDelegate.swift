@@ -38,7 +38,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
                 // The below is NEEDEDif you are going to be using auto-renew subscription. I have temporarlity commented it out
                 // in order to test on the simulator.
-                //  AppDelegate.validateReceipt()
+
+                
+                
+                AppDelegate.validateReceipt()
+                
                 
                 // The below is just temporary at the moment
       /*          self.getProductIds() {
@@ -93,27 +97,64 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("Inside of validateReceipt")
         
         let receiptUrl = Bundle.main.appStoreReceiptURL
-        
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        
+
         if let receipt = try? NSData(contentsOf: receiptUrl!, options: []) {
             let receiptData = receipt.base64EncodedString(options:[])
-    
-            let username = "dcheli"
-            let password = "aside555"
-            let loginString = NSString(format: "%@:%@", username, password)
-            let loginData = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
-            let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
-
-            let request = NSMutableURLRequest(url: URL(string: "https://dataasap.com/specasap/webapi/v1/IAPReceipt/verifyapplereceipt")!)
-            request.httpMethod = "POST"
-            request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
-            request.addValue("text/plain", forHTTPHeaderField: "Content-Type")
-            request.httpBody = receiptData.data(using: String.Encoding.ascii)
-            
-            let session = URLSession.shared
-            print("AppDelegate setting isNetworkActivityIndicatorVisible to true")
+        
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            
+            let methodStart = Date()
+            
+            NetworkManager.sharedInstance.verifyReceipt(receiptData: receiptData)
+            { (responseCode, data) -> Void in
+                if responseCode == 200 {
+                    let productMapper = ProductMapper()
+                    let products = productMapper.mapProduct(fromUrl: data!)
+                    
+                    AppDelegate.products = products
+                    
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    }
+                    
+                } else {
+                    print("error")
+                }
+            }
+            
+
+            let methodFinish = Date()
+            let executionTime = methodFinish.timeIntervalSince(methodStart)
+            print("Execution time for Verifying the Receipt was \(executionTime) ms")
+       
+  
+        }
+    }
+}
+
+// Once satisfied.... remove all the stuff below
+        
+        /*
+         let username = "dcheli"
+         let password = "aside555"
+         let loginString = NSString(format: "%@:%@", username, password)
+         let loginData = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
+         let base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
+         
+         let request = NSMutableURLRequest(url: URL(string: "https://dataasap.com/specasap/webapi/v1/IAPReceipt/verifyapplereceipt")!)
+         request.httpMethod = "POST"
+         request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+         request.addValue("text/plain", forHTTPHeaderField: "Content-Type")
+         request.httpBody = receiptData.data(using: String.Encoding.ascii)
+         
+         let session = URLSession.shared
+         */
+
+        
+   /*
+         
+            
+            
             let dataTask = session.dataTask(with: request as URLRequest){
                 data, response, error in
                 // this is the callback that is being pass data, response, error
@@ -149,7 +190,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 print("AppDelegate.validateReceipt() did not find local receipt.")
             }
-    }
+   */     
+        
+        
+    //}
     
     
     
@@ -206,4 +250,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
  */   
     
-}
+

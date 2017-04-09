@@ -8,9 +8,9 @@
 
 import Foundation
 
-class ProductSetParser{
+class ProductSetMapper{
     
-    func parseProductSet(fromUrl data : Data) -> [ProductSet] {
+    func mapProductSet(fromUrl data : Data) -> [ProductSet] {
 
         var products : [Product]? = [Product]()
         var domain : String?
@@ -49,7 +49,7 @@ class ProductSetParser{
                 }
             }
         } catch {
-            print("ProductSet dumped")
+            print("Error mapping ProductSet")
         }
         return productSet
     }

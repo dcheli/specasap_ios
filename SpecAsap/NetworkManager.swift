@@ -12,12 +12,13 @@ class NetworkManager {
     
     private var urlSession : URLSession
     static let sharedInstance = NetworkManager()
-    let baseUrl = URL(string: "https://dataasap.com/")
+    let baseUrl = URL(string: "https://dataasap.com/specasap/webapi/v1/")
     let username = "dcheli"
     let password = "aside555"
     let loginString : NSString
     let loginData : Data
     let base64LoginString : String
+    let authorizationString = "Authorization"
     
     init() {
         let configuration = URLSessionConfiguration.default
@@ -25,21 +26,16 @@ class NetworkManager {
         loginString = NSString(format: "%@:%@", username, password)
         loginData = loginString.data(using: String.Encoding.utf8.rawValue)! as Data
         base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
-        
-        
     }
     
     func getCodeSet(elementId: String, codeSetDomain : String, completion : @escaping ((_ responseCode: Int?, _ data : Data?) -> Void)){
         
-        let relativeUrl = URL(string: "specasap/webapi/v1/codesets/\(codeSetDomain)/\(elementId)", relativeTo: baseUrl)
+        let relativeUrl = URL(string: "codesets/\(codeSetDomain)/\(elementId)", relativeTo: baseUrl)
         let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
-
         
         let request = NSMutableURLRequest(url: components!.url!)
-        print("CodeSet URL is \(request.url)")
-        
         request.httpMethod = "GET"
-        request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+        request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
         
         let dataTask = urlSession.dataTask(with: (request as? URLRequest)!,
                 completionHandler: {(data, response, error) -> Void in
@@ -57,13 +53,12 @@ class NetworkManager {
     
     func getProductSet(os: String, completion : @escaping ((_ responseCode: Int?, _ data : Data?) -> Void)){
         
-        let relativeUrl = URL(string: "specasap/webapi/v1/products/productlist", relativeTo: baseUrl)
+        let relativeUrl = URL(string: "products/productlist", relativeTo: baseUrl)
         let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
         
         let request = NSMutableURLRequest(url: components!.url!)
-        
         request.httpMethod = "GET"
-        request.setValue(base64LoginString, forHTTPHeaderField: "Authorization")
+        request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
         
         let dataTask = urlSession.dataTask(with: (request as? URLRequest)!,
                 completionHandler: {(data, response, error) -> Void in
@@ -77,5 +72,71 @@ class NetworkManager {
         
         dataTask.resume()
     }
+    
+    func getLegalDocument(document: String, completion : @escaping ((_ responseCode: Int?, _ data : Data?)->Void)) {
+        
+        let relativeUrl = URL(string: "legal/\(document)", relativeTo: baseUrl)
+        let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
+        
+        let request = NSMutableURLRequest(url: components!.url!)
+        request.httpMethod = "GET"
+        request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
 
+        let dataTask = urlSession.dataTask(with: (request as? URLRequest)! ,
+                completionHandler: {(data, response, error) -> Void in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else if let httpResponse = response as? HTTPURLResponse {
+                            completion(httpResponse.statusCode, data)
+                    }
+            })
+            dataTask.resume()
+    }
+    
+    func getElements(elementDomain: String, version: String, searchParam : String, completion : @escaping ((_ responseCode: Int?, _ data : Data?)->Void)) {
+        
+        let relativeUrl = URL(string: "elements/\(elementDomain)/\(searchParam)", relativeTo: baseUrl)
+        var components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
+        let versionQueryItem = URLQueryItem(name: "v", value: version)
+        components?.queryItems = [versionQueryItem]
+        
+        
+        
+        let request = NSMutableURLRequest(url: components!.url!)
+        request.httpMethod = "GET"
+        request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
+  
+        
+        let dataTask = urlSession.dataTask(with: (request as? URLRequest)!,
+                completionHandler: {(data, response, error) -> Void in
+                    if let error = error {
+                        print(error.localizedDescription)
+                    } else if let httpResponse = response as? HTTPURLResponse {
+                        completion(httpResponse.statusCode, data)
+                    }
+        })
+        dataTask.resume()
+    }
+    
+    func verifyReceipt(receiptData : String, completion : @escaping ((_ responseCode : Int?, _ data : Data?) -> Void)) {
+        let relativeUrl = URL(string: "IAPReceipt/verifyapplereceipt", relativeTo: baseUrl)
+        
+        var components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
+        
+        let request = NSMutableURLRequest(url: components!.url!)
+        request.httpMethod = "POST"
+        request.addValue("text/plain", forHTTPHeaderField: "Content-Type")
+        request.httpBody = receiptData.data(using: String.Encoding.ascii)
+        request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
+        
+        let dataTask = urlSession.dataTask(with: (request as? URLRequest)!,
+                completionHandler: {(data, response, error) -> Void in
+                        if let error = error {
+                            print(error.localizedDescription)
+                        } else if let httpResponse = response as? HTTPURLResponse {
+                            completion(httpResponse.statusCode, data)
+                        }
+        })
+        dataTask.resume()
+    }
 }

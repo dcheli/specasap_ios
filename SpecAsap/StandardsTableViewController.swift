@@ -33,6 +33,10 @@ class StandardsTableViewController: UITableViewController {
                 return (AppDelegate.productSet[1].products?.count)!
         }
     }
+    
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.00001
+    }
 
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
@@ -45,7 +49,7 @@ class StandardsTableViewController: UITableViewController {
         
         let label = UILabel()
         label.text = AppDelegate.productSet[section].domain
-        //label.text = sectionTitles[section]
+    
         
         label.frame = CGRect(x: 45, y: 5, width: 100, height: 35)
         view.addSubview(label)
@@ -59,7 +63,7 @@ class StandardsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StandardsCellIdentifier", for: indexPath)
-       // let product = AppDelegate.products[indexPath.row]
+    
         switch indexPath.section {
             case 0:
                 cell.textLabel?.text = AppDelegate.productSet[0].products?[indexPath.row].displayName

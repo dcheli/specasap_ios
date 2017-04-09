@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class DetailViewController : UIViewController {
+class ElementDetailViewController : UIViewController {
     
     @IBOutlet weak var textView: UITextView!
     //var element : NCPDPElement! = nil

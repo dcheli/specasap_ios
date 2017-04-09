@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/AboutDetailsViewController.swift"
-            timestampString = "501776419.412878"
+            timestampString = "513450035.735781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,27 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/AboutDetailsViewController.swift"
-            timestampString = "501777760.355081"
+            timestampString = "513450035.735781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpecAsap/AboutDetailsViewController.swift"
-            timestampString = "501776419.412878"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/IAPManager.swift"
-            timestampString = "513220385.636059"
+            timestampString = "513462985.313181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
             landmarkName = "IAPManager"
             landmarkType = "3">
          </BreakpointContent>
@@ -154,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/IAPManager.swift"
-            timestampString = "513220385.636059"
+            timestampString = "513462985.313181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "paymentQueue(_:updatedTransactions:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -202,13 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/AppDelegate.swift"
-            timestampString = "513219519.484215"
+            timestampString = "513462985.313181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
-            landmarkName = "validateReceipt()"
-            landmarkType = "7">
+            startingLineNumber = "158"
+            endingLineNumber = "158">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -250,11 +232,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/NetworkManager.swift"
-            timestampString = "513287957.743059"
+            timestampString = "513462370.982195"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101">
+            startingLineNumber = "162"
+            endingLineNumber = "162">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -312,11 +294,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/CodeSetTableViewController.swift"
-            timestampString = "513287814.397946"
+            timestampString = "513450392.873515"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "tableView(_:cellForRowAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -360,11 +342,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/IAPManager.swift"
-            timestampString = "513220385.636059"
+            timestampString = "513462985.313181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "getProductIdentifiers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -440,11 +422,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/IAPManager.swift"
-            timestampString = "513220385.636059"
+            timestampString = "513462985.313181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
             landmarkName = "getProductIdentifiers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -504,11 +486,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/NetworkManager.swift"
-            timestampString = "513287957.743059"
+            timestampString = "513452882.534248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "getProductSet(os:completion:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -568,11 +550,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/IAPManager.swift"
-            timestampString = "513220385.636059"
+            timestampString = "513462985.313181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "getProductIdentifiers()"
             landmarkType = "7">
          </BreakpointContent>
@@ -632,11 +614,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/IAPManager.swift"
-            timestampString = "513220385.636059"
+            timestampString = "513462985.313181"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "performProductRequestForIdentifiersFromiTunes(identifiers:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -648,11 +630,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/SearchViewController.swift"
-            timestampString = "513220705.480497"
+            timestampString = "513464080.756831"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "110"
-            endingLineNumber = "110"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "searchBarSearchButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -664,11 +646,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/StandardsTableViewController.swift"
-            timestampString = "513221621.702006"
+            timestampString = "513463279.868769"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -680,13 +662,93 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpecAsap/NetworkManager.swift"
-            timestampString = "513288170.143714"
+            timestampString = "513452882.534248"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "getCodeSet(elementId:codeSetDomain:completion:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpecAsap/CodeSetDetailViewController.swift"
+            timestampString = "513370915.316656"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "CodeSetDetailViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpecAsap/AboutDetailsViewController.swift"
+            timestampString = "513449149.972642"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpecAsap/SearchViewController.swift"
+            timestampString = "513464080.756831"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "searchBarSearchButtonClicked(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SpecAsap.SearchViewController.searchBarSearchButtonClicked (__ObjC.UISearchBar) -&gt; ()"
+                  moduleName = "SpecAsap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dcheli/Documents/swiftprojects/SpecAsap/SpecAsap/SearchViewController.swift"
+                  timestampString = "513453580.810039"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "2208">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "SpecAsap.SearchViewController.(searchBarSearchButtonClicked (__ObjC.UISearchBar) -&gt; ()).(closure #2)"
+                  moduleName = "SpecAsap"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/dcheli/Documents/swiftprojects/SpecAsap/SpecAsap/SearchViewController.swift"
+                  timestampString = "513453580.812957"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "416">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

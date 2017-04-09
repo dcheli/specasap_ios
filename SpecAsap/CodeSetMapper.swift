@@ -8,13 +8,13 @@
 
 import Foundation
 
-class CodeSetParser {
+class CodeSetMapper {
     
     init() {
         
     }
     
-    func parseCodeSet(fromUrl data : Data) -> CodeSet? {
+    func mapCodeSet(fromUrl data : Data) -> CodeSet? {
         
         var codeSet : CodeSet?
         var codesS :  [Code]? = [Code]()
@@ -30,8 +30,8 @@ class CodeSetParser {
                 for code in codes {
                     let c = code["code"] as? String ?? ""
                     let description  = code["description"] as? String ?? ""
-                   
-                    codesS?.append(Code(code: c, description: description))
+                    let longDescription = code["longDescription"] as? String ?? "No Additional Information"
+                    codesS?.append(Code(code: c, description: description, longDescription : longDescription))
                    
                 }
             } else {
@@ -42,7 +42,7 @@ class CodeSetParser {
             
  
         } catch {
-            print("Bam fucked")
+            print("Error mapping CodeSet")
         }
 
         return codeSet

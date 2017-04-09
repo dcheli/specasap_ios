@@ -18,16 +18,25 @@ class CodeSetTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+
         NetworkManager.sharedInstance.getCodeSet(elementId: elementId!, codeSetDomain : codeSetDomain!) { (responseCode, data) -> Void in
             if responseCode == 200 {
              
-                let codeSetParser = CodeSetParser()
-                self.codeSet = codeSetParser.parseCodeSet(fromUrl: data!)!
+                let codeSetMapper  = CodeSetMapper()
+                self.codeSet = codeSetMapper.mapCodeSet(fromUrl: data!)!
                 
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
+                                
                 self.tableView.reloadData()
             } else {
-                print("result is \(String(describing : responseCode))")
+                let alertMessage = "Error retrieving Code Set: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+
             }
         }
         
@@ -71,7 +80,6 @@ class CodeSetTableViewController: UITableViewController {
         
         return cell
     }
-    
 
     /*
     // Override to support conditional editing of the table view.
@@ -108,14 +116,23 @@ class CodeSetTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        let indexPath = self.tableView.indexPathForSelectedRow
+        let destination = segue.destination as! CodeSetDetailViewController
+        
+        if let code = codeSet.codes?[(indexPath?.row)!]{
+            destination.code = code.code
+            destination.desc
+                = code.description
+            destination.longDescription = code.longDescription
+        } else {
+            destination.longDescription = "No Additional Information"
+        }
     }
-    */
+    
 
 }

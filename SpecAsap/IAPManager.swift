@@ -49,8 +49,8 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
             
             if responseCode == 200 {
                 
-                let productSetParser = ProductSetParser()
-                let productSet = productSetParser.parseProductSet(fromUrl: data!)
+                let productSetMapper = ProductSetMapper()
+                let productSet = productSetMapper.mapProductSet(fromUrl: data!)
                 
                 if productSet.count > 0 {
                     for item in productSet {
@@ -65,6 +65,9 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                 }
                 AppDelegate.standardNames = identifiers
                 self.performProductRequestForIdentifiersFromiTunes(identifiers: identifiers)
+                DispatchQueue.main.async {
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }
                 
             } else {
                 print("result is \(String(describing : responseCode))")
@@ -156,8 +159,9 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                 print("purchased")
                 print("AppDelegate.validateReceipt is being called from IAPManager after purchase is made")
                 AppDelegate.validateReceipt()
-                //verifiy the receipt; RMStore stuff
-               self.validateReceipt({ (success, purchases) in
+                //verifiy the receipt; RMAPP stuff remmed out 3/10/2017 I think this can be removed and 
+                // possibly is the only part of RMApp this is called... need to verify
+ /*              self.validateReceipt({ (success, purchases) in
                     if success {
                         print("receipt locally validated..I think")
                         self.persistPurchase(purchases: purchases!)
@@ -167,7 +171,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                         print("Receipt did not validate")
                     }
                 })
-                
+ */
                 break
             case .deferred:
                 print("deferred")
@@ -197,7 +201,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     
     // Some of this stuff is for non-auto renewing subscriptions
     // Receipt Verification completion handler
-    
+  
     func validateReceipt(_ handler: @escaping (Bool, [RMAppReceiptIAP]?) -> Void) {
         let verifier = RMStoreAppReceiptVerifier()
         if verifier.verifyAppReceipt() {
@@ -206,7 +210,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
             handler(false, nil)
         }
     }
-    
+ 
     func persistPurchase(purchases: [RMAppReceiptIAP]) {
         for purchase in purchases {
             if let endDate = purchase.subscriptionExpirationDate {
@@ -224,7 +228,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
 
         }
     }
-    
+
     func unlockProductIdentifier(identifier: String) {
         UserDefaults.standard.set(true, forKey: identifier)
         UserDefaults.standard.synchronize()

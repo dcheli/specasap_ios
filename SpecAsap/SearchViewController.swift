@@ -14,15 +14,11 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var criteriaLabel: UILabel!
     @IBOutlet weak var searchBar: UISearchBar!
-    let baseURL = "https://dataasap.com/specasap/webapi/v1/"
-    var elementsURL = ""
-    var codesURL  = ""
-    var urlString = ""
+ 
     var version = ""
     var selectedStandard  = ""
-    var searchDomain  = ""
+    var elementDomain  = ""
     var standardsDomain = ""
-    var queryURL = ""
     
     var searchResults = [AnyObject]()
     
@@ -39,38 +35,25 @@ class SearchViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.tableFooterView = UIView()
-   
-        
-        // this is the default when entering this screen
-        urlString = elementsURL
-        
         
         switch selectedStandard {
             case "NCPDP D.0":
                 self.standardsDomain = "ncpdpvD0"
-                self.elementsURL = baseURL + "elements/ncpdp/"
-                self.codesURL = baseURL + "codes/ncpdp/"
+                self.elementDomain = "ncpdp"
                 self.version = "D0"
             case "X12 5010" :
                 self.standardsDomain = "x12v5010"
-                self.elementsURL = baseURL + "elements/x12/"
-                self.codesURL = baseURL + "codes/x12/"
+                self.elementDomain = "x12"
                 self.version = "5010"
             case "HL7 v2":
                 self.standardsDomain = "hl7v2"
-                self.elementsURL = baseURL + "elements/hl7/"
-                self.codesURL = baseURL + "codes/hl7/"
+                self.elementDomain = "hl7"
                 self.version = "282"
             default:
-                self.urlString +=  ""
                 self.version = ""
         }
-        // This is the default url
-        self.queryURL = self.elementsURL
      }
     
-    // this is activated when you move to this screen, via the Home Screen; fyi after viewDidAppear is called, didMove toParentViewControlelr is called
-
     override func viewDidAppear(_ animated: Bool) {
        
 
@@ -89,7 +72,7 @@ class SearchViewController: UIViewController {
         let indexPath = self.tableView.indexPathForSelectedRow
         
         if(segue.identifier == "attributes") {
-            let destination = segue.destination as! DetailViewController
+            let destination = segue.destination as! ElementDetailViewController
             if searchResults[indexPath!.row] is NCPDPElement {
                 destination.element = searchResults[indexPath!.row] as! NCPDPElement
             } else if searchResults[indexPath!.row] is X12Element {
@@ -108,72 +91,102 @@ extension SearchViewController: UISearchBarDelegate {
         dismissKeyboard()
 
         let expectedCharSet = CharacterSet.urlQueryAllowed
-        let searchTerm = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
+        let searchParam = searchBar.text!.addingPercentEncoding(withAllowedCharacters: expectedCharSet)
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         searchResults.removeAll()
-        self.queryURL = elementsURL +  searchTerm! + "?v=" + version
+        //self.queryURL = elementsURL +  searchParam! + "?v=" + version
         
         if self.standardsDomain == "ncpdpvD0" {
-            let ncpdpElementParser  = NCPDPElementParser(fromUrl : self.queryURL)
-            ncpdpElementParser.getNCPDPSpec(urlString: self.queryURL) {
-                (result : [NCPDPElement]) in
-                if result.isEmpty{
-                    let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
-                } else {
-                    for item in result {
-                        self.searchResults.append(item)
-                    }
+            let methodStart = Date()
             
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkManager.sharedInstance.getElements(elementDomain: elementDomain, version: version, searchParam: searchParam!) { (responseCode, data ) -> Void in
+                if responseCode == 200 {
+                    let ncpdpMapper = NCPDPElementMapper()
+                    let ncpdpElements = ncpdpMapper.mapNCPDPElement(fromUrl: data!)
+                    
                     DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.searchResults = ncpdpElements
                         self.tableView.reloadData()
                         self.tableView.setContentOffset(CGPoint.zero, animated: false)
                     }
-                }
-            }
-      
-        } else if self.standardsDomain == "hl7v2" {
-
-            let hL7ElementParser  = HL7ElementParser(fromUrl : self.queryURL)
-            hL7ElementParser.getHL7Spec(urlString: self.queryURL) {
-                (result : [HL7Element]) in
-                if result.isEmpty{
-                    let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
+                    
                 } else {
-                    for item in result {
-                        self.searchResults.append(item)
-                    }
+                    let alertMessage = "Error retrieving NCPDP Elements: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                    let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
+                }
+            }
+        
+            let methodFinish = Date()
+            let executionTime = methodFinish.timeIntervalSince(methodStart)
+            print("Execution time for \(self.title!) was \(executionTime) ms")
+    
+        } else if self.standardsDomain == "hl7v2" {
+            
+            let methodStart = Date()
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            NetworkManager.sharedInstance.getElements(elementDomain: elementDomain, version: version, searchParam: searchParam!) { (responseCode, data ) -> Void in
+                if responseCode == 200 {
+                    let hl7Mapper = HL7ElementMapper()
+                    let hl7Elements = hl7Mapper.mapHL7Element(fromUrl: data!)
+                    
                     DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.searchResults = hl7Elements
                         self.tableView.reloadData()
                         self.tableView.setContentOffset(CGPoint.zero, animated: false)
                     }
+                
+                } else {
+                    let alertMessage = "Error retrieving HL7 Elements: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                    let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                   
                 }
             }
+            
+            let methodFinish = Date()
+            let executionTime = methodFinish.timeIntervalSince(methodStart)
+            print("Execution time for \(self.title!) was \(executionTime) ms")
 
         } else if self.standardsDomain == "x12v5010" {
-    //else if self.selector.selectedSegmentIndex == 2 {
-            let x12ElementParser  = X12ElementParser(fromUrl : self.queryURL)
-            x12ElementParser.getX12Spec(urlString: self.queryURL) {
-                (result : [X12Element]) in
-                if result.isEmpty{
-                    let alertController = UIAlertController(title: "Alert", message: "No matching data elements were found", preferredStyle: UIAlertControllerStyle.alert)
-                    alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
-                    self.present(alertController, animated: true, completion: nil)
-                } else {
-                    for item in result {
-                        self.searchResults.append(item)
-                    }
+            
+            let methodStart = Date()
+            
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+ 
+            
+            NetworkManager.sharedInstance.getElements(elementDomain: elementDomain, version: version, searchParam: searchParam!) { (responseCode, data ) -> Void in
+                if responseCode == 200 {
+                    let x12Mapper = X12ElementMapper()
+                    let x12Elements = x12Mapper.mapX12Element(fromUrl: data!)
+                    
                     DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.searchResults = x12Elements
                         self.tableView.reloadData()
                         self.tableView.setContentOffset(CGPoint.zero, animated: false)
                     }
+                    
+                } else {
+                    let alertMessage = "Error retrieving X12 Elements: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                    let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                    
                 }
-                
             }
             
+            let methodFinish = Date()
+            let executionTime = methodFinish.timeIntervalSince(methodStart)
+            print("Execution time for \(self.title!) was \(executionTime) ms")
+           
         }
     }
     

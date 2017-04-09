@@ -11,11 +11,13 @@ import Foundation
 class Code {
     var code : String?
     var description : String?
+    var longDescription : String?
     
-    init (code : String?, description : String?) {
+    init (code : String?, description : String?, longDescription: String?) {
         
         self.code = code!
         self.description = description!
+        self.longDescription = longDescription!
     }
     
 }
