@@ -177,7 +177,8 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
                 print("deferred")
                 break
             case .failed:
-                if let transactionError = transaction.error as? NSError {
+                if let transactionError = transaction.error as NSError? {
+                    
                     if transactionError.code != SKError.paymentCancelled.rawValue {
                         print("Transaction error: \(transaction.error?.localizedDescription)")
                     } else {
@@ -201,7 +202,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     
     // Some of this stuff is for non-auto renewing subscriptions
     // Receipt Verification completion handler
-  
+/*
     func validateReceipt(_ handler: @escaping (Bool, [RMAppReceiptIAP]?) -> Void) {
         let verifier = RMStoreAppReceiptVerifier()
         if verifier.verifyAppReceipt() {
@@ -210,7 +211,8 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
             handler(false, nil)
         }
     }
- 
+ */
+  /*
     func persistPurchase(purchases: [RMAppReceiptIAP]) {
         for purchase in purchases {
             if let endDate = purchase.subscriptionExpirationDate {
@@ -228,7 +230,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
 
         }
     }
-
+*/
     func unlockProductIdentifier(identifier: String) {
         UserDefaults.standard.set(true, forKey: identifier)
         UserDefaults.standard.synchronize()
@@ -244,17 +246,19 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
     }
     
     // this is called when we have successfully completed the restore process
-    
+
     func paymentQueueRestoreCompletedTransactionsFinished(_ queue: SKPaymentQueue) {
         print("Restore complete")
-        self.validateReceipt { (success, purchases) in
-            if success {
-                self.persistPurchase(purchases: purchases!)
-                print("persist restored purchases")
-            } else {
-                print("problem with receipt valication after restore process")
-            }
-        }
+        
+        // This stuff was in from the RMStore stuff, not sure what to do with it now
+//        self.validateReceipt { (success, purchases) in
+//            if success {
+//                self.persistPurchase(purchases: purchases!)
+//                print("persist restored purchases")
+//            } else {
+//                print("problem with receipt valication after restore process")
+//            }
+//        }
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {

@@ -163,11 +163,13 @@ class AboutTableViewController: UITableViewController {
         
         switch indexPath!.section {
         case 0:
-            let destination = segue.destination as! AboutDetailsViewController
-            destination.pageTitle = menuItem
+            if let destination = segue.destination as? AboutDetailsViewController {
+                destination.pageTitle = menuItem
+            }
             break
         case 1:
-            segue.destination as! StoreTableViewController
+            
+            segue.destination as? StoreTableViewController
             break
         default:
                 break

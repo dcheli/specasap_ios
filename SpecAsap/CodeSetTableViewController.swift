@@ -19,7 +19,7 @@ class CodeSetTableViewController: UITableViewController {
         super.viewDidLoad()
      
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
-
+ 
         NetworkManager.sharedInstance.getCodeSet(elementId: elementId!, codeSetDomain : codeSetDomain!) { (responseCode, data) -> Void in
             if responseCode == 200 {
              
@@ -32,7 +32,16 @@ class CodeSetTableViewController: UITableViewController {
                                 
                 self.tableView.reloadData()
             } else {
-                let alertMessage = "Error retrieving Code Set: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                
+                var alertMessage : String
+                
+                if let code = responseCode {
+                    alertMessage = "Error retrieving Code Set: Response Code received is \(code). Please try again or contact support@dataasap.com"
+                } else {
+                    alertMessage = "Error retrieving Code Set: Response Code received is unkonwn. Please try again or contact support@dataasap.com"
+                    
+                }
+                
                 let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)

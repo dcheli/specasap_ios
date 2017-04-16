@@ -49,6 +49,15 @@ class SearchViewController: UIViewController {
                 self.standardsDomain = "hl7v2"
                 self.elementDomain = "hl7"
                 self.version = "282"
+            case "CCD+" :
+                self.standardsDomain = "ccdplus"
+                self.elementDomain = "ccdplus"
+                self.version = ""
+            case "BAI" :
+                self.standardsDomain = "bai"
+                self.elementDomain = "bai"
+                self.version = "2"
+
             default:
                 self.version = ""
         }
@@ -79,6 +88,10 @@ class SearchViewController: UIViewController {
                 destination.element = searchResults[indexPath!.row] as! X12Element
             } else if searchResults[indexPath!.row] is HL7Element {
                 destination.element = searchResults[indexPath!.row] as! HL7Element
+            } else if searchResults[indexPath!.row] is CCDPlusElement {
+                destination.element = searchResults[indexPath!.row] as! CCDPlusElement
+            } else if searchResults[indexPath!.row] is BAIElement {
+                destination.element = searchResults[indexPath!.row] as! BAIElement
             }
             
         }
@@ -87,6 +100,7 @@ class SearchViewController: UIViewController {
 
 
 extension SearchViewController: UISearchBarDelegate {
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         dismissKeyboard()
 
@@ -96,8 +110,9 @@ extension SearchViewController: UISearchBarDelegate {
         searchResults.removeAll()
         //self.queryURL = elementsURL +  searchParam! + "?v=" + version
         
+        let methodStart = Date()
+        
         if self.standardsDomain == "ncpdpvD0" {
-            let methodStart = Date()
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkManager.sharedInstance.getElements(elementDomain: elementDomain, version: version, searchParam: searchParam!) { (responseCode, data ) -> Void in
@@ -112,8 +127,19 @@ extension SearchViewController: UISearchBarDelegate {
                         self.tableView.setContentOffset(CGPoint.zero, animated: false)
                     }
                     
+                    
                 } else {
-                    let alertMessage = "Error retrieving NCPDP Elements: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                    var alertMessage : String
+                    
+                    if let code = responseCode {
+                        if code == 404 {
+                            alertMessage = "The requested Data Element was not found. Please check your search query. If you think this is an error, please contact us at support@dataasap.com"
+                        } else {
+                            alertMessage = "Error retrieving NCPDP Elements: Response Code received is \(code). Please try again or contact support@dataasap.com"
+                        }
+                    } else {
+                        alertMessage = "Error retrieving NCPDP Elements: Response Code received is unknown. Please try again or contact support@dataasap.com"
+                    }
                     let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
@@ -121,13 +147,7 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
         
-            let methodFinish = Date()
-            let executionTime = methodFinish.timeIntervalSince(methodStart)
-            print("Execution time for \(self.title!) was \(executionTime) ms")
-    
         } else if self.standardsDomain == "hl7v2" {
-            
-            let methodStart = Date()
             
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             NetworkManager.sharedInstance.getElements(elementDomain: elementDomain, version: version, searchParam: searchParam!) { (responseCode, data ) -> Void in
@@ -143,7 +163,19 @@ extension SearchViewController: UISearchBarDelegate {
                     }
                 
                 } else {
-                    let alertMessage = "Error retrieving HL7 Elements: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                    var alertMessage : String
+                    
+                    if let code = responseCode {
+                        if code == 404 {
+                            alertMessage = "The requested Data Element was not found. Please check your search query. If you think this is an error, please contact us at support@dataasap.com"
+                        } else {
+                            alertMessage = "Error retrieving HL7 Elements: Response Code received is \(code). Please try again or contact support@dataasap.com"
+                        }
+                    } else {
+                        alertMessage = "Error retrieving HL7 Elements: Response Code received is unkonwn. Please try again or contact support@dataasap.com"
+
+                        
+                    }
                     let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
@@ -151,16 +183,9 @@ extension SearchViewController: UISearchBarDelegate {
                 }
             }
             
-            let methodFinish = Date()
-            let executionTime = methodFinish.timeIntervalSince(methodStart)
-            print("Execution time for \(self.title!) was \(executionTime) ms")
-
         } else if self.standardsDomain == "x12v5010" {
             
-            let methodStart = Date()
-            
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
- 
             
             NetworkManager.sharedInstance.getElements(elementDomain: elementDomain, version: version, searchParam: searchParam!) { (responseCode, data ) -> Void in
                 if responseCode == 200 {
@@ -174,22 +199,118 @@ extension SearchViewController: UISearchBarDelegate {
                         self.tableView.setContentOffset(CGPoint.zero, animated: false)
                     }
                     
-                } else {
-                    let alertMessage = "Error retrieving X12 Elements: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                }  else {
+                    var alertMessage : String
+                    
+                    if let code = responseCode {
+                        
+                        if code == 404 {
+                            alertMessage = "The requested Data Element was not found. Please check your search query. If you think this is an error, please contact us at support@dataasap.com"
+                        } else {
+                            alertMessage = "Error retrieving X12 Elements: Response Code received is \(code). Please try again or contact support@dataasap.com"
+                        }
+                    } else {
+                        alertMessage = "Error retrieving X12 Elements: Response Code received is unkonwn. Please try again or contact support@dataasap.com"
+                        
+                        
+                    }
                     let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
                     
                 }
             }
+        } else if self.standardsDomain == "ccdplus" {
+                    
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                    
+            NetworkManager.sharedInstance.getElements(elementDomain: elementDomain, version: version, searchParam: searchParam!) { (responseCode, data) -> Void in
+                    if responseCode == 200 {
+                        let ccdPlusMapper = CCDPlusMapper()
+                        let ccdPlusElements = ccdPlusMapper.mapCCDPlusElement(fromUrl: data!)
+                        print("CCDPlus \(ccdPlusElements.count)")
+                    DispatchQueue.main.async {
+                            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                            self.searchResults = ccdPlusElements
+                            self.tableView.reloadData()
+                            self.tableView.setContentOffset(CGPoint.zero, animated: false)
+                        }
+                    } else {
+                        var alertMessage : String
+                        
+                        if let code = responseCode {
+                            
+                            if code == 404 {
+                                alertMessage = "The requested Data Element was not found. Please check your search query. If you think this is an error, please contact us at support@dataasap.com"
+                            } else {
+                                alertMessage = "Error retrieving CCDPlus Elements: Response Code received is \(code). Please try again or contact support@dataasap.com"
+                            }
+                        } else{
+                            alertMessage = "Error retrieving CCDPlus Elements: Response Code received is unkonwn. Please try again or contact support@dataasap.com"
+                            
+                            
+                        }
+                        let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                }
+            }
+
+        } else if self.standardsDomain == "bai" {
             
-            let methodFinish = Date()
-            let executionTime = methodFinish.timeIntervalSince(methodStart)
-            print("Execution time for \(self.title!) was \(executionTime) ms")
-           
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
+            
+            NetworkManager.sharedInstance.getElements(elementDomain: elementDomain, version: version, searchParam: searchParam!) { (responseCode, data) -> Void in
+                if responseCode == 200 {
+                    let baiMapper = BAIElementMapper()
+                    let baiElements = baiMapper.mapBAIElement(fromUrl: data!)
+                    print("BAI \(baiElements.count)")
+                    DispatchQueue.main.async {
+                        UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                        self.searchResults = baiElements
+                        self.tableView.reloadData()
+                        self.tableView.setContentOffset(CGPoint.zero, animated: false)
+                    }
+                } else {
+                    var alertMessage : String
+                    
+                    if let code = responseCode {
+                        
+                        if code == 404 {
+                            alertMessage = "The requested Data Element was not found. Please check your search query. If you think this is an error, please contact us at support@dataasap.com"
+                        } else {
+                            alertMessage = "Error retrieving BAI Elements: Response Code received is \(code). Please try again or contact support@dataasap.com"
+                        }
+                    } else{
+                        alertMessage = "Error retrieving BAI Elements: Response Code received is unkonwn. Please try again or contact support@dataasap.com"
+                        
+                        
+                    }
+                    let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+
+        
         }
-    }
+        
+        else {
+            var alertMessage : String
+            alertMessage = "Error retrieving Request Elements: Response Code received is unknown. Please try again or contact support@dataasap.com"
+
+            let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     
+        
+        let methodFinish = Date()
+        let executionTime = methodFinish.timeIntervalSince(methodStart)
+        print("Execution time for \(self.title!) was \(executionTime) ms")
+
+    }
+
     func position(for bar: UIBarPositioning) -> UIBarPosition {
         return .topAttached
     }
@@ -220,6 +341,22 @@ extension SearchViewController: UITableViewDataSource {
             cell.elementId.text = element?.elementId
             cell.elementName.text = element?.elementName!
 
+        } else if searchResults[indexPath.row] is CCDPlusElement {
+            let element = searchResults[indexPath.row] as? CCDPlusElement
+            
+            if let position = element?.elementPosition {
+                cell.elementId.text = "Position \(position)"
+            }
+            cell.elementName.text = element?.elementName!
+        } else if searchResults[indexPath.row] is BAIElement {
+            let element = searchResults[indexPath.row] as? BAIElement
+            
+            if let position = element?.position {
+                cell.elementId.text = "Position \(position)"
+            }
+            cell.elementName.text = element?.elementName!
+           
+            
         }
         
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator

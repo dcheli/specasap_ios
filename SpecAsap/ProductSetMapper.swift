@@ -18,8 +18,8 @@ class ProductSetMapper{
         var productSet : [ProductSet] = [ProductSet]()
         
         do {
-            let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? AnyObject
             
+            let jsonDict = try JSONSerialization.jsonObject(with: data, options: []) as? AnyObject
             
             if let count  = jsonDict?.count, count  > 0 {
                 if let json  = jsonDict as? [[String : AnyObject]] {
@@ -27,7 +27,7 @@ class ProductSetMapper{
                         domain  = item["domain"] as? String ?? ""
                         operatingSystems = item["operatingSystems"] as? [String] ?? []
                         
-                        let jsonArray = item["products"] as? AnyObject
+                        let jsonArray = item["products"] //as? AnyObject
                         
                         if (jsonArray?.count!)! > 0 {
                             if let productArray = jsonArray as? [[String: AnyObject]] {
@@ -36,7 +36,7 @@ class ProductSetMapper{
                                     let displayName = product["displayName"] as? String ?? ""
                                     let productId = product["productId"] as? String ?? ""
                                     let version = product["version"] as? String ?? ""
-                                    print("\(productId)")
+    
                                     products?.append(Product(productId: productId, enabled: "false", displayName: displayName, version: version))
                                 }
                             }
@@ -48,6 +48,7 @@ class ProductSetMapper{
 
                 }
             }
+            
         } catch {
             print("Error mapping ProductSet")
         }

@@ -30,14 +30,17 @@ class NetworkManager {
     
     func getCodeSet(elementId: String, codeSetDomain : String, completion : @escaping ((_ responseCode: Int?, _ data : Data?) -> Void)){
         
-        let relativeUrl = URL(string: "codesets/\(codeSetDomain)/\(elementId)", relativeTo: baseUrl)
+        let element = elementId.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let codeSet = codeSetDomain.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let relativeUrl = URL(string: "codesets/\(codeSet!)/\(element!)", relativeTo: baseUrl)
         let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
         
-        let request = NSMutableURLRequest(url: components!.url!)
+        var request = URLRequest(url: components!.url!)
         request.httpMethod = "GET"
         request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
-        
-        let dataTask = urlSession.dataTask(with: (request as? URLRequest)!,
+        print("Codeset url is \(request.url!)")
+    
+        let dataTask = urlSession.dataTask(with: (request as URLRequest),
                 completionHandler: {(data, response, error) -> Void in
                     if let error = error {
                         print(error.localizedDescription)
@@ -56,11 +59,13 @@ class NetworkManager {
         let relativeUrl = URL(string: "products/productlist", relativeTo: baseUrl)
         let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
         
-        let request = NSMutableURLRequest(url: components!.url!)
+        var request = URLRequest(url: components!.url!)
+        //let request = NSMutableURLRequest(url: components!.url!)
         request.httpMethod = "GET"
         request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
         
-        let dataTask = urlSession.dataTask(with: (request as? URLRequest)!,
+        
+        let dataTask = urlSession.dataTask(with: (request as URLRequest),
                 completionHandler: {(data, response, error) -> Void in
                     if let error = error {
                         print(error.localizedDescription)
@@ -78,11 +83,12 @@ class NetworkManager {
         let relativeUrl = URL(string: "legal/\(document)", relativeTo: baseUrl)
         let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
         
-        let request = NSMutableURLRequest(url: components!.url!)
+        var request = URLRequest(url: components!.url!)
         request.httpMethod = "GET"
         request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
 
-        let dataTask = urlSession.dataTask(with: (request as? URLRequest)! ,
+
+        let dataTask = urlSession.dataTask(with: (request as URLRequest) ,
                 completionHandler: {(data, response, error) -> Void in
                     if let error = error {
                         print(error.localizedDescription)
@@ -101,13 +107,13 @@ class NetworkManager {
         components?.queryItems = [versionQueryItem]
         
         
-        
-        let request = NSMutableURLRequest(url: components!.url!)
+        print("Url is \(components?.url)")
+        var request = URLRequest(url: components!.url!)
         request.httpMethod = "GET"
         request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
   
         
-        let dataTask = urlSession.dataTask(with: (request as? URLRequest)!,
+        let dataTask = urlSession.dataTask(with: (request as URLRequest),
                 completionHandler: {(data, response, error) -> Void in
                     if let error = error {
                         print(error.localizedDescription)
@@ -121,15 +127,15 @@ class NetworkManager {
     func verifyReceipt(receiptData : String, completion : @escaping ((_ responseCode : Int?, _ data : Data?) -> Void)) {
         let relativeUrl = URL(string: "IAPReceipt/verifyapplereceipt", relativeTo: baseUrl)
         
-        var components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
+        let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
         
-        let request = NSMutableURLRequest(url: components!.url!)
+        var request = URLRequest(url: components!.url!)
         request.httpMethod = "POST"
         request.addValue("text/plain", forHTTPHeaderField: "Content-Type")
         request.httpBody = receiptData.data(using: String.Encoding.ascii)
         request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
         
-        let dataTask = urlSession.dataTask(with: (request as? URLRequest)!,
+        let dataTask = urlSession.dataTask(with: (request as URLRequest),
                 completionHandler: {(data, response, error) -> Void in
                         if let error = error {
                             print(error.localizedDescription)

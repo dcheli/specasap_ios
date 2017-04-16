@@ -13,25 +13,26 @@
 		FD01F1941E94440200881637 /* CodeSetMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD01F1931E94440200881637 /* CodeSetMapper.swift */; };
 		FD0973421E36C2BE004C15F4 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD0973411E36C2BE004C15F4 /* Product.swift */; };
 		FD17E8561E07616400648631 /* NCPDPElementMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17E8551E07616400648631 /* NCPDPElementMapper.swift */; };
+		FD2B32651EA2961B00F8E6A2 /* BAIElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2B32641EA2961B00F8E6A2 /* BAIElement.swift */; };
+		FD2B32671EA2E39A00F8E6A2 /* BAIElementMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2B32661EA2E39A00F8E6A2 /* BAIElementMapper.swift */; };
 		FD2E5F611E9A6E9900BDC1DA /* PrivacyPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2E5F601E9A6E9800BDC1DA /* PrivacyPolicy.swift */; };
 		FD2E5F651E9A6F9F00BDC1DA /* PrivacyPolicyMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2E5F641E9A6F9F00BDC1DA /* PrivacyPolicyMapper.swift */; };
 		FD2E5F671E9A953000BDC1DA /* TermsOfService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2E5F661E9A953000BDC1DA /* TermsOfService.swift */; };
 		FD2E5F691E9A98AB00BDC1DA /* TermsOfServiceMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2E5F681E9A98AB00BDC1DA /* TermsOfServiceMapper.swift */; };
 		FD2E5F6B1E9AC9A700BDC1DA /* ProductMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2E5F6A1E9AC9A600BDC1DA /* ProductMapper.swift */; };
+		FD35E6031EA03C8500F98D83 /* CCDPlusMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD35E6021EA03C8500F98D83 /* CCDPlusMapper.swift */; };
+		FD5EBBF11E9F08D8004CDD66 /* CCDPlusElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD5EBBF01E9F08D8004CDD66 /* CCDPlusElement.swift */; };
 		FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */; };
 		FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */; };
 		FD75DC101DFF927000E45684 /* X12ElementMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD75DC0F1DFF927000E45684 /* X12ElementMapper.swift */; };
 		FD8D8A101DE51DEE00FC6254 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */; };
 		FD94AC701E038348008C50FC /* HL7Element.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC6F1E038348008C50FC /* HL7Element.swift */; };
 		FD94AC721E0383A5008C50FC /* HL7ElementMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD94AC711E0383A5008C50FC /* HL7ElementMapper.swift */; };
-		FD9A1BB01E1AC36E00C954E7 /* AppleIncRootCertificate.cer in Resources */ = {isa = PBXBuildFile; fileRef = FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */; };
 		FD9D98371E96D80E00CC01D9 /* ProductSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D98361E96D80D00CC01D9 /* ProductSet.swift */; };
 		FD9D98391E96D92E00CC01D9 /* ProductSetMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD9D98381E96D92E00CC01D9 /* ProductSetMapper.swift */; };
 		FDAFA1721E989D96004087F2 /* CodeSetDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDAFA1711E989D96004087F2 /* CodeSetDetailViewController.swift */; };
 		FDAFCB2B1DF7781E00DFA032 /* libssl_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */; };
 		FDAFCB2C1DF7781E00DFA032 /* libcrypto_iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */; };
-		FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAFCB311DF7791900DFA032 /* RMAppReceipt.m */; };
-		FDAFCB351DF7796300DFA032 /* RMStoreAppReceiptVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = FDAFCB341DF7796300DFA032 /* RMStoreAppReceiptVerifier.m */; };
 		FDC72B371E92FF88001909C0 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC72B361E92FF88001909C0 /* NetworkManager.swift */; };
 		FDC80ADC1DD8F9B800548CC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80ADB1DD8F9B800548CC0 /* AppDelegate.swift */; };
 		FDC80ADE1DD8F9B800548CC0 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDC80ADD1DD8F9B800548CC0 /* SearchViewController.swift */; };
@@ -56,28 +57,26 @@
 		FD01F1931E94440200881637 /* CodeSetMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSetMapper.swift; sourceTree = "<group>"; };
 		FD0973411E36C2BE004C15F4 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FD17E8551E07616400648631 /* NCPDPElementMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NCPDPElementMapper.swift; sourceTree = "<group>"; };
+		FD2B32641EA2961B00F8E6A2 /* BAIElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BAIElement.swift; sourceTree = "<group>"; };
+		FD2B32661EA2E39A00F8E6A2 /* BAIElementMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BAIElementMapper.swift; sourceTree = "<group>"; };
 		FD2E5F601E9A6E9800BDC1DA /* PrivacyPolicy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicy.swift; sourceTree = "<group>"; };
 		FD2E5F641E9A6F9F00BDC1DA /* PrivacyPolicyMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyMapper.swift; sourceTree = "<group>"; };
 		FD2E5F661E9A953000BDC1DA /* TermsOfService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfService.swift; sourceTree = "<group>"; };
 		FD2E5F681E9A98AB00BDC1DA /* TermsOfServiceMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsOfServiceMapper.swift; sourceTree = "<group>"; };
 		FD2E5F6A1E9AC9A600BDC1DA /* ProductMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductMapper.swift; sourceTree = "<group>"; };
+		FD35E6021EA03C8500F98D83 /* CCDPlusMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCDPlusMapper.swift; sourceTree = "<group>"; };
+		FD5EBBF01E9F08D8004CDD66 /* CCDPlusElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CCDPlusElement.swift; sourceTree = "<group>"; };
 		FD5FDCC21DE51CCE00C694AE /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		FD6DD51F1DECD0E700ED511F /* StoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreTableViewController.swift; sourceTree = "<group>"; };
 		FD73EFCE1DDD4BD800EA1186 /* AboutDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutDetailsViewController.swift; sourceTree = "<group>"; };
 		FD75DC0F1DFF927000E45684 /* X12ElementMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = X12ElementMapper.swift; sourceTree = "<group>"; };
 		FD94AC6F1E038348008C50FC /* HL7Element.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7Element.swift; sourceTree = "<group>"; };
 		FD94AC711E0383A5008C50FC /* HL7ElementMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HL7ElementMapper.swift; sourceTree = "<group>"; };
-		FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = AppleIncRootCertificate.cer; sourceTree = "<group>"; };
 		FD9D98361E96D80D00CC01D9 /* ProductSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSet.swift; sourceTree = "<group>"; };
 		FD9D98381E96D92E00CC01D9 /* ProductSetMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductSetMapper.swift; sourceTree = "<group>"; };
 		FDAFA1711E989D96004087F2 /* CodeSetDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CodeSetDetailViewController.swift; sourceTree = "<group>"; };
 		FDAFCB291DF7781E00DFA032 /* libssl_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl_iOS.a; path = SpecAsap/openssl/lib/libssl_iOS.a; sourceTree = "<group>"; };
 		FDAFCB2A1DF7781E00DFA032 /* libcrypto_iOS.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto_iOS.a; path = SpecAsap/openssl/lib/libcrypto_iOS.a; sourceTree = "<group>"; };
-		FDAFCB2F1DF7791800DFA032 /* SpecAsap-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpecAsap-Bridging-Header.h"; sourceTree = "<group>"; };
-		FDAFCB301DF7791900DFA032 /* RMAppReceipt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMAppReceipt.h; path = "../../../../Downloads/Ex_Files_In_App_Purchases_Swift3/Exercise Files/04_06_NoteTaker End/NoteTaker/RMAppReceipt.h"; sourceTree = "<group>"; };
-		FDAFCB311DF7791900DFA032 /* RMAppReceipt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMAppReceipt.m; path = "../../../../Downloads/Ex_Files_In_App_Purchases_Swift3/Exercise Files/04_06_NoteTaker End/NoteTaker/RMAppReceipt.m"; sourceTree = "<group>"; };
-		FDAFCB331DF7796300DFA032 /* RMStoreAppReceiptVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RMStoreAppReceiptVerifier.h; path = "../../../../Downloads/Ex_Files_In_App_Purchases_Swift3/Exercise Files/04_06_NoteTaker End/NoteTaker/RMStoreAppReceiptVerifier.h"; sourceTree = "<group>"; };
-		FDAFCB341DF7796300DFA032 /* RMStoreAppReceiptVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RMStoreAppReceiptVerifier.m; path = "../../../../Downloads/Ex_Files_In_App_Purchases_Swift3/Exercise Files/04_06_NoteTaker End/NoteTaker/RMStoreAppReceiptVerifier.m"; sourceTree = "<group>"; };
 		FDC72B361E92FF88001909C0 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		FDC80AD81DD8F9B800548CC0 /* SpecAsap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpecAsap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC80ADB1DD8F9B800548CC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +121,8 @@
 				FD2E5F641E9A6F9F00BDC1DA /* PrivacyPolicyMapper.swift */,
 				FD2E5F681E9A98AB00BDC1DA /* TermsOfServiceMapper.swift */,
 				FD2E5F6A1E9AC9A600BDC1DA /* ProductMapper.swift */,
+				FD35E6021EA03C8500F98D83 /* CCDPlusMapper.swift */,
+				FD2B32661EA2E39A00F8E6A2 /* BAIElementMapper.swift */,
 			);
 			name = Mappers;
 			sourceTree = "<group>";
@@ -152,27 +153,6 @@
 			name = Controllers;
 			sourceTree = "<group>";
 		};
-		FDAFCB2D1DF778C200DFA032 /* Receipt Verification */ = {
-			isa = PBXGroup;
-			children = (
-				FDAFCB2E1DF778D600DFA032 /* RMStore */,
-				FDAFCB2F1DF7791800DFA032 /* SpecAsap-Bridging-Header.h */,
-			);
-			name = "Receipt Verification";
-			sourceTree = "<group>";
-		};
-		FDAFCB2E1DF778D600DFA032 /* RMStore */ = {
-			isa = PBXGroup;
-			children = (
-				FD9A1BAF1E1AC36E00C954E7 /* AppleIncRootCertificate.cer */,
-				FDAFCB331DF7796300DFA032 /* RMStoreAppReceiptVerifier.h */,
-				FDAFCB341DF7796300DFA032 /* RMStoreAppReceiptVerifier.m */,
-				FDAFCB301DF7791900DFA032 /* RMAppReceipt.h */,
-				FDAFCB311DF7791900DFA032 /* RMAppReceipt.m */,
-			);
-			name = RMStore;
-			sourceTree = "<group>";
-		};
 		FDC80ACF1DD8F9B800548CC0 = {
 			isa = PBXGroup;
 			children = (
@@ -193,7 +173,6 @@
 		FDC80ADA1DD8F9B800548CC0 /* SpecAsap */ = {
 			isa = PBXGroup;
 			children = (
-				FDAFCB2D1DF778C200DFA032 /* Receipt Verification */,
 				FDF7E0CC1DF3368D00EDD451 /* TableCells */,
 				FD6DD51E1DECB88600ED511F /* Controllers */,
 				FDE7A8FB1DEBD88200080AA2 /* Managers */,
@@ -220,6 +199,8 @@
 				FD9D98361E96D80D00CC01D9 /* ProductSet.swift */,
 				FD2E5F601E9A6E9800BDC1DA /* PrivacyPolicy.swift */,
 				FD2E5F661E9A953000BDC1DA /* TermsOfService.swift */,
+				FD5EBBF01E9F08D8004CDD66 /* CCDPlusElement.swift */,
+				FD2B32641EA2961B00F8E6A2 /* BAIElement.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -311,7 +292,6 @@
 				FDE7A9011DEBDCA300080AA2 /* products.plist in Resources */,
 				FDC80AE61DD8F9B800548CC0 /* LaunchScreen.storyboard in Resources */,
 				FDC80AE31DD8F9B800548CC0 /* Assets.xcassets in Resources */,
-				FD9A1BB01E1AC36E00C954E7 /* AppleIncRootCertificate.cer in Resources */,
 				FDC80AE11DD8F9B800548CC0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -324,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FD2E5F671E9A953000BDC1DA /* TermsOfService.swift in Sources */,
+				FD35E6031EA03C8500F98D83 /* CCDPlusMapper.swift in Sources */,
 				FDFADBCE1E6CD201003476B4 /* StandardsTableViewController.swift in Sources */,
 				FD9D98371E96D80E00CC01D9 /* ProductSet.swift in Sources */,
 				FDCE1F401E02364A000F7D36 /* X12Element.swift in Sources */,
@@ -335,9 +316,12 @@
 				FDC80ADE1DD8F9B800548CC0 /* SearchViewController.swift in Sources */,
 				FD01F18E1E94371F00881637 /* CodeSetTableViewController.swift in Sources */,
 				FDC80ADC1DD8F9B800548CC0 /* AppDelegate.swift in Sources */,
+				FD5EBBF11E9F08D8004CDD66 /* CCDPlusElement.swift in Sources */,
+				FD2B32651EA2961B00F8E6A2 /* BAIElement.swift in Sources */,
 				FD75DC101DFF927000E45684 /* X12ElementMapper.swift in Sources */,
 				FDC80AF11DD8FAE400548CC0 /* ElementCell.swift in Sources */,
 				FD94AC701E038348008C50FC /* HL7Element.swift in Sources */,
+				FD2B32671EA2E39A00F8E6A2 /* BAIElementMapper.swift in Sources */,
 				FDD1ED471E7A171D008B311E /* AboutTableViewController.swift in Sources */,
 				FD2E5F691E9A98AB00BDC1DA /* TermsOfServiceMapper.swift in Sources */,
 				FD6DD5201DECD0E700ED511F /* StoreTableViewController.swift in Sources */,
@@ -348,8 +332,6 @@
 				FD0973421E36C2BE004C15F4 /* Product.swift in Sources */,
 				FD01F1901E94412800881637 /* CodeSet.swift in Sources */,
 				FD9D98391E96D92E00CC01D9 /* ProductSetMapper.swift in Sources */,
-				FDAFCB321DF7791900DFA032 /* RMAppReceipt.m in Sources */,
-				FDAFCB351DF7796300DFA032 /* RMStoreAppReceiptVerifier.m in Sources */,
 				FD73EFCF1DDD4BD800EA1186 /* AboutDetailsViewController.swift in Sources */,
 				FDF7E0CE1DF337C500EDD451 /* ProductCell.swift in Sources */,
 				FDC80AF31DD8FB1E00548CC0 /* ElementDetailViewController.swift in Sources */,
@@ -491,7 +473,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataasap.specasap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SpecAsap/SpecAsap-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
@@ -513,7 +495,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.dataasap.specasap;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "SpecAsap/SpecAsap-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -30,7 +30,7 @@ class ElementDetailViewController : UIViewController {
         
         if element is NCPDPElement {
             
-            self.codeSetDomain = "ncpdpD0"
+            self.codeSetDomain = "ncpdpD0CodeSets"
             
             let e : NCPDPElement = self.element as! NCPDPElement
             self.elementId = e.elementId
@@ -136,7 +136,7 @@ class ElementDetailViewController : UIViewController {
             
         } else if element is X12Element {
             
-            self.codeSetDomain = "x125010"
+            self.codeSetDomain = "x125010CodeSets"
             
             let e : X12Element = self.element as! X12Element
             self.elementId = e.elementId
@@ -217,7 +217,7 @@ class ElementDetailViewController : UIViewController {
             
         } else if element is HL7Element {
             
-            self.codeSetDomain = "hl7v2"
+            self.codeSetDomain = "hl7v2CodeSets"
             
             let e : HL7Element = self.element as! HL7Element
             self.elementId = e.elementId
@@ -297,6 +297,126 @@ class ElementDetailViewController : UIViewController {
             
             
             ddd = attributedString
+        } else if element is CCDPlusElement {
+            self.codeSetDomain = "ccdPlusCodeSets"
+            
+            let e : CCDPlusElement = self.element as! CCDPlusElement
+            self.elementId = e.elementName
+            
+            if e.codes == true {
+                self.getCodeSetButton.isHidden = false
+                self.getCodeSetButton.isEnabled = true
+                
+            }
+
+            displayString += "Field Position: " +  e.elementPosition! + "\n"
+            displayString += "Field Name: " +  e.elementName! + "\n"
+            displayString += "Record Name: " +  e.segmentName! + "\n"
+            displayString += "Length: " + e.length! + "\n"
+            displayString += "Position: " + e.position! + "\n"
+            displayString += "Usage: " + e.usage! + "\n"
+            displayString += "Data Type: " + e.dataType! + "\n"
+            
+            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
+            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
+            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+
+            
+            let dd : NSString = displayString as NSString
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Position:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Position:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Name:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Name:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Record Name:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record Name:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Position:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Position:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Usage:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Usage:"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
+
+            
+            ddd = attributedString
+        } else if element is BAIElement {
+            
+            self.codeSetDomain = "baiCodeSets"
+            
+            let e : BAIElement = self.element as! BAIElement
+            self.elementId = e.elementName
+            
+            if e.codes == true {
+                self.getCodeSetButton.isHidden = false
+                self.getCodeSetButton.isEnabled = true
+                
+            }
+            
+            
+            
+            displayString += "Field Position: " +  e.position! + "\n"
+            displayString += "Field Name: " +  e.elementName! + "\n"
+            if e.segmentNames.count > 0 {
+                displayString += "Record Name(s):"
+                displayString += processArray(e.segmentNames)
+            }
+
+            if e.segmentIds.count > 0 {
+                displayString += "Record ID(s):"
+                displayString += processArray(e.segmentIds)
+            }
+            
+            displayString += "Length: " + e.length! + "\n"
+            displayString += "Position: " + e.position! + "\n"
+            displayString += "Usage: " + e.usage! + "\n"
+            displayString += "Data Type: " + e.dataType! + "\n"
+            
+            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
+            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
+            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+            
+            
+            let dd : NSString = displayString as NSString
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Position:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Position:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Name:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Name:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Record Name(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record Name(s):"))
+
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Record ID(s):"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record ID(s):"))
+
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Position:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Position:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Usage:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Usage:"))
+            
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
+            
+            
+            ddd = attributedString
+
+            
+
+            
         }
         
         textView.attributedText = ddd
@@ -343,7 +463,6 @@ class ElementDetailViewController : UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let destination = segue.destination as! CodeSetTableViewController
-        
         if let e = elementId {
             destination.elementId = e
             destination.codeSetDomain = self.codeSetDomain

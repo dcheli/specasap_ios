@@ -80,7 +80,14 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
                     }
                     
                 } else {
-                    let alertMessage = "Error retrieving Privacy Policy: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                    var alertMessage : String
+                    if let code = responseCode {
+                        alertMessage = "Error retrieving Privacy Policy: Response Code received is \(code) Please try again or contact support@dataasap.com"
+                    } else {
+                    
+                        alertMessage = "Error retrieving Privacy Policy: Response Code received is unknown Please try again or contact support@dataasap.com"
+                    }
+                    
                     let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
@@ -152,7 +159,16 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
                 
                 
                 } else {
-                    let alertMessage = "Error retrieving Terms of Service: Response Code received is \(responseCode) Please try again or contact support@dataasap.com"
+                    
+                    var alertMessage : String
+                    
+                    if let code = responseCode {
+                        alertMessage = "Error retrieving Terms of Service: Response Code received is \(code) Please try again or contact support@dataasap.com"
+                    } else {
+                        alertMessage = "Error retrieving Terms of Service: Response Code received is unknown Please try again or contact support@dataasap.com"
+                        
+                    }
+                    
                     let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
                     self.present(alert, animated: true, completion: nil)
