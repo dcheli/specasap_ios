@@ -35,6 +35,7 @@ class SearchViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         tableView.tableFooterView = UIView()
+        print("Selected Standard is \(selectedStandard)")
         
         switch selectedStandard {
             case "NCPDP D.0":
@@ -49,7 +50,7 @@ class SearchViewController: UIViewController {
                 self.standardsDomain = "hl7v2"
                 self.elementDomain = "hl7"
                 self.version = "282"
-            case "CCD+" :
+            case "ACH CCD+ Addenda" :
                 self.standardsDomain = "ccdplus"
                 self.elementDomain = "ccdplus"
                 self.version = ""

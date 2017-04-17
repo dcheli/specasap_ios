@@ -10,8 +10,9 @@ import UIKit
 
 class CodeSetTableViewController: UITableViewController {
     
-    var elementId : String?
+    var searchParam : String?
     var codeSetDomain: String?
+    var codeSetVersion: String?
     
     var codeSet : CodeSet = CodeSet()
     
@@ -20,7 +21,7 @@ class CodeSetTableViewController: UITableViewController {
      
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
  
-        NetworkManager.sharedInstance.getCodeSet(elementId: elementId!, codeSetDomain : codeSetDomain!) { (responseCode, data) -> Void in
+        NetworkManager.sharedInstance.getCodeSet(searchParam: searchParam!, codeSetDomain : codeSetDomain!, codeSetVersion : codeSetVersion!) { (responseCode, data) -> Void in
             if responseCode == 200 {
              
                 let codeSetMapper  = CodeSetMapper()
@@ -135,8 +136,7 @@ class CodeSetTableViewController: UITableViewController {
         
         if let code = codeSet.codes?[(indexPath?.row)!]{
             destination.code = code.code
-            destination.desc
-                = code.description
+            destination.desc = code.description
             destination.longDescription = code.longDescription
         } else {
             destination.longDescription = "No Additional Information"

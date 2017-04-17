@@ -28,12 +28,14 @@ class NetworkManager {
         base64LoginString = loginData.base64EncodedString(options: Data.Base64EncodingOptions())
     }
     
-    func getCodeSet(elementId: String, codeSetDomain : String, completion : @escaping ((_ responseCode: Int?, _ data : Data?) -> Void)){
+    func getCodeSet(searchParam: String, codeSetDomain : String, codeSetVersion : String, completion : @escaping ((_ responseCode: Int?, _ data : Data?) -> Void)){
         
-        let element = elementId.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
+        let element = searchParam.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let codeSet = codeSetDomain.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)
         let relativeUrl = URL(string: "codesets/\(codeSet!)/\(element!)", relativeTo: baseUrl)
-        let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
+        var components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
+        let versionQueryItem = URLQueryItem(name: "v", value: codeSetVersion)
+        components?.queryItems = [versionQueryItem]
         
         var request = URLRequest(url: components!.url!)
         request.httpMethod = "GET"
@@ -60,7 +62,7 @@ class NetworkManager {
         let components = URLComponents(url: relativeUrl!, resolvingAgainstBaseURL: true)
         
         var request = URLRequest(url: components!.url!)
-        //let request = NSMutableURLRequest(url: components!.url!)
+
         request.httpMethod = "GET"
         request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
         
@@ -87,7 +89,6 @@ class NetworkManager {
         request.httpMethod = "GET"
         request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)
 
-
         let dataTask = urlSession.dataTask(with: (request as URLRequest) ,
                 completionHandler: {(data, response, error) -> Void in
                     if let error = error {
@@ -106,8 +107,6 @@ class NetworkManager {
         let versionQueryItem = URLQueryItem(name: "v", value: version)
         components?.queryItems = [versionQueryItem]
         
-        
-        print("Url is \(components?.url)")
         var request = URLRequest(url: components!.url!)
         request.httpMethod = "GET"
         request.setValue(base64LoginString, forHTTPHeaderField: authorizationString)

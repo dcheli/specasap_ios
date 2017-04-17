@@ -13,10 +13,10 @@ import UIKit
 class ElementDetailViewController : UIViewController {
     
     @IBOutlet weak var textView: UITextView!
-    //var element : NCPDPElement! = nil
     var element : AnyObject! = nil
     var elementId : String?
     var codeSetDomain : String?
+    var codeSetVersion : String?
     
     @IBOutlet weak var getCodeSetButton: UIButton!
     
@@ -30,7 +30,8 @@ class ElementDetailViewController : UIViewController {
         
         if element is NCPDPElement {
             
-            self.codeSetDomain = "ncpdpD0CodeSets"
+            self.codeSetDomain = "ncpdp"
+            self.codeSetVersion = "D0"
             
             let e : NCPDPElement = self.element as! NCPDPElement
             self.elementId = e.elementId
@@ -136,7 +137,8 @@ class ElementDetailViewController : UIViewController {
             
         } else if element is X12Element {
             
-            self.codeSetDomain = "x125010CodeSets"
+            self.codeSetDomain = "x12"
+            self.codeSetVersion = "5010"
             
             let e : X12Element = self.element as! X12Element
             self.elementId = e.elementId
@@ -217,7 +219,8 @@ class ElementDetailViewController : UIViewController {
             
         } else if element is HL7Element {
             
-            self.codeSetDomain = "hl7v2CodeSets"
+            self.codeSetDomain = "hl7"
+            self.codeSetVersion = "282"
             
             let e : HL7Element = self.element as! HL7Element
             self.elementId = e.elementId
@@ -298,7 +301,8 @@ class ElementDetailViewController : UIViewController {
             
             ddd = attributedString
         } else if element is CCDPlusElement {
-            self.codeSetDomain = "ccdPlusCodeSets"
+            self.codeSetDomain = "ccdplus"
+            self.codeSetVersion = ""
             
             let e : CCDPlusElement = self.element as! CCDPlusElement
             self.elementId = e.elementName
@@ -313,9 +317,10 @@ class ElementDetailViewController : UIViewController {
             displayString += "Field Name: " +  e.elementName! + "\n"
             displayString += "Record Name: " +  e.segmentName! + "\n"
             displayString += "Length: " + e.length! + "\n"
-            displayString += "Position: " + e.position! + "\n"
+            displayString += "Psition: " + e.position! + "\n"
             displayString += "Usage: " + e.usage! + "\n"
             displayString += "Data Type: " + e.dataType! + "\n"
+            displayString += "Definition: " + e.definition! + "\n"
             
             
             let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
@@ -336,8 +341,8 @@ class ElementDetailViewController : UIViewController {
             attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
 
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Position:"))
-            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Position:"))
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Psition:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Psition:"))
             
             attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Usage:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Usage:"))
@@ -345,11 +350,15 @@ class ElementDetailViewController : UIViewController {
             attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
 
+            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Definition:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
+
             
             ddd = attributedString
         } else if element is BAIElement {
             
-            self.codeSetDomain = "baiCodeSets"
+            self.codeSetDomain = "bai"
+            self.codeSetVersion = "2"
             
             let e : BAIElement = self.element as! BAIElement
             self.elementId = e.elementName
@@ -464,10 +473,11 @@ class ElementDetailViewController : UIViewController {
         
         let destination = segue.destination as! CodeSetTableViewController
         if let e = elementId {
-            destination.elementId = e
+            destination.searchParam = e
             destination.codeSetDomain = self.codeSetDomain
+            destination.codeSetVersion = self.codeSetVersion
         } else {
-            destination.elementId = nil
+            destination.searchParam = nil
         }
         
     }
