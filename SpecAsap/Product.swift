@@ -14,9 +14,9 @@ class Product {
     var displayName : String?
     var version : String?
     
-    init(productId : String?, enabled : String?, displayName : String?, version: String?) {
+    init(productId : String?, active : String?, displayName : String?, version: String?) {
         self.productId = productId!
-        if enabled! == "true" {
+        if active! == "true" {
             self.active = true
         } else {
             self.active = false

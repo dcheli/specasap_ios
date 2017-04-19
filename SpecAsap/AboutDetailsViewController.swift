@@ -246,38 +246,21 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
     
     
     func attributedPrivacyPolicy(document: String) -> NSMutableAttributedString {
-        
-        let attributedString = NSMutableAttributedString(string : document, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
-        let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
-        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-        
+        let underlineAttribute : [String : Any] = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,NSForegroundColorAttributeName : UIColor.blue]
+        let bodyAttributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)]
+      
+       
+        let attributedString = NSMutableAttributedString(string : document as String, attributes: bodyAttributes)
+
         let dd : NSString = document as NSString
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "GENERAL INFORMATION"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "GENERAL INFORMATION"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "INFORMATION GATHERING AND USAGE"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "INFORMATION GATHERING AND USAGE"))
-        
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "COOKIES"))
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "COOKIES"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "DATA STORAGE"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "DATA STORAGE"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "DISCLOSURE"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "DISCLOSURE"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "EU AND SWISS SAFE HARBOR"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "EU AND SWISS SAFE HARBOR"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "CHANGES"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "CHANGES"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "QUESTIONS"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "QUESTIONS"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "LAST REVIEWED OR UPDATED"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "LAST REVIEWED OR UPDATED"))
         
         return attributedString
@@ -286,34 +269,22 @@ class AboutDetailsViewController : UIViewController, MFMailComposeViewController
     
     func attributedTermsOfService(document: String) -> NSMutableAttributedString {
   
-        let attributedString = NSMutableAttributedString(string : document, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
-        let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
-        let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+        let underlineAttribute : [String : Any] = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,NSForegroundColorAttributeName : UIColor.blue]
+        let bodyAttributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)]
+        
+        
+        let attributedString = NSMutableAttributedString(string : document as String, attributes: bodyAttributes)
         
         let dd : NSString = document as NSString
         
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "INTRODUCTION"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "INTRODUCTION"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "ACCOUNT TERMS"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "ACCOUNT TERMS"))
         
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "PAYMENT, REFUNDS, UPGRADING AND DOWNGRADING"))
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "PAYMENT, REFUNDS, UPGRADING AND DOWNGRADING"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "CANCELLATION AND TERMINATION"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "CANCELLATION AND TERMINATION"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "MODIFICATIONS TO THE SERVICE AND PRICES"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "MODIFICATIONS TO THE SERVICE AND PRICES"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "COPYRIGHT AND CONTENT OWNERSHIP"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "COPYRIGHT AND CONTENT OWNERSHIP"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "GENERAL CONDITIONS"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "GENERAL CONDITIONS"))
-        
-        attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "LAST REVIEWED OR UPDATED"))
         attributedString.addAttributes(underlineAttribute, range: dd.range(of: "LAST REVIEWED OR UPDATED"))
         
         return attributedString

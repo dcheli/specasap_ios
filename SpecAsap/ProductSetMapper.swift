@@ -37,7 +37,7 @@ class ProductSetMapper{
                                     let productId = product["productId"] as? String ?? ""
                                     let version = product["version"] as? String ?? ""
     
-                                    products?.append(Product(productId: productId, enabled: "false", displayName: displayName, version: version))
+                                    products?.append(Product(productId: productId, active: "false", displayName: displayName, version: version))
                                 }
                             }
                         }

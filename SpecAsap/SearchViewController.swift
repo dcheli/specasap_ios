@@ -345,15 +345,15 @@ extension SearchViewController: UITableViewDataSource {
         } else if searchResults[indexPath.row] is CCDPlusElement {
             let element = searchResults[indexPath.row] as? CCDPlusElement
             
-            if let position = element?.elementPosition {
-                cell.elementId.text = "Position \(position)"
+            if let position = element?.position {
+                cell.elementId.text = "Field Position \(position)"
             }
             cell.elementName.text = element?.elementName!
         } else if searchResults[indexPath.row] is BAIElement {
             let element = searchResults[indexPath.row] as? BAIElement
             
             if let position = element?.position {
-                cell.elementId.text = "Position \(position)"
+                cell.elementId.text = "Field Position \(position)"
             }
             cell.elementName.text = element?.elementName!
            

@@ -45,7 +45,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
 
         NetworkManager.sharedInstance.getProductSet(os: "ios") { (responseCode, data) -> Void in
             
-             print("Completion Handler called")
+             print("IAPManager - getProducSet Completion Handler called")
             
             if responseCode == 200 {
                 
@@ -63,57 +63,22 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
         
                     AppDelegate.productSet = productSet
                 }
-                AppDelegate.standardNames = identifiers
+
                 self.performProductRequestForIdentifiersFromiTunes(identifiers: identifiers)
                 DispatchQueue.main.async {
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 }
                 
             } else {
-                print("result is \(String(describing : responseCode))")
+                if let code = responseCode {
+        
+                    let alertMessage = "Error retrieving Product Set: Response Code received is \(code). Please try again or contact support@dataasap.com"
+                    let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                    alert.present(alert, animated: false, completion: nil)
+                }
             }
         }
-
-/*
-        let dataTask = session.dataTask(with: request) {(data, response, error) -> Void in
-            do {
-       //    DispatchQueue.main.async {
-                let productSetParser  = ProductSetParser()
-                productSetParser.parseProductSet(fromUrl: data!)
-                
-                if AppDelegate.productSet.count > 0 {
-                    for productSet in AppDelegate.productSet {
-                        for product in productSet.products! {
-                            identifiers.append(product.productId!)
-                        }
-                    }
-                }
-                
-                
-                // I need to get the product ids & domains for the sections
-                
-             //   let jsonArray = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers) as! NSArray
-                DispatchQueue.main.async {
-             //       if jsonArray.count > 0 {
-               //         for json in jsonArray as! [Dictionary<String, String>]{
-                 //           let productId = json["productId"]!
-                   //         identifiers.append(productId)
-                     //   }
-           // }
-            
-                    self.performProductRequestForIdentifiersFromiTunes(identifiers: identifiers)
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                 
-                }
-                let methodFinish = Date()
-                let executionTime = methodFinish.timeIntervalSince(methodStart)
-                print("Execution time for productlist request was \(executionTime) ms")
-            } catch {
-                print("Error: \(error)")
-            }
-
-        }
-        dataTask.resume()*/
     }
     
     func performProductRequestForIdentifiersFromiTunes(identifiers : [String]) {
@@ -130,6 +95,7 @@ class IAPManager : NSObject, SKProductsRequestDelegate, SKPaymentTransactionObse
 
     
     func setupPurchases(_ handler: @escaping (Bool) ->Void) {
+        // This returns whether the user is allowed to make purchases
         if SKPaymentQueue.canMakePayments() {
             handler(true)
             SKPaymentQueue.default().add(self)

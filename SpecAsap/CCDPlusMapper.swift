@@ -24,6 +24,7 @@ class CCDPlusMapper {
                         if let attributes = item["attributes"] as? [String: AnyObject] {
                             
                             let segmentName = attributes["segmentName"] as? String ?? ""
+                            let segmentId = attributes["segmentId"] as? String ?? ""
                             
                             let elementPosition = attributes["elementPosition"] as? String ?? ""
                             let elementName = attributes["elementName"] as? String ?? ""
@@ -35,7 +36,7 @@ class CCDPlusMapper {
                             let codes = attributes["codes"] as? Bool ?? false
                             
                             
-                            elementArray.append(CCDPlusElement(segmentName: segmentName, elementPosition: elementPosition, elementName: elementName, usage: usage, dataType: dataType, length: length, position: position, definition: definition, codes: codes))
+                            elementArray.append(CCDPlusElement(segmentName: segmentName, segmentId: segmentId, elementPosition: elementPosition, elementName: elementName, usage: usage, dataType: dataType, length: length, position: position, definition: definition, codes: codes))
                         }
                     }
                 }

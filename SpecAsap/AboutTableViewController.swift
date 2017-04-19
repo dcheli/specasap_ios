@@ -88,7 +88,7 @@ class AboutTableViewController: UITableViewController {
         }
         
     }
-    
+ 
     func isProductActive()  -> String {
         var enabledProducts = ""
         for product in AppDelegate.products {
@@ -103,7 +103,7 @@ class AboutTableViewController: UITableViewController {
         return enabledProducts
     }
     
-    
+ 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath.section {
             case 1:

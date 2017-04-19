@@ -18,11 +18,29 @@ class CodeSetDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
-        var displayString = self.code! + " - " + self.desc! + "\n\n"
+        
+        var ddd : NSMutableAttributedString = NSMutableAttributedString()
+        
+        let title = self.code! + " - " + self.desc!
+        
+        var displayString = title + "\n\n"
         
         displayString += self.longDescription!
+
+        let underlineAttribute : [String : Any] = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,NSForegroundColorAttributeName : UIColor.blue]
+        let bodyAttributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)]
+
+        
+        let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
+        
+        let dd : NSString = displayString as NSString
+        attributedString.addAttributes(underlineAttribute, range: dd.range(of: title))
+        
+        ddd = attributedString
+        
+        
     
-        longDescriptionTextView.text = displayString
+        longDescriptionTextView.attributedText = ddd
     }
 
     override func didReceiveMemoryWarning() {

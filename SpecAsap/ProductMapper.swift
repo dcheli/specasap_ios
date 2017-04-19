@@ -21,10 +21,10 @@ class ProductMapper {
                 if let json = jsonDict as? [[String: AnyObject]] {
                     for item in json {
                         let productId = item["productId"] as? String ?? ""
-                        let enabled =  item["enabled"] as? String ?? ""
+                        let active =  item["enabled"] as? String ?? ""
                         let displayName = item["displayName"] as? String ?? ""
                         let version = item["version"] as? String ?? ""
-                        products.append(Product(productId: productId, enabled: enabled , displayName : displayName, version: version))
+                        products.append(Product(productId: productId, active: active, displayName : displayName, version: version))
                     }
                 }
             }

@@ -13,9 +13,25 @@ class StandardsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if AppDelegate.productSet.count == 0 {
+            print("Count is 0")
+            
+            sleep(5) // this puts in a wait for the restful service
+            
+            if AppDelegate.productSet.count   == 0 {
+                let alertMessage = "Error retrieving Standard Sets. Please try again or contact support@dataasap.com"
+                let alert = UIAlertController(title: "Alert", message: alertMessage, preferredStyle : UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: false, completion: nil)
+            } else {
+                self.tableView.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
     }
 
@@ -48,6 +64,7 @@ class StandardsTableViewController: UITableViewController {
         view.addSubview(image)
         
         let label = UILabel()
+        label.font = UIFont.preferredFont(forTextStyle: .body)
         label.text = AppDelegate.productSet[section].domain
     
         

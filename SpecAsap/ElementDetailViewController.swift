@@ -24,7 +24,13 @@ class ElementDetailViewController : UIViewController {
         self.automaticallyAdjustsScrollViewInsets = false
         self.getCodeSetButton.isEnabled = false
         self.getCodeSetButton.isHidden = true
+        getCodeSetButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
         
+        
+        let underlineAttribute : [String : Any] = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,NSForegroundColorAttributeName : UIColor.blue]
+        let bodyAttributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)]
+
+
         var displayString = ""
         var ddd : NSMutableAttributedString = NSMutableAttributedString()
         
@@ -91,45 +97,21 @@ class ElementDetailViewController : UIViewController {
                 displayString += processArray(e.responseTransactions, addNewLine: true)
             }
         
-            
-    
-            
-            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
-            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
-            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
             let dd : NSString = displayString as NSString
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element ID:"))
+
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element ID:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment ID(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment ID(s):"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment Name(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment Name(s):"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length(s):"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Standard Format(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Standard Format(s):"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Codes:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Codes:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Format(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Format(s):"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Version(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Version(s):"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Request Transaction(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Request Transaction(s):"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Response Transaction(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Response Transaction(s):"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Definition:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Comments:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Comments:"))
             
             ddd = attributedString
@@ -175,43 +157,23 @@ class ElementDetailViewController : UIViewController {
             
             
             
-            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
-            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
-            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
+    
             let dd : NSString = displayString as NSString
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Implementation Name:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Implementation Name:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element ID:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element ID:"))
+            
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment ID:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment ID:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment Name:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
             
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Repeat:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Repeat:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Loop:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Loop:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Element:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Element:"))
-
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Codes:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Codes:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Version(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Version(s):"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Transaction(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Transaction(s):"))
             
             ddd = attributedString
@@ -256,48 +218,24 @@ class ElementDetailViewController : UIViewController {
             }
             displayString += "Definition: " + e.definition! + "\n"
             
-            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
-            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
-            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
             
             let dd : NSString = displayString as NSString
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element ID:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element ID:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Element Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Element Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment ID:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment ID:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Segment Name:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Segment Name:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Sequence:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Sequence:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Conformance Length:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Conformance Length:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Optionality:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Optionality:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Repetition:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Repetition:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Table Number:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Table Number:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Item Number:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Item Number:"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Version(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Version(s):"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Transaction(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Transaction(s):"))
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Definition:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
-            
             
             ddd = attributedString
         } else if element is CCDPlusElement {
@@ -313,46 +251,29 @@ class ElementDetailViewController : UIViewController {
                 
             }
 
-            displayString += "Field Position: " +  e.elementPosition! + "\n"
             displayString += "Field Name: " +  e.elementName! + "\n"
+            displayString += "Field Position: " + e.position! + "\n"
             displayString += "Record Name: " +  e.segmentName! + "\n"
-            displayString += "Length: " + e.length! + "\n"
-            displayString += "Psition: " + e.position! + "\n"
+            displayString += "Record ID: " + e.segmentId! + "\n"
+            displayString += "Record Position: " +  e.elementPosition! + "\n"
+
             displayString += "Usage: " + e.usage! + "\n"
             displayString += "Data Type: " + e.dataType! + "\n"
+            displayString += "Length: " + e.length! + "\n"
             displayString += "Definition: " + e.definition! + "\n"
             
             
-            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
-            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
-            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-
-            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
             let dd : NSString = displayString as NSString
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Position:"))
-            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Position:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Name:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record Position:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Name:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Record Name:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record Name:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record ID:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Psition:"))
-            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Psition:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Usage:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Position:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Usage:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Definition:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
-
             
             ddd = attributedString
         } else if element is BAIElement {
@@ -370,64 +291,42 @@ class ElementDetailViewController : UIViewController {
             }
             
             
-            
-            displayString += "Field Position: " +  e.position! + "\n"
             displayString += "Field Name: " +  e.elementName! + "\n"
+            displayString += "Field Position: " +  e.position! + "\n"
+            
             if e.segmentNames.count > 0 {
                 displayString += "Record Name(s):"
                 displayString += processArray(e.segmentNames)
             }
 
             if e.segmentIds.count > 0 {
-                displayString += "Record ID(s):"
+                displayString += "Record ID(s): "
                 displayString += processArray(e.segmentIds)
             }
             
-            displayString += "Length: " + e.length! + "\n"
-            displayString += "Position: " + e.position! + "\n"
+            displayString += "Record Position: " + e.position! + "\n"
             displayString += "Usage: " + e.usage! + "\n"
             displayString += "Data Type: " + e.dataType! + "\n"
+            displayString += "Length: " + e.length! + "\n"
+            displayString += "Definition: " + e.definition! + "\n"
             
-            
-            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 15.0)])
-            let boldFontAttribute = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 15.0)]
-            let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue]
-            
+            let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
             
             let dd : NSString = displayString as NSString
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Position:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Position:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Field Name:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Field Name:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Record Name(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record Name(s):"))
-
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Record ID(s):"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record ID(s):"))
-
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Length:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Length:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Position:"))
-            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Position:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Usage:"))
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Record Position:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Usage:"))
-            
-            attributedString.addAttributes(boldFontAttribute, range: dd.range(of: "Data Type:"))
             attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Data Type:"))
-            
+            attributedString.addAttributes(underlineAttribute, range: dd.range(of: "Definition:"))
             
             ddd = attributedString
 
-            
-
-            
         }
-        
+        //textView.text = displayString
         textView.attributedText = ddd
         
     }

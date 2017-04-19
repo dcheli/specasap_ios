@@ -117,10 +117,10 @@
 				FD94AC711E0383A5008C50FC /* HL7ElementMapper.swift */,
 				FD17E8551E07616400648631 /* NCPDPElementMapper.swift */,
 				FD01F1931E94440200881637 /* CodeSetMapper.swift */,
+				FD2E5F6A1E9AC9A600BDC1DA /* ProductMapper.swift */,
 				FD9D98381E96D92E00CC01D9 /* ProductSetMapper.swift */,
 				FD2E5F641E9A6F9F00BDC1DA /* PrivacyPolicyMapper.swift */,
 				FD2E5F681E9A98AB00BDC1DA /* TermsOfServiceMapper.swift */,
-				FD2E5F6A1E9AC9A600BDC1DA /* ProductMapper.swift */,
 				FD35E6021EA03C8500F98D83 /* CCDPlusMapper.swift */,
 				FD2B32661EA2E39A00F8E6A2 /* BAIElementMapper.swift */,
 			);
