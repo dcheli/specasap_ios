@@ -176,13 +176,13 @@
 				FDF7E0CC1DF3368D00EDD451 /* TableCells */,
 				FD6DD51E1DECB88600ED511F /* Controllers */,
 				FDE7A8FB1DEBD88200080AA2 /* Managers */,
+				FD0AFE4C1DFCB858009E798F /* Mappers */,
 				FDC80AED1DD8FA9100548CC0 /* Model */,
 				FDC80ADF1DD8F9B800548CC0 /* Main.storyboard */,
 				FDC80AE21DD8F9B800548CC0 /* Assets.xcassets */,
 				FDC80AE41DD8F9B800548CC0 /* LaunchScreen.storyboard */,
 				FDC80AE71DD8F9B800548CC0 /* Info.plist */,
 				FDE7A9001DEBDCA300080AA2 /* products.plist */,
-				FD0AFE4C1DFCB858009E798F /* Mappers */,
 			);
 			path = SpecAsap;
 			sourceTree = "<group>";

@@ -22,11 +22,12 @@ class NCPDPElement {
     var dataType : String?
     var fieldFormats : [String]
     var comments: String?
+    var fbRejectMessages : [String]
     
     init(elementId: String?, elementName: String?, definition : String?, segmentIds: [String],
          segmentNames: [String], standardFormats : [String], lengths : [String],
          versions : [String], codes : [String], dataType : String?, fieldFormats : [String],
-         requestTransactions : [String], responseTransactions : [String], comments : String?) {
+         requestTransactions : [String], responseTransactions : [String], comments : String?, fbRejectMessages : [String]) {
         self.elementId = elementId
         self.elementName = elementName
         self.definition = definition
@@ -41,5 +42,6 @@ class NCPDPElement {
         self.requestTransactions = requestTransactions
         self.responseTransactions = responseTransactions
         self.comments = comments
+        self.fbRejectMessages = fbRejectMessages
     }
 }

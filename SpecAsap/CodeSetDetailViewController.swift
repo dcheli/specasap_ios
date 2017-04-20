@@ -27,14 +27,16 @@ class CodeSetDetailViewController: UIViewController {
         
         displayString += self.longDescription!
 
-        let underlineAttribute : [String : Any] = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,NSForegroundColorAttributeName : UIColor.blue]
+ //       let headerlineAttributes : [String : Any] = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,NSForegroundColorAttributeName : UIColor.blue]
         let bodyAttributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)]
+        
+        let headerlineAttributes : [String : Any] = [NSForegroundColorAttributeName : UIColor.black,NSFontAttributeName: UIFont.preferredFont(forTextStyle: .headline)]
 
         
         let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
         
         let dd : NSString = displayString as NSString
-        attributedString.addAttributes(underlineAttribute, range: dd.range(of: title))
+        attributedString.addAttributes(headerlineAttributes, range: dd.range(of: title))
         
         ddd = attributedString
         

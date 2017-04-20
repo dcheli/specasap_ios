@@ -137,11 +137,12 @@ class NCPDPElementMapper{
                         
                         let dataType = item["dataType"] as? String ?? ""
                         let fieldFormats = item["fieldFormats"] as? [String] ?? []
+                        let fbRejectMessages = item["fbRejectMessages"] as? [String] ?? []
                         
                         elementArray.append(NCPDPElement(elementId : elementId, elementName: elementName,
                                                           definition: definition, segmentIds: segmentIds, segmentNames: segmentNames,
                                                           standardFormats : standardFormats, lengths: lengths,
-                                                          versions : versions, codes : codes, dataType : dataType, fieldFormats : fieldFormats, requestTransactions : requestTransactions, responseTransactions : responseTransactions, comments: comments))
+                                                          versions : versions, codes : codes, dataType : dataType, fieldFormats : fieldFormats, requestTransactions : requestTransactions, responseTransactions : responseTransactions, comments: comments, fbRejectMessages : fbRejectMessages))
                     }
                 }
             }
