@@ -22,14 +22,14 @@ class X12Element {
     var loop : String?
     var dataElement : Int?
     
-    var codes : [String]
-    var transactions : [String]
-    var versions : [String]
+    var codes : [String]?
+    var transactions : [String]?
+    var versions : [String]?
     
     init(elementId : String?, segmentId : String?, segmentName : String?, elementName : String?,
          dataType : String?, usage : String?, length : String?, implementationName : String?,
-         elementRepeat : Int?, loop : String?, dataElement : Int?, codes : [String],
-         transactions : [String], versions : [String]) {
+         elementRepeat : Int?, loop : String?, dataElement : Int?, codes : [String]?,
+         transactions : [String]?, versions : [String]?) {
         self.elementId = elementId
         self.segmentId = segmentId
         self.segmentName = segmentName

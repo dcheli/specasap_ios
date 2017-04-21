@@ -49,30 +49,40 @@ class ElementDetailViewController : UIViewController {
             self.codeSetVersion = "D0"
             
             let e : NCPDPElement = self.element as! NCPDPElement
-            self.elementId = e.elementId
+            
 
-            if let elementId = e.elementId {
-                displayString += "Element ID: " +  elementId + "\n"
-            }
             if let elementName = e.elementName {
                 displayString += "Element Name: " +  elementName + "\n"
-            }
-
-            if e.segmentIds .count > 0 {
-                displayString += "Segment ID(s): "
-                displayString += processArray(e.segmentIds)
+                
             }
             
-            if e.segmentNames .count > 0 {
-                displayString += "Segment Name(s): "
-                displayString += processArray(e.segmentNames)
-            }
-
-            if e.versions.count > 0 {
-                displayString += "Version(s): "
-                displayString += processArray(e.versions)
+            if let elementId = e.elementId {
+                self.elementId = elementId
+                displayString += "Element ID: " +  elementId + "\n"
             }
             
+            if let segmentNames = e.segmentNames {
+                if segmentNames .count > 0 {
+                    displayString += "Segment(s): "
+                    displayString += processArray(segmentNames)
+                }
+            }
+
+            if let fieldFormats = e.fieldFormats {
+                if fieldFormats.count > 0 {
+                    displayString += "Field Format(s): "
+                    displayString += processArray(fieldFormats)
+                }
+            }
+            
+            if let lengths = e.lengths {
+                if lengths.count > 0{
+                    displayString += "Length(s): "
+                    displayString += processArray(lengths)
+                }
+            }
+
+ 
             if let definition = e.definition, !definition.isEmpty {
                 displayString += "Definition: " +  definition + "\n"
             }
@@ -81,40 +91,40 @@ class ElementDetailViewController : UIViewController {
                 displayString += "Comments: " +  comments + "\n"
             }
             
-            
-            if e.codes.count > 0 {
-                self.getCodeSetButton.isHidden = false
-                self.getCodeSetButton.isEnabled = true
-                
+            if let codes = e.codes {
+                if codes.count > 0 {
+                    self.getCodeSetButton.isHidden = false
+                    self.getCodeSetButton.isEnabled = true
+                }
             }
 
-            if e.fieldFormats.count > 0 {
-                displayString += "Field Format(s): "
-                displayString += processArray(e.fieldFormats)
-            }
-            if e.lengths.count > 0{
-                displayString += "Length(s): "
-                displayString += processArray(e.lengths)
-            }
-            
-            if e.fbRejectMessages.count > 0 {
-                displayString += "FB Reject Codes: "
-                displayString += processArray(e.fbRejectMessages, addNewLine: true)
+            if let fbRejectMessages = e.fbRejectMessages {
+                if fbRejectMessages.count > 0 {
+                    displayString += "FB Reject Codes: \n"
+                    displayString += processArray(fbRejectMessages, addNewLine: true)
+                }
             }
 
-        
-            if e.standardFormats.count > 0 {
-                displayString += "Standard Format(s): "
-                displayString += processArray(e.standardFormats)
+            if let standardFormats = e.standardFormats {
+                if standardFormats.count > 0 {
+                    displayString += "Standard Format(s): "
+                    displayString += processArray(standardFormats)
+                }
             }
         
-            if e.requestTransactions.count > 0  || !e.requestTransactions.isEmpty {
-                displayString += "Request Transaction(s): \n"
-                displayString += processArray(e.requestTransactions, addNewLine: true)
+            if let requestTransactions = e.requestTransactions {
+                if requestTransactions.count > 0  || !requestTransactions.isEmpty {
+                    displayString += "Request Transaction(s): \n"
+                    displayString += processArray(requestTransactions, addNewLine: true)
+                }
             }
-            if e.responseTransactions.count > 0 {
-                displayString += "Response Transaction(s): \n"
-                displayString += processArray(e.responseTransactions, addNewLine: true)
+        
+            if let responseTransactions = e.responseTransactions {
+        
+                if responseTransactions.count > 0  || !responseTransactions.isEmpty {
+                    displayString += "Response Transaction(s): \n"
+                    displayString += processArray(responseTransactions, addNewLine: true)
+                }
             }
         
             let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
@@ -124,7 +134,7 @@ class ElementDetailViewController : UIViewController {
             attributedString.addAttributes(headerlineAttributes, range: dd.range(of: "Element ID:"))
             attributedString.addAttributes(headerlineAttributes, range: dd.range(of: "Element Name:"))
             attributedString.addAttributes(headerlineAttributes, range: dd.range(of: "Segment ID(s):"))
-            attributedString.addAttributes(headerlineAttributes, range: dd.range(of: "Segment Name(s):"))
+            attributedString.addAttributes(headerlineAttributes, range: dd.range(of: "Segment(s):"))
             attributedString.addAttributes(headerlineAttributes, range: dd.range(of: "Length(s):"))
             attributedString.addAttributes(headerlineAttributes, range: dd.range(of: "Standard Format(s):"))
             attributedString.addAttributes(headerlineAttributes, range: dd.range(of: "Codes:"))
@@ -144,36 +154,65 @@ class ElementDetailViewController : UIViewController {
             self.codeSetVersion = "5010"
             
             let e : X12Element = self.element as! X12Element
-            self.elementId = e.elementId
             
-            displayString += "Implementation Name: " +  e.implementationName! + "\n"
-            displayString += "Element ID: " +  e.elementId! + "\n"
-            displayString += "Element Name: " +  e.elementName! + "\n"
-            displayString += "Segment ID: " +  e.segmentId! + "\n"
-            displayString += "Segment Name: " +  e.segmentName! + "\n"
-            displayString += "Data Type: " + e.dataType! + "\n"
-            displayString += "Length: " + e.length! + "\n"
-            displayString += "Element Repeat: "  + String(e.elementRepeat!) + "\n"
             
-            if !(e.loop?.isEmpty)!{
-                displayString += "Loop: " + e.loop! + "\n"
+            if let impName = e.implementationName {
+                displayString += "Implementation Name: " +  impName + "\n"
             }
             
-            displayString += "Data Element: " + String(e.dataElement!) + "\n"
-            
-            if e.versions.count > 0 {
-                displayString += "Version(s):"
-                displayString += processArray(e.versions)
+            if let elementName = e.elementName {
+                displayString += "Element Name: " +  elementName + "\n"
             }
             
-            if e.transactions.count > 0 {
-                displayString += "Transaction(s):"
-                displayString += processArray(e.transactions)
+            if let elementId = e.elementId {
+                self.elementId = e.elementId
+                displayString += "Element ID: " +  elementId + "\n"
             }
             
-            if e.codes.count > 0 {
-                self.getCodeSetButton.isHidden = false
-                self.getCodeSetButton.isEnabled = true
+            if let segmentId = e.segmentId {
+                displayString += "Segment ID: " +  segmentId + "\n"
+            }
+            
+            if let segmentName = e.segmentName {
+                displayString += "Segment Name: " + segmentName + "\n"
+            }
+            
+            if let dataType = e.dataType {
+                displayString += "Data Type: " + dataType + "\n"
+            }
+            
+            if let length = e.length {
+                displayString += "Length: " + length + "\n"
+            }
+            
+            if let elementRepeat = e.elementRepeat {
+                displayString += "Element Repeat: "  + String(elementRepeat) + "\n"
+            }
+            
+            if let loop = e.loop {
+                if !loop.isEmpty {
+                    displayString += "Loop: " + loop + "\n"
+                }
+            }
+            
+            if let dataElement = e.dataElement {
+                displayString += "Data Element: " + String(dataElement) + "\n"
+            }
+            
+ 
+            if let transactions = e.transactions {
+                if transactions.count > 0 {
+                    displayString += "Transaction(s): "
+                    displayString += processArray(transactions)
+                }
+            }
+            
+            if let codes = e.codes {
+                
+                if codes.count > 0 {
+                    self.getCodeSetButton.isHidden = false
+                    self.getCodeSetButton.isEnabled = true
+                }
             }
             
             
@@ -206,38 +245,75 @@ class ElementDetailViewController : UIViewController {
             self.codeSetVersion = "282"
             
             let e : HL7Element = self.element as! HL7Element
-            self.elementId = e.elementId
             
-            displayString += "Element ID: " +  e.elementId! + "\n"
-            displayString += "Element Name: " +  e.elementName! + "\n"
-            displayString += "Segment ID: " +  e.segmentId! + "\n"
-            displayString += "Segment Name: " +  e.segmentName! + "\n"
-            displayString += "Sequence: " + String(e.sequence!) + "\n"
-
-            displayString += "Length: " + e.length! + "\n"
-            displayString += "Conformance Length: " + e.conformanceLength! + "\n"
-            displayString += "Data Type: " + e.dataType! + "\n"
-            displayString += "Optionality: "  + String(e.optionality!) + "\n"
+            if let elementName = e.elementName{
+                displayString += "Element Name: " +  elementName + "\n"
+            }
+            
+            if let elementId = e.elementId {
+                self.elementId = elementId
+                displayString += "Element ID: " +  elementId + "\n"
+            }
+            
+            if let segmentId = e.segmentId {
+                displayString += "Segment ID: " +  segmentId + "\n"
+            }
+            
+            if let segmentName = e.segmentName {
+                displayString += "Segment Name: " +  segmentName + "\n"
+            }
+            
+            if let sequence = e.sequence {
+                displayString += "Sequence: " + String(sequence) + "\n"
+            }
+            
+            if let dataType = e.dataType {
+                displayString += "Data Type: " + dataType + "\n"
+            }
+            
+            if let length = e.length {
+                displayString += "Length: " + length + "\n"
+            }
+            
+            if let conformanceLength = e.conformanceLength {
+                displayString += "Conformance Length: " + conformanceLength + "\n"
+            }
+            
+            if let optionality = e.optionality {
+                displayString += "Optionality: "  + String(optionality) + "\n"
+            }
            
             if let repetition = e.repetition {
                 if !repetition.isEmpty{
-                    displayString += "Repetition: " + e.repetition! + "\n"
+                    displayString += "Repetition: " + repetition + "\n"
                 }
             }
             
-            displayString += "Table Number: " + String(e.tableNumber!) + "\n"
-            displayString += "Item Number: " + String(e.itemNumber!) + "\n"
-            
-            if e.versions.count > 0 {
-                displayString += "Version(s):"
-                displayString += processArray(e.versions)
+            if let tableNumber = e.tableNumber {
+                displayString += "Table Number: " + String(tableNumber) + "\n"
             }
             
-            if e.transactions.count > 0 {
-                displayString += "Transaction(s):"
-                displayString += processArray(e.transactions)
+            if let itemNumber = e.itemNumber {
+                displayString += "Item Number: " + String(itemNumber) + "\n"
             }
-            displayString += "Definition: " + e.definition! + "\n"
+            
+            if let versions = e.versions {
+                if versions.count > 0 {
+                    displayString += "Version(s):"
+                    displayString += processArray(versions)
+                }
+            }
+            
+            if let transactions = e.transactions {
+                if transactions.count > 0 {
+                    displayString += "Transaction(s):"
+                    displayString += processArray(transactions)
+                }
+            }
+            
+            if let definition = e.definition {
+                displayString += "Definition: " + definition + "\n"
+            }
             
             let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
             
@@ -264,24 +340,45 @@ class ElementDetailViewController : UIViewController {
             self.codeSetVersion = ""
             
             let e : CCDPlusElement = self.element as! CCDPlusElement
-            self.elementId = e.elementName
+            
             
             if e.codes == true {
                 self.getCodeSetButton.isHidden = false
                 self.getCodeSetButton.isEnabled = true
                 
             }
-
-            displayString += "Field Name: " +  e.elementName! + "\n"
-            displayString += "Field Position: " + e.position! + "\n"
-            displayString += "Record Name: " +  e.segmentName! + "\n"
-            displayString += "Record ID: " + e.segmentId! + "\n"
-            displayString += "Record Position: " +  e.elementPosition! + "\n"
-
-            displayString += "Usage: " + e.usage! + "\n"
-            displayString += "Data Type: " + e.dataType! + "\n"
-            displayString += "Length: " + e.length! + "\n"
-            displayString += "Definition: " + e.definition! + "\n"
+            if let fieldName = e.elementName {
+                // Yes this is correct.
+                self.elementId = fieldName
+                displayString += "Field Name: " +  fieldName + "\n"
+            }
+            if let recordName = e.segmentName {
+                displayString += "Record Name: " +  recordName + "\n"
+            }
+            
+            if let recordPosition = e.elementPosition {
+                displayString += "Record Position: " +  recordPosition + "\n"
+            }
+            
+            if let position = e.position {
+                displayString += "Field Position: " + position + "\n"
+            }
+            
+            if let usage = e.usage {
+                displayString += "Usage: " + usage + "\n"
+            }
+            
+            if let dataType = e.dataType {
+                displayString += "Data Type: " + dataType + "\n"
+            }
+            
+            if let length = e.length {
+                displayString += "Length: " + length + "\n"
+            }
+            
+            if let definition = e.definition {
+                displayString += "Definition: " + definition + "\n"
+            }
             
             
             let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
@@ -303,7 +400,7 @@ class ElementDetailViewController : UIViewController {
             self.codeSetVersion = "2"
             
             let e : BAIElement = self.element as! BAIElement
-            self.elementId = e.elementName
+
             
             if e.codes == true {
                 self.getCodeSetButton.isHidden = false
@@ -311,25 +408,37 @@ class ElementDetailViewController : UIViewController {
                 
             }
             
-            
-            displayString += "Field Name: " +  e.elementName! + "\n"
-            displayString += "Field Position: " +  e.position! + "\n"
-            
-            if e.segmentNames.count > 0 {
-                displayString += "Record Name(s):"
-                displayString += processArray(e.segmentNames)
+            if let fieldName = e.elementName {
+                // yes this is correct
+                self.elementId = fieldName
+                displayString += "Field Name: " +  fieldName + "\n"
             }
 
-            if e.segmentIds.count > 0 {
-                displayString += "Record ID(s): "
-                displayString += processArray(e.segmentIds)
+            if let recordNames = e.segmentNames {
+                if recordNames.count > 0 {
+                    displayString += "Record Name(s):"
+                    displayString += processArray(recordNames)
+                }
             }
             
-            displayString += "Record Position: " + e.position! + "\n"
-            displayString += "Usage: " + e.usage! + "\n"
-            displayString += "Data Type: " + e.dataType! + "\n"
-            displayString += "Length: " + e.length! + "\n"
-            displayString += "Definition: " + e.definition! + "\n"
+            if let recordPosition = e.position {
+                displayString += "Record Position: " + recordPosition + "\n"
+            }
+    
+            if let usage = e.usage {
+                displayString += "Usage: " + usage + "\n"
+            }
+            
+            if let dataType = e.dataType {
+                displayString += "Data Type: " + dataType + "\n"
+            }
+            if let length = e.length {
+                displayString += "Length: " + length + "\n"
+            }
+            
+            if let definition = e.definition {
+                displayString += "Definition: " + definition + "\n"
+            }
             
             let attributedString = NSMutableAttributedString(string : displayString as String, attributes: bodyAttributes)
             
@@ -347,7 +456,7 @@ class ElementDetailViewController : UIViewController {
             ddd = attributedString
 
         }
-        //textView.text = displayString
+        
         textView.attributedText = ddd
         
     }

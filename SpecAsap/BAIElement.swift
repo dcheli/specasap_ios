@@ -9,17 +9,17 @@
 import Foundation
 class BAIElement {
     
-    var segmentNames : [String]
-    var segmentIds : [String]
+    var segmentNames : [String]?
+    var segmentIds : [String]?
     var elementName : String?
     var usage : String?
     var dataType : String?
     var length : String?
     var definition : String?
     var position : String?
-    var codes : Bool
+    var codes : Bool?
     
-    init(segmentNames : [String], segmentIds : [String],  elementName : String?, usage : String?,dataType : String?, length : String?, definition : String?, position : String?, codes : Bool) {
+    init(segmentNames : [String]?, segmentIds : [String]?,  elementName : String?, usage : String?,dataType : String?, length : String?, definition : String?, position : String?, codes : Bool?) {
         
         self.segmentNames = segmentNames
         self.segmentIds  = segmentIds

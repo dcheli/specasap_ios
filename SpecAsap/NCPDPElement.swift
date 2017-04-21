@@ -11,23 +11,23 @@ class NCPDPElement {
     var elementId: String?
     var elementName: String?
     var definition: String?
-    var segmentIds: [String]
-    var segmentNames: [String]
-    var standardFormats : [String]
-    var lengths : [String]
-    var requestTransactions : [String]
-    var responseTransactions : [String]
-    var versions : [String]
-    var codes : [String]
+    var segmentIds: [String]?
+    var segmentNames: [String]?
+    var standardFormats : [String]?
+    var lengths : [String]?
+    var requestTransactions : [String]?
+    var responseTransactions : [String]?
+    var versions : [String]?
+    var codes : [String]?
     var dataType : String?
-    var fieldFormats : [String]
+    var fieldFormats : [String]?
     var comments: String?
-    var fbRejectMessages : [String]
+    var fbRejectMessages : [String]?
     
-    init(elementId: String?, elementName: String?, definition : String?, segmentIds: [String],
-         segmentNames: [String], standardFormats : [String], lengths : [String],
-         versions : [String], codes : [String], dataType : String?, fieldFormats : [String],
-         requestTransactions : [String], responseTransactions : [String], comments : String?, fbRejectMessages : [String]) {
+    init(elementId: String?, elementName: String?, definition : String?, segmentIds: [String]?,
+         segmentNames: [String]?, standardFormats : [String]?, lengths : [String]?,
+         versions : [String]?, codes : [String]?, dataType : String?, fieldFormats : [String]?,
+         requestTransactions : [String]?, responseTransactions : [String]?, comments : String?, fbRejectMessages : [String]?) {
         self.elementId = elementId
         self.elementName = elementName
         self.definition = definition

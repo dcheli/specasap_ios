@@ -22,8 +22,9 @@ class CodeSetTableViewController: UITableViewController {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
  
         NetworkManager.sharedInstance.getCodeSet(searchParam: searchParam!, codeSetDomain : codeSetDomain!, codeSetVersion : codeSetVersion!) { (responseCode, data) -> Void in
+            
             if responseCode == 200 {
-             
+            
                 let codeSetMapper  = CodeSetMapper()
                 self.codeSet = codeSetMapper.mapCodeSet(fromUrl: data!)!
                 
@@ -32,6 +33,7 @@ class CodeSetTableViewController: UITableViewController {
                 }
                                 
                 self.tableView.reloadData()
+
             } else {
                 
                 var alertMessage : String

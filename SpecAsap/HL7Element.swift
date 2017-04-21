@@ -23,12 +23,12 @@ class HL7Element {
     var itemNumber : String?
     var definition : String?
 
-    var transactions : [String]
-    var versions : [String]
+    var transactions : [String]?
+    var versions : [String]?
     
     init(elementId : String?, segmentId : String?, segmentName : String?, elementName : String?, sequence : Int?,
          length : String?, conformanceLength : String? , dataType : String?, optionality : String?,
-         repetition : String?, tableNumber : String?, itemNumber : String?, transactions : [String], versions : [String],
+         repetition : String?, tableNumber : String?, itemNumber : String?, transactions : [String]?, versions : [String]?,
          definition : String?) {
         
         self.elementId = elementId
