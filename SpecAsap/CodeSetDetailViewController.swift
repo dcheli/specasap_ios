@@ -21,13 +21,26 @@ class CodeSetDetailViewController: UIViewController {
         
         var ddd : NSMutableAttributedString = NSMutableAttributedString()
         
-        let title = self.code! + " - " + self.desc!
+        var title = ""
         
-        var displayString = title + "\n\n"
+        if let code = self.code {
+            if let description = self.desc {
+                if !code.isEmpty  && !description.isEmpty {
+                    title = code + " - " + description
+                } else if !code.isEmpty {
+                    title = code
+                } else if !description.isEmpty {
+                    title = description
+                }
+            }
+         }
+        
+        // Add some spacing
+        var displayString  = title + "\n\n"
         
         displayString += self.longDescription!
 
- //       let headerlineAttributes : [String : Any] = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,NSForegroundColorAttributeName : UIColor.blue]
+
         let bodyAttributes = [NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)]
         
         let headerlineAttributes : [String : Any] = [NSForegroundColorAttributeName : UIColor.black,NSFontAttributeName: UIFont.preferredFont(forTextStyle: .headline)]

@@ -85,9 +85,18 @@ class CodeSetTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CodeSetCell", for: indexPath)
         
         if let code = codeSet.codes?[indexPath.row] {
-            cell.textLabel?.text = code.code! + " - " + code.description!
-         
-           // cell.detailTextLabel?.text = code.description
+            var displayString : String = ""
+            
+            if let code = code.code {
+                displayString = code
+            }
+            
+            if let description = code.description {
+                if !description.isEmpty {
+                    displayString += " - " + description
+                }
+            }
+            cell.textLabel?.text = displayString
         }
         
         return cell
